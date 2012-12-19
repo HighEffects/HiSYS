@@ -5,6 +5,7 @@
   <div class="control-group string optional">
 	  Name: <%= f.input :name,  wrapper: 'inline', label: false %> 
 	  Slug: <%= f.input :slug, wrapper: 'inline', label: false %>
+	  Parent: <%= f.input :parent_id, collection: Page.order(:name), include_blank: true, wrapper: 'inline', label: false %>
   </div>
   <%= f.input :content, as: :text,:label => false, :input_html => {:rows => '18', :style => 'width: 98.8%' } %>
   <%= f.error :base %>

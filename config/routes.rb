@@ -1,8 +1,9 @@
 Hisys::Application.routes.draw do
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
 
-  resources :pages
-
+  
+  resources :pages, :path => "lab"
+    
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -52,8 +53,13 @@ Hisys::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'pages#index'
-
+  
+  resources :pages, path: "lab"
+  get 'lab/*id', to: 'pages#show'
+  
+  root :to => 'lab#index'
+  
+  
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

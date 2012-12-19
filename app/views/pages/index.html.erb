@@ -12,12 +12,12 @@
 
 <% @pages.each do |page| %>
   <tr>
-    <td><%= link_to page.name, page %></td>
+    <td><%= link_to page.name, nested_page_path(page) %></td>
     <td><%= page.slug %></td>
     <td><%= page.content %></td>
 	<% if user_signed_in? %>
       <td style="text-align: right;">
-	  	<%= link_to 'Edit', edit_page_path(page), :class => "btn btn-mini" %> 
+	  	<%= link_to 'Edit', nested_page_path(page), :class => "btn btn-mini" %> 
 		<%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
 	  </td>
     </tr>
