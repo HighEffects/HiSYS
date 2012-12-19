@@ -1,0 +1,32 @@
+<h1>Listing pages</h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Name</th>
+    <th>Slug</th>
+    <th>Content</th>
+    <% if user_signed_in? %>
+	  <th></th>
+	<% end %>
+  </tr>
+
+<% @pages.each do |page| %>
+  <tr>
+    <td><%= link_to page.name, page %></td>
+    <td><%= page.slug %></td>
+    <td><%= page.content %></td>
+	<% if user_signed_in? %>
+      <td style="text-align: right;">
+	  	<%= link_to 'Edit', edit_page_path(page), :class => "btn btn-mini" %> 
+		<%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
+	  </td>
+    </tr>
+    <% end %>
+<% end %>
+</table>
+
+<br />
+
+<% if user_signed_in? %>
+<%= link_to 'New Page', new_page_path, :class => 'btn btn-primary' %>
+<% end %>

@@ -1,0 +1,16 @@
+<%= simple_form_for(@page, :html => {:class => 'form-inline well' }) do |f| %>
+  <fieldset>
+	<legend>Editar página</legend>
+  <%= f.error_notification %>
+  <div class="control-group string optional">
+	  Name: <%= f.input :name,  wrapper: 'inline', label: false %> 
+	  Slug: <%= f.input :slug, wrapper: 'inline', label: false %>
+  </div>
+  <%= f.input :content, as: :text,:label => false, :input_html => {:rows => '18', :style => 'width: 98.8%' } %>
+  <%= f.error :base %>
+  <div class="form-actions">
+	  <%= f.button :submit, :class => 'btn-success' %>
+  	  <%= link_to 'Back', pages_path, :class => 'btn' %>
+</div>
+  </fieldset>
+<% end %>

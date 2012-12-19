@@ -1,0 +1,15 @@
+<h1>
+  <%= @page.name %> 
+  <%= link_to 'Edit', edit_page_path(@page), :class => "btn btn-mini"  %>
+</h1>
+
+
+<p>
+  <%= @page.content %>
+</p>
+
+
+<%= link_to 'Back', pages_path %> 
+
+
+
