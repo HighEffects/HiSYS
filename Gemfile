@@ -26,6 +26,11 @@ gem 'devise'
 gem 'simple_form'
 gem 'ancestry'
 
+gem 'redcarpet', '1.17.2'
+gem 'pygmentize'
+gem 'nokogiri'
+
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

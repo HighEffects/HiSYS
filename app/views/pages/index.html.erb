@@ -6,7 +6,7 @@
     <th>Slug</th>
     <th>Content</th>
     <% if user_signed_in? %>
-	  <th></th>
+	  <th style="width: 90px;"></th>
 	<% end %>
   </tr>
 
@@ -14,10 +14,10 @@
   <tr>
     <td><%= link_to page.name, nested_page_path(page) %></td>
     <td><%= page.slug %></td>
-    <td><%= page.content %></td>
+    <td><%= truncate( page.content, :length => 90, :omission => '...') %></td>
 	<% if user_signed_in? %>
       <td style="text-align: right;">
-	  	<%= link_to 'Edit', nested_page_path(page), :class => "btn btn-mini" %> 
+	  	<%= link_to 'Edit', nested_page_path(page) + '/edit', :class => "btn btn-mini" %> 
 		<%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
 	  </td>
     </tr>
