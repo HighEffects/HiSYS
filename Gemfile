@@ -45,3 +45,11 @@ gem 'nokogiri'
 
 # To use debugger
 # gem 'debugger'
+
+group :test do
+  gem "rspec"
+  gem "rspec-rails"
+  gem 'cucumber-rails'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+end

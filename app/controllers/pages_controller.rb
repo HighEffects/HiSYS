@@ -5,11 +5,19 @@ class PagesController < ApplicationController
   before_filter :find_page, only: [:show, :edit, :update, :destroy]
   
   layout "layout-pages"
-  def index
-    @pages = Page.all
 
+  def index
+    @page = Page.find_by_slug!('home')
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render json: @page }
+    end
+  end
+
+  def list
+    @pages = Page.all
+    respond_to do |format|
+      format.html # list.html.erb
       format.json { render json: @pages }
     end
   end
