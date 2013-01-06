@@ -1,4 +1,5 @@
 # Factories
+
 Given /^I have a page titled "(.*?)"$/ do |arg1|
   FactoryGirl.create(:page, :name => arg1, :slug => arg1)
 end
@@ -8,10 +9,18 @@ Given /^I have pages titled "(.*?)", "(.*?)"$/ do |arg1, arg2|
   FactoryGirl.create(:page, :name => arg2)
 end
 
+Given /^I have the following wiki pages$/ do |table|
+  table.hashes.each do |hash|
+    FactoryGirl.create(:page, hash)
+  end
+end
+
 # Paths
+
 When /^I go to the list of pages$/ do
   visit('/lab/list')
 end
+
 When /^I go to the lab page$/ do
   visit(pages_path)
 end
@@ -36,7 +45,7 @@ Given /^I am logged in$/ do
     fill_in "user_email", :with => 'test@testing.com'
     fill_in "user_password", :with => '123456'
     click_button "Sign in"
-    page.should have_content("Logged in as test@testing.com")
+    page.should have_content("test@testing.com")
 end
 
 When /^I click in the link "(.*?)"$/ do |link|

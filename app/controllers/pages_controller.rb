@@ -15,7 +15,11 @@ class PagesController < ApplicationController
   end
 
   def list
-    @pages = Page.all
+    @pages = Page.search(params[:search])
+    if params[:search]
+      @search = params[:search]
+    end
+    @page = false
     respond_to do |format|
       format.html # list.html.erb
       format.json { render json: @pages }

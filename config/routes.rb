@@ -2,10 +2,13 @@ Hisys::Application.routes.draw do
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"} 
   
+  
+  
   get 'lab/list', to: 'pages#list' 
   resources :pages, :path => "lab"  
   get 'lab/*id', to: 'pages#show'
-
+  get 'lab/new', to: 'pages#new'
+ 
   root :to => 'pages#index'
   
   

@@ -15,5 +15,14 @@ class Page < ActiveRecord::Base
   def generate_slug
     self.slug ||= name.parameterize
   end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['name LIKE ? OR content LIKE ?', "%#{search}%", "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
+
   
 end

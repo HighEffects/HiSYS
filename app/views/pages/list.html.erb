@@ -1,4 +1,8 @@
-<h1>Listing pages</h1>
+<% if @search %>
+  <h1>Results for <%= @search %></h1>
+<% else %>
+  <h1>Listing pages</h1>
+<% end %>
 
 <table class="table table-bordered">
   <tr>
@@ -18,7 +22,7 @@
 	<% if user_signed_in? %>
       <td style="text-align: right;">
 	  	<%= link_to 'Edit', nested_page_path(page) + '/edit', :class => "btn btn-mini" %> 
-		<%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
+		<%= link_to 'Delete', page, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
 	  </td>
     </tr>
     <% end %>
