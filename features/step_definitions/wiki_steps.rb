@@ -1,7 +1,7 @@
 # Factories
 
 Given /^I have a page titled "(.*?)"$/ do |arg1|
-  FactoryGirl.create(:page, :name => arg1, :slug => arg1)
+  FactoryGirl.create(:page, :name => arg1, :slug => arg1, :content => arg1)
 end
 
 Given /^I have pages titled "(.*?)", "(.*?)"$/ do |arg1, arg2|
@@ -13,6 +13,10 @@ Given /^I have the following wiki pages$/ do |table|
   table.hashes.each do |hash|
     FactoryGirl.create(:page, hash)
   end
+end
+
+Given /^I have a page with parent "(.*?)" and titled "(.*?)"$/ do |parent, arg1|
+  FactoryGirl.create(:page, :name => arg1, :slug => arg1, :content => arg1, :parent_id => parent)
 end
 
 # Paths
@@ -29,6 +33,18 @@ end
 
 Then /^I should see "(.*?)"$/ do |text|
   page.should have_content(text)
+end
+
+Then /^I should see the link "(.*?)"$/ do |link|
+  page.should have_link(link)
+end
+
+Then /^I should see "(.*?)" css tag$/ do |css|
+  page.has_css?(css)
+end
+
+Then /^I should not see "(.*?)" css tag$/ do |css|
+  page.has_no_css?(css)
 end
 
 Given /^I have no pages$/ do
@@ -67,6 +83,11 @@ end
 Then /^I should fill in "(.*?)" with "(.*?)"$/ do |field, content|
   fill_in field, :with => content
 end
+
+When /^I should select "(.*?)" in "(.*?)"$/ do |arg1, arg2|
+  select(arg1, {:from => arg2})
+end
+
 
 # Find item buttom
 When /^I click in the link "(.*?)" of the "(.*?)" item$/ do |link, item|

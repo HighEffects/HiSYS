@@ -31,7 +31,6 @@ Feature: wiki pages
 	And I should fill in "page[content]" with "Testing 1, 2, 3"
 	And I click in the button "Create Page"
 	Then I should see "Page was successfully created"
-	And I should see "Test page"
 	And I should see "Testing 1, 2, 3"
   
   Scenario: Delete page
@@ -40,17 +39,58 @@ Feature: wiki pages
 	And I go to the list of pages
 	When I click in the link "Delete" of the "table tr:last-child" item
 	Then I should not see "test subject"
+	
+  Scenario: Edit page
+    Given I am logged in
+	And I have a page titled "test"
+	When I visit the "lab/test" page
+	And I click in the link "edit-wiki-page"
+	And I should see "Editar página"
+	And I should fill in "page[content]" with "Testing 1, 2, 3"
+	And I click in the button "Update Page"
+	Then I should see "Page was successfully updated"
+	And I should see "Testing 1, 2, 3"
   
   Scenario Outline: Only registered users can see the edit button on wiki pages
     Given I am logged in as "<user>" with password "secret"
     When I visit the "<page>" page
-    Then I should <action>
+    Then I should <action> css tag
 	
     Examples:
-      | user         | page | action         |
-      | bob@test.com | home | see "Edit"     |
-	  | fucking@u.me | home | not see "Edit" |
-      |              | home | not see "Edit" |
+      | user         | page | action                 |
+      | bob@test.com | home | see "i.icon-pencil"     |
+	  | fucking@u.me | home | not see "i.icon-pencil" |
+      |              | home | not see "i.icon-pencil" |
   
-  # Scenario: edit page
+  @subpages
+  Scenario: Subpages
+    Given I have a page titled "level_1"
+    And I have a page with parent "1" and titled "level_2"
+	Then I visit the "lab/level_1/level_2" page
+	And I should see "level_2"
   
+  @subpages
+  Scenario: Creating subpages
+    Given I am logged in
+	And I go to the lab page
+    Given I have a page titled "level_1"
+	When I click in the link "create_page"
+	And I should fill in "page[name]" with "Level 2"
+	And I should fill in "page[slug]" with "level_2"
+	And I should fill in "page[content]" with "Level 2 Testing"
+	And I should select "level_1" in "page[parent_id]"
+	And I click in the button "Create Page"
+	Then I visit the "lab/level_1/level_2" page
+	And I should see "Level 2 Testing"
+  
+  @subpages
+  Scenario: Editing subpages
+    Given I am logged in
+    And I have a page titled "level_1"
+    And I have a page with parent "1" and titled "level_2"
+	When I visit the "lab/level_1/level_2" page
+	And I click in the link "edit-wiki-page"
+	And I should fill in "page[content]" with "Testing 1, 2, 3"
+	And I click in the button "Update Page"
+	Then I should see "Page was successfully updated"
+	And I should see "Testing 1, 2, 3"

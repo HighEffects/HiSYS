@@ -63,7 +63,7 @@
 				<% if user_signed_in? %>
 				  <li><a id="create_page" href="<%= new_page_path %>"><i class="icon-plus"></i></a></li>
 				  <% if @page != false %>
-				    <li><a href="<%='lab/' + nested_page_path(@page) + '/edit' %>"><i class="icon-pencil"></i></a></li>
+				    <li><a id="edit-wiki-page" href="<%='lab/' + nested_page_path(@page) + '/edit' %>"><i class="icon-pencil"></i></a></li>
 				  <% end %>
 				  <li class="divider-vertical"></li>
 				  <li class="dropdown">

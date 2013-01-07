@@ -5,7 +5,8 @@ Hisys::Application.routes.draw do
   
   
   get 'lab/list', to: 'pages#list' 
-  resources :pages, :path => "lab"  
+  resources :pages, :path => "lab"
+  get 'lab/*id/edit', to: 'pages#edit'  
   get 'lab/*id', to: 'pages#show'
   get 'lab/new', to: 'pages#new'
  
