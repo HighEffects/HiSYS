@@ -5,10 +5,14 @@ Feature: Blog
   I want a basic blog
   
   Background:
+    Given I have a page titled "home"
     Given the following blog posts
-    | title       | content                      |
-	| Testing     | Testing 1, 2, 3              |
-    | Hello World | This is the first blog post! |
+    | title       | content                      | user_id |
+	| Testing     | Testing 1, 2, 3              |       1 |
+    | Hello World | This is the first blog post! |       1 |
+    Given the following user records
+    | email        | password |
+    | bob@test.com | secret   |
 
   Scenario: list posts
 	When I go to the blog
@@ -17,13 +21,14 @@ Feature: Blog
   
   Scenario: create post
     Given I am logged in
-	And I am in the blog page
-	When I go click the button "Create Post"
-	Then I should see "Create Post"
-	And I should fill "title" with "Posting Test"
-	And I should fill "content" with "This is a post created by cucumber!"
-	And I go click the button "Post"
-	Then I should see "Post Created"
+	And I go to the blog
+	When I click in the link "create_post"
+	Then I should see "New post"
+	And I should fill in "post[title]" with "Posting Test"
+	And I should fill in "post[slug]" with "posting_test"
+	And I should fill in "post[content]" with "This is a post created by cucumber!"
+	And I click in the button "Create Post"
+	Then I should see "Post was successfully created"
 	And I should see "Posting Test"
   
   # Scenario: delete post

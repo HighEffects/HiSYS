@@ -1,5 +1,10 @@
 Hisys::Application.routes.draw do
 
+  resources :posts, :path => "blog"
+  get 'blog/*id/edit', to: 'posts#edit'
+  get 'blog/*id', to: 'posts#show'
+  get 'blog/new', to: 'posts#new'
+
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"} 
   
   

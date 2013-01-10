@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     if devise_controller?
-      "layout-pages"
+      "layout-user"
     else
       "application"
     end

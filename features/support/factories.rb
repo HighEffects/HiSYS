@@ -16,3 +16,11 @@ FactoryGirl.define do
     f.content 'test'
   end
 end
+
+FactoryGirl.define do 
+  factory :post do |f|
+    f.title 'Test'
+    f.content 'Testing 1 2 3'
+    f.user_id '1'
+  end
+end

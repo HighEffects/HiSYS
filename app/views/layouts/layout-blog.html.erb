@@ -56,16 +56,17 @@
 			<ul class="nav pull-right">
 				
 				<% if user_signed_in? %>
-				  <% if @page != false %>
-				    <li><a id="edit-wiki-page" href="<%='lab/' + nested_page_path(@page) + '/edit' %>"><i class="icon-pencil"></i></a></li>
-				  <% end %>
-				  <li><a id="create_page" href="<%= new_page_path %>"><i class="icon-plus"></i></a></li>
+			      <% if @post != false %>
+			        <li><a id="edit-wiki-page" href="<%= @post.slug.to_s + '/edit' %>"><i class="icon-pencil"></i></a></li>
+			      <% end %>	
+				  <li><a id="create_post" href="<%= blog_new_path %>"><i class="icon-plus"></i></a></li>
 				  <li class="divider-vertical"></li>
-				  <% end%>
+				<% end %>
+					
+			    
 				
 				<li><%= form_tag lab_list_path, :method => "get", :class => "navbar-search " do |f| %>
-					<%= text_field_tag :search, nil, :placeholder => "Search", 
-					      :class => "input-medium search-query" %>
+					<%= text_field_tag :search, nil, :placeholder => "Search", :class => "input-medium search-query" %>
 					<%= submit_tag "Find", :name => nil, :class => "hidden" %>
 				<% end%></li>
 				<li class="divider-vertical"></li>
