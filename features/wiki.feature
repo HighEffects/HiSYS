@@ -26,9 +26,9 @@ Feature: wiki pages
 	And I go to the lab page
 	When I click in the link "create_page"
 	Then I should see "New page"
-	And I should fill in "page[name]" with "Test page"
-	And I should fill in "page[slug]" with "test_page"
-	And I should fill in "page[content]" with "Testing 1, 2, 3"
+	And I fill in "page[name]" with "Test page"
+	And I fill in "page[slug]" with "test_page"
+	And I fill in "page[content]" with "Testing 1, 2, 3"
 	And I click in the button "Create Page"
 	Then I should see "Page was successfully created"
 	And I should see "Testing 1, 2, 3"
@@ -46,7 +46,7 @@ Feature: wiki pages
 	When I visit the "lab/test" page
 	And I click in the link "edit-wiki-page"
 	And I should see "Editar página"
-	And I should fill in "page[content]" with "Testing 1, 2, 3"
+	And I fill in "page[content]" with "Testing 1, 2, 3"
 	And I click in the button "Update Page"
 	Then I should see "Page was successfully updated"
 	And I should see "Testing 1, 2, 3"
@@ -75,9 +75,9 @@ Feature: wiki pages
 	And I go to the lab page
     Given I have a page titled "level_1"
 	When I click in the link "create_page"
-	And I should fill in "page[name]" with "Level 2"
-	And I should fill in "page[slug]" with "level_2"
-	And I should fill in "page[content]" with "Level 2 Testing"
+	And I fill in "page[name]" with "Level 2"
+	And I fill in "page[slug]" with "level_2"
+	And I fill in "page[content]" with "Level 2 Testing"
 	And I should select "level_1" in "page[parent_id]"
 	And I click in the button "Create Page"
 	Then I visit the "lab/level_1/level_2" page
@@ -90,7 +90,7 @@ Feature: wiki pages
     And I have a page with parent "1" and titled "level_2"
 	When I visit the "lab/level_1/level_2" page
 	And I click in the link "edit-wiki-page"
-	And I should fill in "page[content]" with "Testing 1, 2, 3"
+	And I fill in "page[content]" with "Testing 1, 2, 3"
 	And I click in the button "Update Page"
 	Then I should see "Page was successfully updated"
 	And I should see "Testing 1, 2, 3"

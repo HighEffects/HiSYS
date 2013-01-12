@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
 
   attr_accessible :content, :title, :user, :slug
   belongs_to :user
+  has_many :comments, as: :commentable
   
   validates :slug, uniqueness: true, presence: true,
                    exclusion: {in: %w[signup login]}

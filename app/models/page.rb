@@ -6,6 +6,8 @@ class Page < ActiveRecord::Base
   
   has_ancestry
   
+  has_many :comments, as: :commentable
+  
   before_validation :generate_slug
   
   def to_param

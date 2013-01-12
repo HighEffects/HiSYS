@@ -80,7 +80,7 @@ Then /^I should go to items list page$/ do
   page.should have_content('Resources')
 end
 
-Then /^I should fill in "(.*?)" with "(.*?)"$/ do |field, content|
+Then /^I fill in "(.*?)" with "(.*?)"$/ do |field, content|
   fill_in field, :with => content
 end
 

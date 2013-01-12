@@ -9,6 +9,7 @@
     <th>Name</th>
     <th>Slug</th>
     <th>Content</th>
+	<th>Comments</th>
     <% if user_signed_in? %>
 	  <th style="width: 90px;"></th>
 	<% end %>
@@ -19,6 +20,7 @@
     <td><%= link_to page.name, nested_page_path(page) %></td>
     <td><%= page.slug %></td>
     <td><%= truncate( page.content, :length => 90, :omission => '...') %></td>
+	<td><%= page.comments.count %></td>
 	<% if user_signed_in? %>
       <td style="text-align: right;">
 	  	<%= link_to 'Edit', nested_page_path(page) + '/edit', :class => "btn btn-mini" %> 
@@ -34,3 +36,4 @@
 <% if user_signed_in? %>
 <%= link_to 'New Page', new_page_path, :class => 'btn btn-primary' %>
 <% end %>
+

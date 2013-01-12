@@ -54,7 +54,9 @@
               <li><%= link_to "Link3", "/path3"  %></li>
             </ul>
 			<ul class="nav pull-right">
-				
+				<% if @page != false && @comments != false %>
+				  <li><a id="wiki-page-comments" href="<%=nested_page_path(@page) + '/comments' %>"><i class="icon-comment"></i></a></li>
+				<% end %>
 				<% if user_signed_in? %>
 				  <% if @page != false %>
 				    <li><a id="edit-wiki-page" href="<%='lab/' + nested_page_path(@page) + '/edit' %>"><i class="icon-pencil"></i></a></li>

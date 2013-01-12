@@ -8,6 +8,7 @@ class PagesController < ApplicationController
 
   def index
     @page = Page.find_by_slug!('home')
+    @comments = false
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @page }

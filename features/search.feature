@@ -12,7 +12,7 @@ Feature: Search
     | Hello World  | hello_world  | Testing 1, 2, 3 |
 	| Teapot       | teapot       | no info here    |  
     When I go to the lab page
-	And I should fill in "search" with "test"
+	And I fill in "search" with "test"
 	And I click in the button "Find"
 	Then I should see "Results for test"
 	And I should see "Testing page"

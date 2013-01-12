@@ -1,6 +1,8 @@
 Hisys::Application.routes.draw do
 
-  resources :posts, :path => "blog"
+  resources :posts, :path => "blog" do
+    resources :comments
+  end
   get 'blog/*id/edit', to: 'posts#edit'
   get 'blog/*id', to: 'posts#show'
   get 'blog/new', to: 'posts#new'
@@ -10,7 +12,9 @@ Hisys::Application.routes.draw do
   
   
   get 'lab/list', to: 'pages#list' 
-  resources :pages, :path => "lab"
+  resources :pages, :path => "lab" do
+    resources :comments 
+  end
   get 'lab/*id/edit', to: 'pages#edit'  
   get 'lab/*id', to: 'pages#show'
   get 'lab/new', to: 'pages#new'

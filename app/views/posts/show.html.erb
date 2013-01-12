@@ -2,3 +2,6 @@
   <%= @post.title %>
 </h1>
   <%= markdown(@post.content)  %>
+
+<%= render "comments/comments"%>
+<%= render "comments/form"%>

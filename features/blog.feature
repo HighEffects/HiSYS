@@ -24,9 +24,9 @@ Feature: Blog
 	And I go to the blog
 	When I click in the link "create_post"
 	Then I should see "New post"
-	And I should fill in "post[title]" with "Posting Test"
-	And I should fill in "post[slug]" with "posting_test"
-	And I should fill in "post[content]" with "This is a post created by cucumber!"
+	And I fill in "post[title]" with "Posting Test"
+	And I fill in "post[slug]" with "posting_test"
+	And I fill in "post[content]" with "This is a post created by cucumber!"
 	And I click in the button "Create Post"
 	Then I should see "Post was successfully created"
 	And I should see "Posting Test"
