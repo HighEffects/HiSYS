@@ -112,8 +112,18 @@
         </div><!--/row-->
 
       <footer>
-		  <hr>
-        <p>&copy; High Effects 2012</p>
+		<hr>
+        <p>
+			
+			<% if @page != false %>
+			  Created: <%= time_ago_in_words(@page.created_at) %> |
+			  
+			  <% if @page.comments.count != 0%>
+			    Comments: <%= @page.comments.count %> |
+			  <% end %>
+			<% end %>
+			&copy; High Effects 2012
+		</p>
       </footer>
 
     </div> <!-- /container -->
@@ -122,6 +132,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-
+	
   </body>
 </html>

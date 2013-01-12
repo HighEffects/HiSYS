@@ -29,6 +29,6 @@ class CommentsController < ApplicationController
   def load_commentable
       klass = [Post, Page].detect { |c| params["#{c.name.underscore}_id"]}
       @commentable = klass.find_by_slug!(params["#{klass.name.underscore}_id"])
-    end
+  end
   
 end

@@ -99,6 +99,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.19)
     multi_json (1.5.0)
+    nested_form (0.3.1)
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
@@ -195,6 +196,7 @@ DEPENDENCIES
   factory_girl_rails
   jquery-rails
   less-rails
+  nested_form
   nokogiri
   pygmentize
   rails (= 3.2.8)

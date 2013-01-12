@@ -29,6 +29,7 @@ gem 'ancestry'
 gem 'redcarpet', '1.17.2'
 gem 'pygmentize'
 gem 'nokogiri'
+gem "nested_form"
 
 
 # To use ActiveModel has_secure_password
