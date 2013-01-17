@@ -1,0 +1,23 @@
+<h1>Tagged "<%= @tag.name %>"</h1>
+
+
+
+<table class="table table-bordered">
+  <tr>
+    <th>Title</th>
+    <th>type</th>
+	<th>content</th>
+  </tr>
+
+<% @tag.taggings.each do |t| %>
+  <tr>
+	<% if t.taggable_type == "Post" %>
+      <td><%= link_to t.taggable.title, {:controller => "posts", :action => 'show', :id => t.taggable.slug} %></td>
+	<% else %>
+	  <td><%= link_to t.taggable.name, {:controller => "pages", :action => 'show', :id => t.taggable.slug} %></td>
+	<% end %>
+	<td><%= t.taggable_type %></td>
+    <td><%= truncate( t.taggable.content, :length => 110, :omission => '...') %></td>
+  </tr>
+<% end %>
+</table>

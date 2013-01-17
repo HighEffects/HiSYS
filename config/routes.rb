@@ -1,5 +1,9 @@
 Hisys::Application.routes.draw do
 
+  get "tags/index"
+  get 'tags/*id', to: 'tags#show'
+  get 'tags/', to: 'tags#index'
+   
   resources :posts, :path => "blog" do
     resources :comments
   end

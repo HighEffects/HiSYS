@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   
   before_filter :find_post, only: [:show, :edit, :update, :destroy]
+  after_filter :process_tags, only: [:create, :update]
   
   layout "layout-blog"
   
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
   # GET /posts/new.json
   def new
     @post = Post.new
-
+    @tags = Tag.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @post }
@@ -40,6 +41,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @tags = Tag.all
   end
 
   # POST /posts
@@ -87,6 +89,22 @@ class PostsController < ApplicationController
   
   def find_post
     @post = Post.find_by_slug!(params[:id].split("/").last)
+  end
+  
+  def process_tags
+    @post.taggings.each do |old_tag|
+      old_tag.destroy
+    end
+    if params[:hiddenTagList]
+      tags = params[:hiddenTagList].split(",")
+      tags.each do |t|
+        tag = Tag.find_by_name(t.downcase)
+        if(tag.class != Tag)
+          tag = Tag.create!(:name => t.downcase)
+        end
+        @post.taggings.create!(:tag_id => tag.id)
+      end
+    end
   end
   
 end

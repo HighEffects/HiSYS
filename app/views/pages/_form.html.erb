@@ -8,6 +8,7 @@
 	  Parent: <%= f.input :parent_id, collection: Page.order(:name), include_blank: true, wrapper: 'inline', label: false %>
   </div>
   <%= f.input :content, as: :text,:label => false, :input_html => {:rows => '18', :style => 'width: 98.8%' } %>
+  <input class="tagManager" data-provide="typehead" data-items=4>
   <%= f.error :base %>
   <div class="form-actions">
 	  <%= f.button :submit, :class => 'btn-success' %>

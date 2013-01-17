@@ -8,8 +8,8 @@ class Page < ActiveRecord::Base
   
   has_many :comments, as: :commentable
   
-  has_many :taggings, as: :taggable
-  has_many :tags, through: :taggings
+  has_many :taggings, :as => :taggable
+  has_many :tags, :through => :taggings
   
   before_validation :generate_slug
   

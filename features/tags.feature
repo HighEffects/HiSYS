@@ -1,7 +1,7 @@
 Feature: Tag system
-  In order to find information in the system
+  In order to find related information in the system
   As an organized user
-  I want to tag objects
+  I want to tag objects and find objects by tag
   
   # Scenario: List Tags
   

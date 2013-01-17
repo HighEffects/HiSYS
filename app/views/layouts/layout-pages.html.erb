@@ -48,17 +48,13 @@
           </a>
           <%= link_to "HiSYS", pages_path, :class => "brand"  %>
           <div class="container nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "list", lab_list_path %></li>
-              <li><%= link_to "blog", posts_path  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
+            <%= render 'layouts/nav_links' %>
 			<ul class="nav pull-right">
-				<% if @page != false && @comments != false %>
+				<% if @page != false && @comments != false && @page.new_record? != true  %>
 				  <li><a id="wiki-page-comments" href="<%=nested_page_path(@page) + '/comments' %>"><i class="icon-comment"></i></a></li>
 				<% end %>
 				<% if user_signed_in? %>
-				  <% if @page != false %>
+				  <% if @page != false && @page.new_record? != true %>
 				    <li><a id="edit-wiki-page" href="<%='lab/' + nested_page_path(@page) + '/edit' %>"><i class="icon-pencil"></i></a></li>
 				  <% end %>
 				  <li><a id="create_page" href="<%= new_page_path %>"><i class="icon-plus"></i></a></li>
@@ -115,9 +111,13 @@
 		<hr>
         <p>
 			
-			<% if @page != false %>
+			<% if @page != false && @page.new_record? != true %>
+		      <% if @page.tags %> Tags: 
+			  <% @page.tags.each do |tag| %>
+			         <span class="badge"><%= link_to tag.name, {:controller => 'tags', :action => 'show', :id => tag.name }, :style => "color: white;" %></span> 
+			      <% end %> |
+		      <% end %>
 			  Created: <%= time_ago_in_words(@page.created_at) %> |
-			  
 			  <% if @page.comments.count != 0%>
 			    Comments: <%= @page.comments.count %> |
 			  <% end %>
@@ -132,6 +132,34 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+	<%= javascript_include_tag "bootstrap-tagmanager.js" %>
+	
+    <script>
+    	$(document).ready(function() {
+    		 jQuery(".tagManager").tagsManager( { 
+    		 	
+    		 	prefilled: 
+    		 	[ 
+				<% if @page != false %>
+					<% @page.tags.each do |tag| %>
+					  "<%= tag.name %>",
+					<% end %>
+				<% end %>
+    		 	],
+    		 	preventSubmitOnEnter: true,
+    		 	typeahead: true,
+    		 	typeaheadSource: 
+    		 	[
+				<% if @tags != nil %>
+					<% @tags.each do |tag| %>
+					  "<%= tag.name %>",
+					<% end %>
+				<% end %>
+    		 	]
+    		 } )
+
+    	});
+    </script>
 	
   </body>
 </html>

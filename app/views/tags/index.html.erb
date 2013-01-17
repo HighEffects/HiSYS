@@ -1,0 +1,5 @@
+<h1>Tags</h1>
+<hr>
+<% @tags.each do |tag| %>
+ <span class="badge"><%= link_to tag.name + ' (' + tag.taggings.count.to_s + ')', {:action => 'show', :id => tag.name }, :style => "color: white;" %></span> 
+<% end %>

@@ -4,6 +4,9 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, as: :commentable
   
+  has_many :taggings, :as => :taggable
+  has_many :tags, :through => :taggings
+  
   validates :slug, uniqueness: true, presence: true,
                    exclusion: {in: %w[signup login]}
   

@@ -48,11 +48,7 @@
           </a>
           <%= link_to "HiSYS", pages_path, :class => "brand"  %>
           <div class="container nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "list", lab_list_path %></li>
-              <li><%= link_to "blog", posts_path  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
+            <%= render 'layouts/nav_links' %>
 			<ul class="nav pull-right">
 				
 				<li><%= form_tag lab_list_path, :method => "get", :class => "navbar-search " do |f| %>
