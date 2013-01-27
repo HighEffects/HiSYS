@@ -35,3 +35,17 @@ FactoryGirl.define do
     f.commentable_type 'post'
   end
 end
+
+FactoryGirl.define do 
+  factory :tag do |f|
+    f.name 'test'
+  end
+end
+
+FactoryGirl.define do 
+  factory :tagging do |f|
+    f.tag_id '1'
+    f.taggable_id '1'
+    f.taggable_type 'Page'
+  end
+end

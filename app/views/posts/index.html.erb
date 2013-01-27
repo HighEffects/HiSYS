@@ -1,29 +1,30 @@
-<h1>Blog</h1>
-
-<table class="table table-bordered">
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-	<th>Author</th>
-	<th>Comments</th>
-    <% if user_signed_in? %>
-	  <th></th>
-	<% end%>
-  </tr>
+<h1>High Effects Blog</h1>
 
 <% @posts.each do |post| %>
-  <tr>
-    <td><%= link_to post.title, post %></td>
-    <td><%= truncate( post.content, :length => 110, :omission => '...') %></td>
-	<td><%= post.user.email %></td>
-	<td><%= post.comments.count %></td>
-	<% if user_signed_in? %>
-      <td style="text-align: right;">
-	  	<%= link_to 'Edit', edit_post_path(post), :class => "btn btn-mini" %> 
-		<%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
-	  </td>
-    </tr>
-    <% end %>
-  </tr>
+
+<div class="media">
+
+  <div class="media-body">
+    <h3 class="media-heading"><%= link_to post.title, post %></h3>
+    
+	
+    
+    <!-- Nested media object -->
+    <div class="media">
+      <p><%= truncate( post.content, :length => 250, :omission => '...') %></p>
+      <p><% if post.tags %> Tags: 
+        <% post.tags.each do |tag| %>
+           <span class="badge"><%= link_to tag.name, {:controller => 'tags', :action => 'show', :id => tag.name }, :style => "color: white;" %></span> 
+        <% end %> |
+      <% end %>
+      Created: <%= time_ago_in_words(post.created_at) %> |
+      <% if post.comments.count != 0%>
+        Comments: <%= post.comments.count %> |
+      <% end %>
+  	por <%= post.user.email %></p>
+      
+	  
+    </div>
+  </div>
+</div>
 <% end %>
-</table>

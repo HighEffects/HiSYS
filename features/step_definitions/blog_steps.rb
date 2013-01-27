@@ -1,4 +1,4 @@
-Given /^the following blog posts$/ do |table|
+Given /^I have the following blog posts$/ do |table|
   table.hashes.each do |hash|
     FactoryGirl.create(:post, hash)
   end

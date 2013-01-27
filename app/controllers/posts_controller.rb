@@ -15,6 +15,15 @@ class PostsController < ApplicationController
       format.json { render json: @posts }
     end
   end
+  
+  def list
+    @posts = Post.all
+    @post = false
+    respond_to do |format|
+      format.html # list.html.erb
+      format.json { render json: @posts }
+    end
+  end
 
   # GET /posts/1
   # GET /posts/1.json

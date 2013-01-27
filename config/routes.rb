@@ -1,18 +1,18 @@
 Hisys::Application.routes.draw do
 
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"} 
+  
   get "tags/index"
   get 'tags/*id', to: 'tags#show'
   get 'tags/', to: 'tags#index'
    
+  get 'blog/list', to: 'posts#list'
   resources :posts, :path => "blog" do
     resources :comments
   end
   get 'blog/*id/edit', to: 'posts#edit'
   get 'blog/*id', to: 'posts#show'
   get 'blog/new', to: 'posts#new'
-
-  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"} 
-  
   
   
   get 'lab/list', to: 'pages#list' 
@@ -24,6 +24,7 @@ Hisys::Application.routes.draw do
   get 'lab/new', to: 'pages#new'
  
   root :to => 'pages#index'
+  
   
   
   # The priority is based upon order of creation:

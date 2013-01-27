@@ -6,7 +6,7 @@ Feature: Comments
   
   Background:
     Given I have a page titled "home"
-    Given the following blog posts
+    Given I have the following blog posts
     | title       | content         | user_id |
 	| Testing     | Testing 1, 2, 3 |       1 |
     Given the following user records
