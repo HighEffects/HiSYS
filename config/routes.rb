@@ -31,7 +31,7 @@ Hisys::Application.routes.draw do
   get 'lab/*id', to: 'pages#show'
   get 'lab/new', to: 'pages#new'
  
-  root :to => 'pages#index'
+  root :to => 'slides#index'
   
   
   

@@ -37,9 +37,6 @@
     <%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>
 	
     <style>
-      body {
-        padding-top: 20px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
       .bg-image {
 	      background-size: cover;
       }
@@ -76,8 +73,15 @@
 	 }
 	 .ui-sortable-helper {
 		 border-bottom: 1px solid #DDDDDD;
+		 
 		 box-shadow: 0px 1px 2px 0px #393939;
 		 background-color: white;
+	 }
+	 
+	 .ui-sortable-placeholder {
+	 	border-left: 1px solid #DDDDDD;
+		height: 58px;
+		visibility: visible;
 	 }
 	 .handle {
 	   cursor: move;
@@ -87,19 +91,26 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar navbar-fluid navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%= link_to "HiSYS", pages_path, :class => "brand"  %>
-          <div class="container nav-collapse">
+		  <%= render 'layouts/logo' %>
+          <div class="row-fluid nav-collapse">
             <%= render 'layouts/nav_links' %>
 			<ul class="nav pull-right">
-				
+				<% if user_signed_in? %>
+				     <% if params[:action] == "list" %>
+				  		<li><a href="<%= new_slide_path %>"><i class="icon-plus"></i></a></li>
+				     <% else %>
+					    <li><a href="<%= slides_list_path %>"><i class="icon-wrench"></i></a></li>
+				     <% end %>
+					 <li class="divider-vertical"></li>
+				<% end %>
 				<li><%= form_tag lab_list_path, :method => "get", :class => "navbar-search " do |f| %>
 					<%= text_field_tag :search, nil, :placeholder => "Search", :class => "input-medium search-query" %>
 					<%= submit_tag "Find", :name => nil, :class => "hidden" %>
@@ -142,7 +153,7 @@
 		    play: true,
 		    slide_speed: 550,
 	        delay: 9000,
-		    slide_easing: 'easeInOutCubic',
+		    slide_easing: 'easeOutSine',
 		    nav_class: 'slides-navigation',
 		    container_class: 'slides-container',
 		    pagination: true,

@@ -5,14 +5,53 @@
 		<% @slides.each do |slide| %>
 		  <li>
 		    <%= image_tag slide.upload.file.to_s %>
-		    <% if slide.layout == "top-left"%>
+		    <% if slide.layout == "top_left"%>
 		      <div class="container" style="background: rgba(255, 255, 255, 0.0); width: 100%; top: 75px; margin:0; margin-left: 20px; padding:0;">
 		        <div class="row">
 		      	  <div class="span5">
 		      		<div>
 			      		<p class="header-text" style="text-transform: uppercase; margin-bottom: 0px;"><%= link_to slide.link_title, slide.link, :class => "slide-link"%></p>
-			      		<h1 style="font-family: 'AkzidenzGrotesk-ExtraBoldCond'; color: white; font-size: 85px; line-height: 73px; margin-top: 5px; margin-bottom: 5px"><%= slide.title %></h1>
-			      		<p class="header-text"><%= slide.content %></p>
+			      		<h1 style="font-family: 'AkzidenzGrotesk-ExtraBoldCond'; color: white; font-size: 85px; line-height: 73px; margin-top: 5px; margin-bottom: 10px"><%= markdown(slide.title) %></h1>
+			      		<div class="header-text"><%= markdown(slide.content) %></div>
+		      		</div>
+		      	  </div>
+		        </div>
+		      </div>
+			<% end %>
+		    <% if slide.layout == "bottom_left"%>
+		      <div class="container" style="background: rgba(255, 255, 255, 0.0); width: 100%; top: 400px; margin:0; margin-left: 20px; padding:0;">
+		        <div class="row">
+		      	  <div class="span7">
+		      		<div>
+			      		<p class="header-text" style="text-transform: uppercase; margin-bottom: 0px;"><%= link_to slide.link_title, slide.link, :class => "slide-link"%></p>
+			      		<h1 style="font-family: 'AkzidenzGrotesk-ExtraBoldCond'; color: white; font-size: 85px; line-height: 73px; margin-top: 5px; margin-bottom: 10px"><%= markdown(slide.title)   %></h1>
+			      		<div class="header-text"><%= markdown(slide.content) %></div>
+		      		</div>
+		      	  </div>
+		        </div>
+		      </div>
+			<% end %>
+		    <% if slide.layout == "top_right"%>
+		      <div class="container" style="background: rgba(255, 255, 255, 0.0); width: 100%; top: 75px; margin:0; margin-left: 20px; padding:0;">
+		        <div class="row">
+		      	  <div class="pull-right span7" style="margin-right: 50px;">
+		      		<div style="text-align: right">
+			      		<p class="header-text" style="text-transform: uppercase; margin-bottom: 0px;"><%= link_to slide.link_title, slide.link, :class => "slide-link"%></p>
+			      		<h1 style="font-family: 'AkzidenzGrotesk-ExtraBoldCond'; color: white; font-size: 85px; line-height: 73px; margin-top: 5px; margin-bottom: 10px"><%= markdown(slide.title) %></h1>
+			      		<div class="header-text"><%= markdown(slide.content) %></div>
+		      		</div>
+		      	  </div>
+		        </div>
+		      </div>
+			<% end %>
+		    <% if slide.layout == "bottom_right"%>
+		      <div class="container" style="background: rgba(255, 255, 255, 0.0); width: 100%; top: 400px; margin:0; margin-left: 20px; padding:0;">
+		        <div class="row">
+		      	  <div class="pull-right span7" style="margin-right: 50px;">
+		      		<div style="text-align: right">
+			      		<p class="header-text" style="text-transform: uppercase; margin-bottom: 0px;"><%= link_to slide.link_title, slide.link, :class => "slide-link"%></p>
+			      		<h1 style="font-family: 'AkzidenzGrotesk-ExtraBoldCond'; color: white; font-size: 85px; line-height: 73px; margin-top: 5px; margin-bottom: 10px"><%= markdown(slide.title) %></h1>
+			      		<div class="header-text"><%= markdown(slide.content) %></div>
 		      		</div>
 		      	  </div>
 		        </div>

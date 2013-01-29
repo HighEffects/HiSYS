@@ -4,6 +4,7 @@
 
 jQuery ->
   $('#slide_list').sortable
+    placeholder: 'ui-sortable-placeholder'
     axis: 'y'
     handle: '.handle'
     update: ->

@@ -1,6 +1,27 @@
 <ul class="nav">
-  <li><%= link_to "lab", {:controller => '/pages', :action => 'index'}  %></li>
-  <li><%= link_to "blog", posts_path  %></li>
-  <li><%= link_to "tags", tags_path  %></li>
-  <li><%= link_to "files", uploads_path  %></li>
+  
+  <% if params[:controller] == 'pages' %>
+    <li class="active"><%= link_to "lab", {:controller => '/pages', :action => 'index'}  %></li>
+  <% else %>
+	<li><%= link_to "lab", {:controller => '/pages', :action => 'index'}  %></li>
+  <%end%>
+  
+  <% if params[:controller] == 'posts' %>
+    <li class="active"><%= link_to "blog", posts_path  %></li>
+  <% else %>
+     <li><%= link_to "blog", posts_path  %></li>
+  <%end%>
+  
+  <% if params[:controller] == 'tags' %>
+    <li class="active"><%= link_to "tags", tags_path  %></li>
+  <% else %>
+    <li><%= link_to "tags", tags_path  %></li>
+  <% end %>
+  
+  <% if params[:controller] == 'uploads' %>
+    <li class="active"><%= link_to "files", uploads_path  %></li>
+  <% else %>
+    <li><%= link_to "files", uploads_path  %></li>
+  <% end %>
+
 </ul>

@@ -1,16 +1,41 @@
-<%= simple_form_for(@slide) do |f| %>
+<%= simple_form_for(@slide, :html => {:class => 'form-inline well' }) do |f| %>
+  <%= f.error_notification %>
+  <fieldset>
+	<legend><%= @form_title %></legend>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :content %>
-    <%= f.association :upload %>
-    <%= f.input :link_title %>
-    <%= f.input :link %>
-    <%= f.input :layout, collection: ['top-left'] %>
+	  <div class="row">
+		  <div class="span7">
+			  <%= f.input :title, :input_html => {:class => "span7"} %>
+		  </div>
+		  <div class="span2">
+    		  <%= f.association :upload, :input_html => {:class => "span2"}, :label => 'Image' %>
+		  </div>
+		  <div class="span2">
+    		  <%= f.input :layout, collection: ['top_left', 'bottom_left', 'top_right', 'bottom_right'], :input_html => {:class => "span2"}  %>
+		  </div>
+	  </div>
+	  <div class="row">
+		  <div class="span7">
+	  		<%= f.input :content, :input_html => {:class => "span7", :rows => '4'} %>
+	  	  </div>
+	  	  <div class="span4">
+    		  <%= f.input :link_title, :input_html => {:class => "span4"} %>
+		  </div>
+		  <div class="span4">
+    		  <%= f.input :link, :input_html => {:class => "span4"} %>
+		  </div>
+	  </div>
+    
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, :class => "btn btn-success" %>
+	<%= link_to 'Back', slides_list_path, :class => "btn" %>
+	<% if @slide.position %>
+	  <% pos = @slide.position-1%>
+	  <%= link_to 'View', slides_path + '#' + pos.to_s, :class => "btn" %>
+	<% end %>
   </div>
 <% end %>

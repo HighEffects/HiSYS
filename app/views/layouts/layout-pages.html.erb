@@ -40,14 +40,14 @@
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%= link_to "HiSYS", pages_path, :class => "brand"  %>
-          <div class="container nav-collapse">
+          <%= render 'layouts/logo' %>
+          <div class="row-fluid nav-collapse">
             <%= render 'layouts/nav_links' %>
 			<ul class="nav pull-right">
 				<% if @page != false && @comments != false && @page.new_record? != true  %>
@@ -55,7 +55,7 @@
 				<% end %>
 				<% if user_signed_in? %>
 				  <% if @page != false && @page.new_record? != true %>
-				    <li><a id="edit-wiki-page" href="<%='lab/' + nested_page_path(@page) + '/edit' %>"><i class="icon-pencil"></i></a></li>
+					<li><a id="edit-wiki-page" href="<%='lab/' + nested_page_path(@page) + '/edit' %>"><i class="icon-pencil"></i></a></li>
 				  <% end %>
 				  <li><a id="create_page" href="<%= new_page_path %>"><i class="icon-plus"></i></a></li>
 				  <li class="divider-vertical"></li>
