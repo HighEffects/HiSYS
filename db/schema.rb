@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20130129014215) do
     t.string   "link_title"
     t.string   "link"
     t.string   "layout"
+    t.integer  "position"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

@@ -1,34 +1,68 @@
+<div class="container">
+    <div class="row">
+      <div class="span12">
+		  <% if notice %>
+			  <div class="alert">
+			    <button type="button" class="close" data-dismiss="alert">×</button>
+			    <strong>Notice! </strong><%= notice %>
+			  </div>
+		 <% end %>
+		 <% if alert %>
+		  <div class="alert">
+		    <button type="button" class="close" data-dismiss="alert">×</button>
+		    <strong>Alert! </strong><%= alert %>
+		  </div>
+		  <% end %>
+         
+
+
 <h1>Listing slides</h1>
 
-<table class="table table-bordered">
-  <tr>
-    <th>Title</th>
-    <th>Content</th>
-    <th>Upload</th>
-    <th>Link</th>
-    <th>Layout</th>
-    <th style="width:90px">Actions</th>
-  </tr>
 
-<% @slides.each do |slide| %>
-  <tr>
-    <td><%= link_to slide.title, slide %></td>
-    <td><%= slide.content %></td>
-    <td><%= slide.upload.name %></td>
-    <td><%= link_to slide.link_title, slide.link %></td>
-    <td><%= slide.layout %></td>
-	<% if user_signed_in? %>
-      <td style="text-align: right;">
-	  	<%= link_to 'Edit', edit_slide_path(slide), :class => "btn btn-mini" %> 
-		<%= link_to 'Delete', slide, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
-	  </td>
-    </tr>
-    <% end %>
-	
-  </tr>
-<% end %>
+
+
+
+<table class="table table-bordered">
+  <thead>
+	  <tr>
+	    <th>Title</th>
+	    <th>Content</th>
+	    <th>Upload</th>
+	    <th>Link</th>
+	    <th>Layout</th>
+	    <th>Actions</th>
+	  </tr>
+  </thead>
+  <tbody id="slide_list" data-update-url="<%= sort_slides_path %>">
+	<% @slides.each do |slide| %>
+	  <tr id="slide_<%=slide.id %>">
+	    <td style="width: 25%" class="handle"><%= link_to slide.title, slide %></td>
+	    <td style="width: 20%"><%= slide.content %></td>
+	    <td style="width: 15%"><%= slide.upload.name %></td>
+	    <td style="width: 10%"><%= link_to slide.link_title, slide.link %></td>
+	    <td style="width: 5%"><%= slide.layout %></td>
+	    <td style="width: 10%" style="text-align: right;">
+		  	<%= link_to 'Edit', edit_slide_path(slide), :class => "btn btn-mini" %> 
+			<%= link_to 'Delete', slide, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
+		</td>
+	  </tr>
+	<% end %>
+  </tbody>
 </table>
 
 <br />
 
 <%= link_to 'New Slide', new_slide_path, :class => "btn"%>
+
+
+
+      </div>
+          
+    </div><!--/row-->
+
+  <footer>
+	<hr>
+    <p>
+      &copy; High Effects 2012<p></p>
+    </p>
+  </footer>

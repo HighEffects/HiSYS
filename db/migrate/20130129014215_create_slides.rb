@@ -7,6 +7,7 @@ class CreateSlides < ActiveRecord::Migration
       t.string :link_title
       t.string :link
       t.string :layout
+      t.integer :position
 
       t.timestamps
     end

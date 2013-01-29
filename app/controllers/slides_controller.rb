@@ -1,11 +1,11 @@
 class SlidesController < ApplicationController
   
-  layout "layout-slideshow", :except => [ :list, :new, :edit ]
+  layout "layout-slideshow", :except => [ :new, :edit ]
   
   # GET /slides
   # GET /slides.json
   def index
-    @slides = Slide.all
+    @slides = Slide.order("position")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +13,15 @@ class SlidesController < ApplicationController
     end
   end
   
+  def sort
+    params[:slide].each_with_index do |id, index|
+      Slide.update_all({position: index+1}, {id: id})
+    end
+    render nothing:true
+  end
+  
   def list
-    @slides = Slide.all
+    @slides = Slide.order("position")
 
     respond_to do |format|
       format.html # list.html.erb

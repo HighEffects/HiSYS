@@ -1,7 +1,9 @@
 Hisys::Application.routes.draw do
 
   get 'slides/list', to: 'slides#list'
-  resources :slides
+  resources :slides do
+      collection { post :sort }
+  end
 
   get 'uploads/list', to: 'uploads#list'
   resources :uploads

@@ -19,6 +19,7 @@ group :assets do
   gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
   gem 'twitter-bootstrap-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-ui-rails'
 end
 
 gem 'jquery-rails'
@@ -32,6 +33,7 @@ gem 'nokogiri'
 gem "nested_form"
 gem "rmagick"
 gem "carrierwave"
+gem 'acts_as_list'
 
 
 
