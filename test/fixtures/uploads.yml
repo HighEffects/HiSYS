@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  file_type: MyString
+  legend: MyText
+  file: MyString
+  user: 
+  visibility: MyString
+
+two:
+  name: MyString
+  file_type: MyString
+  legend: MyText
+  file: MyString
+  user: 
+  visibility: MyString

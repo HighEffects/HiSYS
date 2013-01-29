@@ -41,6 +41,9 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 1.0.0)
+    carrierwave (0.7.1)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
     childprocess (0.3.5)
       ffi (~> 1.0, >= 1.0.6)
     coffee-rails (3.2.2)
@@ -130,6 +133,7 @@ GEM
     rdoc (3.12)
       json (~> 1.4)
     redcarpet (1.17.2)
+    rmagick (2.13.1)
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
@@ -189,6 +193,7 @@ PLATFORMS
 
 DEPENDENCIES
   ancestry
+  carrierwave
   coffee-rails (~> 3.2.1)
   cucumber-rails
   database_cleaner
@@ -201,6 +206,7 @@ DEPENDENCIES
   pygmentize
   rails (= 3.2.8)
   redcarpet (= 1.17.2)
+  rmagick
   rspec
   rspec-rails
   sass-rails (~> 3.2.3)

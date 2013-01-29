@@ -49,3 +49,14 @@ FactoryGirl.define do
     f.taggable_type 'Page'
   end
 end
+
+FactoryGirl.define do 
+  factory :upload do |f|
+    f.name 'test'
+    f.file_type 'image'
+    f.file 'test.jpg'
+    f.legend 'Testing image'
+    f.user_id '1'
+    f.visibility 'public'
+  end
+end

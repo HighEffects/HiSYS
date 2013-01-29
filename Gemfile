@@ -30,6 +30,9 @@ gem 'redcarpet', '1.17.2'
 gem 'pygmentize'
 gem 'nokogiri'
 gem "nested_form"
+gem "rmagick"
+gem "carrierwave"
+
 
 
 # To use ActiveModel has_secure_password
