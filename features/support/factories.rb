@@ -60,3 +60,13 @@ FactoryGirl.define do
     f.visibility 'public'
   end
 end
+
+FactoryGirl.define do 
+  factory :slide do |f|
+    f.title 'test'
+    f.content 'yeah'
+    f.upload_id '1'
+    f.link_title 'more examples'
+    f.link 'http://example.com'
+  end
+end

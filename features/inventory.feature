@@ -4,6 +4,12 @@ Feature: Inventory
   As an organization maniac
   I want to make a inventory list of all our parts, products and tools
   
+  Background:
+    Given I have a page titled "home"
+    Given the following user records
+    | email        | password |
+    | bob@test.com | secret   |
+  
   Scenario: list inventory items
     Given I have items
 	When I go to the inventory page

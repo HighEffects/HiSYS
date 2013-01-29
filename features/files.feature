@@ -15,3 +15,12 @@ Feature: File Upload
 	When I go to the files list page
 	Then I should see "cats.jpg"
 	And I should see "sunset.png"
+	
+  Scenario: Upload Image
+  	Given I go to the files page
+	When I click in the link "Upload File"
+	And I fill in "upload[name]" with "Test Image"
+	And I fill in "upload[legend]" with "Testing image upload action"
+	And I choose the file "cats.jpg" for the "upload[file]"
+	And I click in the button "Create Upload"
+	Then I should see the image "cats.jpg"
