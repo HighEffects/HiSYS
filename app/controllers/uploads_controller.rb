@@ -1,7 +1,7 @@
 class UploadsController < ApplicationController
   
+  before_filter :check_access, :except => [:show, :index]
   after_filter :process_tags, only: [:create, :update]
-  before_filter :check_access, only: [:create, :update, :new, :create, :edit, :destroy]
   
   layout "layout-files"
   
@@ -116,7 +116,7 @@ class UploadsController < ApplicationController
   
   def check_access
     if user_signed_in? == false
-      redirect_to(new_user_session_path)
+      redirect_to(new_user_session_path, alert: 'You dont have access to that page!')
     end
   end
   

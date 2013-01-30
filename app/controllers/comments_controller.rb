@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   
   before_filter :load_commentable
+  before_filter :check_access, :except => [:index]
   
   def index
     @comments = @commentable.comments
@@ -29,6 +30,12 @@ class CommentsController < ApplicationController
   def load_commentable
       klass = [Post, Page].detect { |c| params["#{c.name.underscore}_id"]}
       @commentable = klass.find_by_slug!(params["#{klass.name.underscore}_id"])
+  end
+  
+  def check_access
+    if user_signed_in? == false
+      redirect_to(new_user_session_path, alert: 'You dont have access to that page!')
+    end
   end
   
 end

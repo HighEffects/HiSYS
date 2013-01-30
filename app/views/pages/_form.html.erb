@@ -1,18 +1,38 @@
 <%= simple_form_for(@page, :html => {:class => 'form-inline well' }) do |f| %>
-  <fieldset>
-	<legend>Editar página</legend>
+<fieldset>
+<legend><%= @form_title %></legend>
+  
   <%= f.error_notification %>
-  <div class="control-group string optional">
-	  Name: <%= f.input :name,  wrapper: 'inline', label: false %> 
-	  Slug: <%= f.input :slug, wrapper: 'inline', label: false %>
-	  Parent: <%= f.input :parent_id, collection: Page.order(:name), include_blank: true, wrapper: 'inline', label: false %>
+  <div class="form-inputs">
+	  <div class="row">
+		  <div class="span3">
+			  <%= f.input :name, :input_html => { :class => "span3"} %> 
+		  </div>
+		  <div class="span2">
+	  		<%= f.input :slug, :input_html => { :class => "span2"} %>
+		  </div>
+		  <div class="span2">
+	  		<%= f.input :parent_id, collection: Page.order(:name), include_blank: true, :input_html => { :class => "span2"} %>
+		  </div>
+		  <div class="span4">
+			  <div class="control-group string required">
+			  <label class="string optional control-label" for="Tags">Tags</label>
+			  <div class="controls">
+			    <input class="tagManager span2" data-provide="typehead" data-items=4 type="text">
+		  	  </div>
+		  </div>
   </div>
+  </div>
+  
   <%= f.input :content, as: :text,:label => false, :input_html => {:rows => '18', :style => 'width: 98.8%' } %>
-  <input class="tagManager" data-provide="typehead" data-items=4>
+  
   <%= f.error :base %>
-  <div class="form-actions">
+  <div class="form-actions" style="margin-bottom: 0px">
 	  <%= f.button :submit, :class => 'btn-success' %>
   	  <%= link_to 'Back', pages_path, :class => 'btn' %>
+  	  <% if @page.id %>
+  	    <%= link_to 'Show', @page, :class => "btn" %>
+  	  <% end %>
 </div>
   </fieldset>
 <% end %>

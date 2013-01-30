@@ -1,4 +1,4 @@
-<h1>Listing uploads</h1>
+<h1>Listing Files</h1>
 
 <ul class="thumbnails">
   <% @uploads.each do |file| %>
@@ -10,11 +10,3 @@
     </li>
   <% end %>
 </ul>
-
-  
-  
-
-
-<br />
-
-<%= link_to 'Upload File', new_upload_path, :class => "btn" %>

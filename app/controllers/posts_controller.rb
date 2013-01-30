@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   
   before_filter :find_post, only: [:show, :edit, :update, :destroy]
+  before_filter :check_access, :except => [:show, :index]
   after_filter :process_tags, only: [:create, :update]
   
   layout "layout-blog"
@@ -113,6 +114,12 @@ class PostsController < ApplicationController
         end
         @post.taggings.create!(:tag_id => tag.id)
       end
+    end
+  end
+  
+  def check_access
+    if user_signed_in? == false
+      redirect_to(new_user_session_path, alert: 'You dont have access to that page!')
     end
   end
   

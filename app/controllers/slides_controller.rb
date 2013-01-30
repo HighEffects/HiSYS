@@ -2,6 +2,8 @@ class SlidesController < ApplicationController
   
   layout "layout-slideshow", :except => [ :new, :edit ]
   
+  before_filter :check_access, :except => [:index]
+  
   # GET /slides
   # GET /slides.json
   def index
@@ -97,6 +99,12 @@ class SlidesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to slides_url }
       format.json { head :no_content }
+    end
+  end
+  
+  def check_access
+    if user_signed_in? == false
+      redirect_to(new_user_session_path, alert: 'You dont have access to that page!')
     end
   end
   
