@@ -1,4 +1,10 @@
 class UploadsController < ApplicationController
+  
+  after_filter :process_tags, only: [:create, :update]
+  before_filter :check_access, only: [:create, :update, :new, :create, :edit, :destroy]
+  
+  layout "layout-files"
+  
   # GET /uploads
   # GET /uploads.json
   def index
@@ -34,7 +40,7 @@ class UploadsController < ApplicationController
   # GET /uploads/new.json
   def new
     @upload = Upload.new
-
+    @tags = Tag.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @upload }
@@ -44,6 +50,7 @@ class UploadsController < ApplicationController
   # GET /uploads/1/edit
   def edit
     @upload = Upload.find(params[:id])
+    @tags = Tag.all
   end
 
   # POST /uploads
@@ -90,4 +97,27 @@ class UploadsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def process_tags
+    @upload.taggings.each do |old_tag|
+      old_tag.destroy
+    end
+    if params[:hiddenTagList]
+      tags = params[:hiddenTagList].split(",")
+      tags.each do |t|
+        tag = Tag.find_by_name(t.downcase)
+        if(tag.class != Tag)
+          tag = Tag.create!(:name => t.downcase)
+        end
+        @upload.taggings.create!(:tag_id => tag.id)
+      end
+    end
+  end
+  
+  def check_access
+    if user_signed_in? == false
+      redirect_to(new_user_session_path)
+    end
+  end
+  
 end

@@ -13,11 +13,19 @@
   <tr>
 	<% if t.taggable_type == "Post" %>
       <td><%= link_to t.taggable.title, {:controller => "posts", :action => 'show', :id => t.taggable.slug} %></td>
-	<% else %>
-	  <td><%= link_to t.taggable.name, {:controller => "pages", :action => 'show', :id => t.taggable.slug} %></td>
+	  <td><%= t.taggable_type %></td>
+	  <td><%= truncate( t.taggable.content, :length => 110, :omission => '...') %></td>
 	<% end %>
-	<td><%= t.taggable_type %></td>
-    <td><%= truncate( t.taggable.content, :length => 110, :omission => '...') %></td>
+	<% if t.taggable_type == "Page" %>
+	  <td><%= link_to t.taggable.name, {:controller => "pages", :action => 'show', :id => t.taggable.slug} %></td>
+	  <td><%= t.taggable_type %></td>
+	  <td><%= truncate( t.taggable.content, :length => 110, :omission => '...') %></td>
+	<% end %>
+	<% if t.taggable_type == "Upload" %>
+	  <td><%= link_to t.taggable.name, {:controller => "uploads", :action => 'show', :id => t.taggable.id} %></td>
+	  <td>File</td>
+	  <td><%= truncate( t.taggable.legend, :length => 110, :omission => '...') %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>

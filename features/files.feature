@@ -17,10 +17,21 @@ Feature: File Upload
 	And I should see "sunset.png"
 	
   Scenario: Upload Image
-  	Given I go to the files page
-	When I click in the link "Upload File"
+    Given I am logged in
+  	And I go to the files page
+	When I click in the link "add_file"
 	And I fill in "upload[name]" with "Test Image"
 	And I fill in "upload[legend]" with "Testing image upload action"
 	And I choose the file "cats.jpg" for the "upload[file]"
 	And I click in the button "Create Upload"
 	Then I should see the image "cats.jpg"
+	
+  Scenario: Only users logged in can create files
+    Given I go to the files page
+	When I visit "uploads/new"
+	Then I should see "Login"
+	
+  Scenario: Only users logged in can edit files
+    Given I have a file "cats.jpg"
+  	When I visit "/uploads/1/edit"
+  	Then I should see "Login"

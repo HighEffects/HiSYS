@@ -11,7 +11,8 @@ Feature: Slideshow
     | bob@test.com | secret   |
   
   Scenario: show slides
-    Given I have uploaded a file "cats.jpg"
+    Given I am logged in 
+	And I have uploaded a file "cats.jpg"
 	And I have uploaded a file "sunset.jpg"
     And I have the following slides
 	| title   | content | upload_id | link_title |        link |
@@ -19,4 +20,4 @@ Feature: Slideshow
 	| Slide 2 | Testing |         2 |       Fuck |  /lab/fuck/ |
 	When I visit the "slides_path"
 	Then I should see the image "cats.jpg"
-	And I should see "Slide 1"
+	And I should see the image "sunset.jpg"

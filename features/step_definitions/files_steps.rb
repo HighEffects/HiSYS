@@ -27,3 +27,7 @@ Given /^I have uploaded a file "(.*?)"$/ do |arg1|
   attach_file('upload[file]', "public/testing/" + arg1)
   click_button('Create Upload')
 end
+
+When /^I visit "(.*?)"$/ do |arg1|
+  visit(arg1)
+end
