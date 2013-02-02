@@ -2,3 +2,27 @@ en:
   pages: 
     list: 
       listing_pages: "Listing Pages"
+      results_for: "Results for "
+  uploads: 
+    index: 
+      listing_files: "Listing Files"
+  tags: 
+    show: 
+      all_tags: "All Tags"
+  sys:
+    title: "Title"
+    slug: "Slug"
+    content: "Content"
+    comments: "Comments"
+    leave_a_comment: "Leave a comment"
+    post_comment: "Post Comment"
+    by: "by"
+    actions: "Actions"
+    edit: "Edit"
+    delete: "Delete"
+    are_you_sure: "Are you sure?"
+    created: "Created "
+    ago: "ago"
+    signup: "Signup"
+    login: "Login"
+    search: "Search"

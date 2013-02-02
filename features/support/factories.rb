@@ -10,6 +10,8 @@ FactoryGirl.define do
   factory :user do |f|
     f.email 'test@testing.com'
     f.password '123456'
+    f.first_name "John"
+    f.last_name "Doe"
   end
 end
 

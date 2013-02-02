@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   # GET /pages
   # GET /pages.json
   
-  before_filter :check_access, :except => [:show, :index]
+  before_filter :check_access, :except => [:show, :index, :list]
   before_filter :find_page, only: [:show, :edit, :update, :destroy]
   after_filter :process_tags, only: [:create, :update]
   

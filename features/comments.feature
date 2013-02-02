@@ -37,7 +37,7 @@ Feature: Comments
     Given I am logged in
 	And I visit the "testing" post
 	When I fill in "comment[content]" with "Post comment test"
-	And I click in the button "Create Comment"
+	And I click in the button "Post Comment"
 	Then I should see "Comment created."
 	And I should see "Post comment test"
 	
@@ -47,7 +47,7 @@ Feature: Comments
 	And I visit the "test" page
 	When I click in the link "wiki-page-comments"
 	And I fill in "comment[content]" with "Wiki page comment test"
-	And I click in the button "Create Comment"
+	And I click in the button "Post Comment"
 	Then I should see "Comment created."
 	And I should see "Wiki page comment test"
 	

@@ -9,7 +9,7 @@ Given /^I have the following files$/ do |table|
 end
 
 When /^I go to the files list page$/ do
-  visit(uploads_list_path)
+  visit(files_list_path)
 end
 
 When /^I go to the files page$/ do

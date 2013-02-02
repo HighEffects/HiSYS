@@ -23,7 +23,7 @@ Feature: Blog
     Given I am logged in
 	And I go to the blog
 	When I click in the link "create_post"
-	Then I should see "New post"
+	Then I should see "New Post"
 	And I fill in "post[title]" with "Posting Test"
 	And I fill in "post[slug]" with "posting_test"
 	And I fill in "post[content]" with "This is a post created by cucumber!"

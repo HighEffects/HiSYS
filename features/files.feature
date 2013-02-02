@@ -12,6 +12,7 @@ Feature: File Upload
   Scenario: List Files
     Given I have a file "cats.jpg"
 	And I have a file "sunset.png"
+	And I am logged in
 	When I go to the files list page
 	Then I should see "cats.jpg"
 	And I should see "sunset.png"
@@ -28,10 +29,10 @@ Feature: File Upload
 	
   Scenario: Only users logged in can create files
     Given I go to the files page
-	When I visit "uploads/new"
+	When I visit "files/new"
 	Then I should see "Login"
 	
   Scenario: Only users logged in can edit files
     Given I have a file "cats.jpg"
-  	When I visit "/uploads/1/edit"
+  	When I visit "/files/1/edit"
   	Then I should see "Login"

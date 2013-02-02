@@ -56,12 +56,12 @@ Given /^I am in the pages list$/ do
 end
 
 Given /^I am logged in$/ do
-  FactoryGirl.create(:user, :email => 'test@testing.com', :password => '123456')
+  FactoryGirl.create(:user, :email => 'test@testing.com', :password => '123456', :first_name => "John", :last_name => "Doe")
   visit (new_user_session_path)
     fill_in "user_email", :with => 'test@testing.com'
     fill_in "user_password", :with => '123456'
     click_button "Sign in"
-    page.should have_content("test@testing.com")
+    page.should have_content("John Doe")
 end
 
 When /^I click in the link "(.*?)"$/ do |link|

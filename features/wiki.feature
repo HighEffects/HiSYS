@@ -7,8 +7,8 @@ Feature: wiki pages
   Background:
     Given I have a page titled "home"
     Given the following user records
-    | email        | password |
-    | bob@test.com | secret   |
+    | email        | password | first_name | last_name |
+    | bob@test.com | secret   |        Bob |    Sponge |
 
   Scenario: home page
 	When I go to the lab page
@@ -16,6 +16,7 @@ Feature: wiki pages
   
   Scenario: list pages
     Given I have pages titled "test page", "page 2"
+	And I am logged in
 	When I go to the list of pages
 	Then I should see "test page"
 	And I should see "page 2"
@@ -25,7 +26,7 @@ Feature: wiki pages
     Given I am logged in
 	And I go to the lab page
 	When I click in the link "create_page"
-	Then I should see "New page"
+	Then I should see "New Page"
 	And I fill in "page[name]" with "Test page"
 	And I fill in "page[slug]" with "test_page"
 	And I fill in "page[content]" with "Testing 1, 2, 3"
@@ -45,7 +46,7 @@ Feature: wiki pages
 	And I have a page titled "test"
 	When I visit the "lab/test" page
 	And I click in the link "edit-wiki-page"
-	And I should see "Editar página"
+	And I should see "Edit Page"
 	And I fill in "page[content]" with "Testing 1, 2, 3"
 	And I click in the button "Update Page"
 	Then I should see "Page was successfully updated"
