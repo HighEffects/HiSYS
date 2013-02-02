@@ -5,8 +5,10 @@ Hisys::Application.routes.draw do
       collection { post :sort }
   end
 
-  get 'uploads/list', to: 'uploads#list'
-  resources :uploads
+  get 'files/list', to: 'uploads#list'
+  resources :uploads, :path => "files" do
+    resources :comments
+  end
 
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"} 
   

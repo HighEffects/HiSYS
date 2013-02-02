@@ -1,0 +1,4 @@
+<li><%= form_tag lab_list_path, :method => "get", :class => "navbar-search " do |f| %>
+					<%= text_field_tag :search, nil, :placeholder => t('sys.search'), :class => "input-medium search-query" %>
+					<%= submit_tag "Find", :name => nil, :class => "hidden" %>
+				<% end%></li>

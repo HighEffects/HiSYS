@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class FileUploader < CarrierWave::Uploader::Base
+class AvatarUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -19,14 +19,8 @@ class FileUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{mounted_as}/#{model.id}"
   end
-
-  version :thumb do
-    process :resize_to_fill => [200, 150,  gravity = ::Magick::CenterGravity]
-  end
   
-  version :small do
-    process :resize_to_fill => [50, 50,  gravity = ::Magick::CenterGravity]
-  end
+  
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url

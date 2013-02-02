@@ -32,7 +32,12 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       ## Token authenticatable
       # t.string :authentication_token
-
+      
+      t.string :avatar
+      t.string :first_name
+      t.string :last_name
+      t.boolean :blogger
+      t.boolean :admin
 
       t.timestamps
     end

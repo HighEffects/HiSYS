@@ -17,11 +17,11 @@
            <span class="badge"><%= link_to tag.name, {:controller => 'tags', :action => 'show', :id => tag.name }, :style => "color: white;" %></span> 
         <% end %> |
       <% end %>
-      Created: <%= time_ago_in_words(post.created_at) %> |
+      <%= t "sys.created" %> <%= time_ago_in_words(post.created_at) %> <%= t "sys.ago" %> |
       <% if post.comments.count != 0%>
-        Comments: <%= post.comments.count %> |
+        <%= t "sys.comments" %>: <%= post.comments.count %> |
       <% end %>
-  	por <%= post.user.email %></p>
+  	<%= t "sys.by" %> <%= post.user.first_name %> <%= post.user.last_name if post.user.last_name? %></p>
       
 	  
     </div>

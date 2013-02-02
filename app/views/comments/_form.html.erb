@@ -1,5 +1,7 @@
 <% if user_signed_in? %>
-	<%= simple_form_for [@commentable, @comment] do |f| %>
+<%= simple_form_for [@commentable, @comment], :html => {:class => 'form-inline well', :style => "margin-top: 20px;" } do |f| %>
+<fieldset>
+	<legend><%= t "sys.leave_a_comment"%></legend>
 	  <%if @comment.errors.any? %>
 	    <div class="error_messages">
 		  <h2>Please correct the following errors.</h2>
@@ -11,10 +13,11 @@
 		</div>
 	  <%end%>
 	  <div class="field">
-	    <%= f.input :content, :input_html => {rows: 4, :class => "span12"}, :label => false%>
+	    <%= f.input :content, :input_html => {rows: 4, :style => "width: 99%"}, :label => false%>
 	  </div>
+  </fieldset>
 	  <div class="actions">
-	    <%= f.button :submit %>
+	    <%= f.button :submit, :value => t("sys.post_comment") %>
 	  </div>
 	<%end%>
 <% end %>

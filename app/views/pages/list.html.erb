@@ -1,17 +1,17 @@
 <% if @search %>
-  <h1>Results for <%= @search %></h1>
+  <h1><%= t ".results_for" %> <%= @search %></h1>
 <% else %>
-  <h1>Listing pages</h1>
+  <h1><%= t ".listing_pages" %></h1>
 <% end %>
 
 <table class="table table-bordered">
   <tr>
-    <th>Name</th>
-    <th>Slug</th>
-    <th>Content</th>
-	<th>Comments</th>
+    <th><%= t "sys.title" %></th>
+    <th><%= t "sys.slug" %></th>
+    <th><%= t "sys.content" %></th>
+	<th><%= t "sys.comments" %></th>
     <% if user_signed_in? %>
-	  <th style="width: 90px;"></th>
+	  <th style="width: 90px;"><%= t "sys.actions" %></th>
 	<% end %>
   </tr>
 
@@ -23,17 +23,12 @@
 	<td><%= page.comments.count %></td>
 	<% if user_signed_in? %>
       <td style="text-align: right;">
-	  	<%= link_to 'Edit', nested_page_path(page) + '/edit', :class => "btn btn-mini" %> 
-		<%= link_to 'Delete', page, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
+		<div class="btn-group">
+	  	  <%= link_to t('sys.edit'), nested_page_path(page) + '/edit', :class => "btn btn-mini" %> 
+		  <%= link_to t('sys.delete'), page, method: :delete, data: { confirm: t('sys.are_you_sure') }, :class => "btn btn-danger btn-mini" %>
+		</div>
 	  </td>
     </tr>
     <% end %>
 <% end %>
 </table>
-
-<br />
-
-<% if user_signed_in? %>
-<%= link_to 'New Page', new_page_path, :class => 'btn btn-primary' %>
-<% end %>
-

@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(params[:comment])
     @comment.user_id = current_user
     if @comment.save
-      klass = [Post, Page].detect { |c| params["#{c.name.underscore}_id"]}
+      klass = [Post, Page, Upload].detect { |c| params["#{c.name.underscore}_id"]}
       if klass == Page
         redirect_to [@commentable, :comments], notice:"Comment created."
       else
@@ -28,8 +28,12 @@ class CommentsController < ApplicationController
   end
   
   def load_commentable
-      klass = [Post, Page].detect { |c| params["#{c.name.underscore}_id"]}
-      @commentable = klass.find_by_slug!(params["#{klass.name.underscore}_id"])
+      klass = [Post, Page, Upload].detect { |c| params["#{c.name.underscore}_id"]}
+      if klass == "Post" || klass == "Page"
+        @commentable = klass.find_by_slug!(params["#{klass.name.underscore}_id"])
+      else
+        @commentable = klass.find_by_id!(params["#{klass.name.underscore}_id"])
+      end
   end
   
   def check_access

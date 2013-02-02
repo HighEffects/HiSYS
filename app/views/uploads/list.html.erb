@@ -16,7 +16,7 @@
     <td><%= upload.name %></td>
     <td><%= upload.file_type %></td>
     <td><%= truncate(upload.legend, :length => 110, :omission => '...') %></td>
-   
+    <td><%= truncate(upload.file.to_s, :length => 30, :omission => '...') %></td>
     <td><%= upload.user.email %></td>
     <td><%= upload.visibility %></td>
     <td style="text-align: right;">

@@ -3,14 +3,17 @@
   <%@comments.each do |comment| %>
     <li class="media">
 	  <a class="pull-left" href="#">
-	    <img class="media-object" src="http://placehold.it/64x64">
+		  <%= image_tag comment.user.avatar.small.to_s, :class => "media-object img-rounded" if comment.user.avatar?%>
 	  </a>
       <div class="media-body">
-        <h5 class="media-heading"><%= time_ago_in_words(comment.created_at) %> by <%= comment.user.email %></h5>
+        
         <div class="media">
-			<%= markdown(comment.content)  %>
-        </div>
-      </div>
+			<small><%= comment.user.first_name %> <%= comment.user.last_name if comment.user.last_name? %>: </small>
+ 		    <br>
+			<%= comment.content  %>
+			<small class=""> - <%= time_ago_in_words(comment.created_at) %> <%= t "sys.ago" %></small>
+			
+        </div></div>
     </li>
   <% end %>
 </ul>

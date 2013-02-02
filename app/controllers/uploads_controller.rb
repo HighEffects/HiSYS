@@ -29,7 +29,9 @@ class UploadsController < ApplicationController
   # GET /uploads/1.json
   def show
     @upload = Upload.find(params[:id])
-
+    @commentable = @upload
+    @comments = @commentable.comments
+    @comment = Comment.new
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @upload }
@@ -57,7 +59,7 @@ class UploadsController < ApplicationController
   # POST /uploads.json
   def create
     @upload = Upload.new(params[:upload])
-    @upload.user = current_user
+    @upload.user_id = current_user.id
 
     respond_to do |format|
       if @upload.save

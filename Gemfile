@@ -30,10 +30,11 @@ gem 'ancestry'
 gem 'redcarpet', '1.17.2'
 gem 'pygmentize'
 gem 'nokogiri'
-gem "nested_form"
+# gem "nested_form"
 gem "rmagick"
 gem "carrierwave"
 gem 'acts_as_list'
+gem 'i18n'
 
 
 

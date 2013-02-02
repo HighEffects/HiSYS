@@ -12,16 +12,12 @@
      <li><%= link_to "blog", posts_path  %></li>
   <%end%>
   
-  <% if params[:controller] == 'tags' %>
-    <li class="active"><%= link_to "tags", tags_path  %></li>
-  <% else %>
-    <li><%= link_to "tags", tags_path  %></li>
-  <% end %>
-  
-  <% if params[:controller] == 'uploads' %>
-    <li class="active"><%= link_to "files", uploads_path  %></li>
-  <% else %>
-    <li><%= link_to "files", uploads_path  %></li>
-  <% end %>
+  <% if user_signed_in? %>
+	  <% if params[:controller] == 'uploads' %>
+	    <li class="active"><%= link_to "files", uploads_path  %></li>
+	  <% else %>
+	    <li><%= link_to "files", uploads_path  %></li>
+	  <% end %>
+   <% end %>
 
 </ul>
