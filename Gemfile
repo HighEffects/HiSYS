@@ -14,11 +14,9 @@ gem 'thin'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
   gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
-  gem 'twitter-bootstrap-rails'
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-ui-rails'
 end
@@ -27,7 +25,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'simple_form'
 gem 'ancestry'
-
+gem 'twitter-bootstrap-rails'
 gem 'redcarpet', '1.17.2'
 gem 'pygmentize'
 gem 'nokogiri'
