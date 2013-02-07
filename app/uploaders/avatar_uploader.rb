@@ -11,7 +11,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  storage :fog
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -20,7 +20,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
     "uploads/#{mounted_as}/#{model.id}"
   end
   
-  
+  def cache_dir
+      " ./tmp/uploads/#{mounted_as}/#{model.id}"
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
