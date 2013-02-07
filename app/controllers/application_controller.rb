@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_locale
-    I18n.locale = 'en'
+    I18n.locale = 'pt-BR'
     # current_user.locale# request.subdomain# request.env["HTTP_ACCEPT_LANGUAGE"]# request.remote_ipenddefdefault_url_options(options = {})
     {locale:I18n.locale}
   end
