@@ -61,5 +61,9 @@ module Hisys
     
     # Fonts Path
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
+    
+    # Prevent initializing the application before assets are precompiled (required for heroku)
+    config.assets.initialize_on_precompile = false
+    
   end
 end
