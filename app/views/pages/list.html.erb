@@ -9,7 +9,7 @@
     <th><%= t "sys.title" %></th>
     <th><%= t "sys.slug" %></th>
     <th><%= t "sys.content" %></th>
-	<th><%= t "sys.comments" %></th>
+	<th><i class="icon-comment"></i></th>
     <% if user_signed_in? %>
 	  <th style="width: 90px;"><%= t "sys.actions" %></th>
 	<% end %>
@@ -19,7 +19,7 @@
   <tr>
     <td><%= link_to page.name, nested_page_path(page) %></td>
     <td><%= page.slug %></td>
-    <td><%= truncate( page.content, :length => 90, :omission => '...') %></td>
+    <td><%= truncate( strip_tags(page.content), :length => 90, :omission => '...') %></td>
 	<td><%= page.comments.count %></td>
 	<% if user_signed_in? %>
       <td style="text-align: right;">

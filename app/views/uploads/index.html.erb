@@ -2,7 +2,7 @@
 
 <ul class="thumbnails">
   <% @uploads.each do |file| %>
-    <li class="span2">
+    <li class="span2" style="height: 160px;">
       <a href="<%= upload_path(file) %>" class="thumbnail">
         <%= image_tag file.file.thumb.to_s %>
       </a>
