@@ -36,6 +36,7 @@ gem "fog", "~> 1.3.1"
 
 
 
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -61,4 +62,5 @@ end
 
 group :production do
   gem 'newrelic_rpm'
+  gem 'mixpanel'
 end

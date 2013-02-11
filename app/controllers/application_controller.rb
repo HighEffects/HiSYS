@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
   
   before_filter :set_locale
+  
+  def mixpanel
+    if Rails.env.production?
+      @mixpanel ||= Mixpanel::Tracker.new 'd38d373a7a4f4123c13df2c610e2acbb', { :env => request.env }
+    end
+  end
 
   private
 
