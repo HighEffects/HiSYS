@@ -88,6 +88,8 @@
 	 }
    </style>
 	
+   <%= render 'layouts/analytics' %>
+	
   </head>
   <body>
 
@@ -145,6 +147,10 @@
 		  });
 		});
 	</script>
-
+	
+	<script type="text/javascript">
+	    mixpanel.track("Landing Page Loaded")
+	</script>
+	
   </body>
 </html>
