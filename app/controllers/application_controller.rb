@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_locale
   
+  def after_sign_in_path_for(resource)
+   pages_path
+  end
+  
+  def after_sign_out_path_for(resource_or_scope)
+    pages_path
+  end
+  
   def mixpanel
     if Rails.env.production?
       @mixpanel ||= Mixpanel::Tracker.new 'd38d373a7a4f4123c13df2c610e2acbb', { :env => request.env }
