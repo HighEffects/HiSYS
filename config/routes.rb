@@ -10,7 +10,7 @@ Hisys::Application.routes.draw do
     resources :comments
   end
 
-  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"} 
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}, :controllers => { :sessions => :sessions }
   
   get "tags/index"
   get 'tags/*id', to: 'tags#show'
