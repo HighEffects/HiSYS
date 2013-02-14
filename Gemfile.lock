@@ -107,11 +107,15 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.7.5)
+    launchy (2.2.0)
+      addressable (~> 2.3)
     less (2.2.2)
       commonjs (~> 0.2.6)
     less-rails (2.2.6)
       actionpack (>= 3.1)
       less (~> 2.2.0)
+    letter_opener (1.1.0)
+      launchy (~> 2.2.0)
     libv8 (3.3.10.4)
     libwebsocket (0.1.5)
       addressable
@@ -236,6 +240,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   less-rails
+  letter_opener
   mixpanel
   newrelic_rpm
   nokogiri

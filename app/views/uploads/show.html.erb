@@ -5,7 +5,7 @@
  <%= image_tag @upload.file.to_s, :class => "img-polaroid" %>
  
 <p>
-  <%= @upload.legend %>
+  <%= markdown(@upload.legend) %>
 </p>
 
 <%= render "comments/comments"%>

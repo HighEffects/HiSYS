@@ -52,6 +52,10 @@ gem "fog", "~> 1.3.1"
 # To use debugger
 # gem 'debugger'
 
+group :development do
+  gem "letter_opener"
+end
+
 group :test do
   gem "rspec"
   gem "rspec-rails"
