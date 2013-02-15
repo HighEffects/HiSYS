@@ -1,0 +1,15 @@
+<%= simple_form_for(@support_message, :html => {:class => "pull-right"}) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+	<% if user_signed_in? == false %>
+    	<%= f.input :email, :input_html => { :class => "input-xlarge", :placeholder => "Email"}, :label => false, :required => true, :autofocus => true  %>
+    <% end %>
+	<%= f.input :title, :input_html => { :class => "input-xlarge", :placeholder => "Titulo"}, :label => false %>
+    <%= f.input :message, :input_html => { :class => "input-xlarge", :placeholder => "Mensagem", :rows => "4"}, :label => false, :required => true  %>
+  </div>
+
+
+	<%= f.button :submit, t("sys.send") %>
+
+<% end %>

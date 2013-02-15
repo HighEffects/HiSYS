@@ -1,5 +1,9 @@
 Hisys::Application.routes.draw do
 
+  get 'contato', to: 'support_messages#index'
+  get 'support_messages', to: 'support_messages#list'
+  resources :support_messages
+
   get 'slides/list', to: 'slides#list'
   resources :slides do
       collection { post :sort }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130130234435) do
+ActiveRecord::Schema.define(:version => 20130215022308) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(:version => 20130130234435) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "support_messages", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "email"
+    t.string   "title"
+    t.text     "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "support_messages", ["user_id"], :name => "index_support_messages_on_user_id"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

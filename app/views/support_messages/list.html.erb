@@ -1,0 +1,33 @@
+<h1>Listing support_messages</h1>
+
+<table class="table table-bordered">
+  <tr>
+	<th>Title</th>
+    <th>Author</th>
+    <th class="">Message</th>
+    <th style="width: 90px;"><%= t "sys.actions" %></th>
+  </tr>
+
+<% @support_messages.each do |support_message| %>
+  <tr>
+	<td><%= link_to truncate( support_message.title, :length => 40, :omission => '...'), support_message %></td>
+    <td>
+		<% if support_message.user %>
+			<%= support_message.user %>
+		<% else %>
+			<%= support_message.email %>
+		<% end %>
+	</td>
+	<td><%= truncate( support_message.message, :length => 90, :omission => '...') %></td>
+    <td style="text-align: right;">	
+		<div class="btn-group">
+	  	  <%= link_to t('sys.show'), support_message, :class => "btn btn-mini" %> 
+		  <%= link_to t('sys.delete'), support_message, method: :delete, data: { confirm: t('sys.are_you_sure') }, :class => "btn btn-danger btn-mini" %>
+		</div>
+	</td>
+	
+  </tr>
+<% end %>
+</table>
+
+<br />

@@ -26,6 +26,9 @@ pt-BR:
     signup: "Registro"
     login: "Entrar"
     search: "Busca"
+    send: "Enviar"
+  support_messages:
+    message_sent: "Mensagem enviada com suscesso."
 
   activerecord:
     models:

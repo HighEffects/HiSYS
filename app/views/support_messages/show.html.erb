@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @support_message.user %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @support_message.email %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @support_message.title %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%= @support_message.message %>
+</p>
+
+<%= link_to 'Back', support_messages_path %>

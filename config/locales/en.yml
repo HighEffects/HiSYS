@@ -26,3 +26,6 @@ en:
     signup: "Signup"
     login: "Login"
     search: "Search"
+    send: "Enviar"
+  support_messages:
+    message_sent: "Your message has been sent."
