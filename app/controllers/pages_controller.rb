@@ -62,6 +62,12 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       if @page.save
+        
+        # mixpanel track page created
+        if Rails.env.production?
+          mixpanel.track 'Page Created', { :distinct_id => current_user.id }
+        end
+        
         format.html { redirect_to @page, notice: 'Page was successfully created.' }
         format.json { render json: @page, status: :created, location: @page }
       else

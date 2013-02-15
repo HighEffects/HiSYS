@@ -62,6 +62,12 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        
+        # mixpanel track post created
+        if Rails.env.production?
+          mixpanel.track 'Post Created', { :distinct_id => current_user.id }
+        end
+        
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
       else

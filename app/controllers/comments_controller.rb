@@ -17,6 +17,12 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user
     if @comment.save
       klass = [Post, Page, Upload].detect { |c| params["#{c.name.underscore}_id"]}
+      
+      # mixpanel track comment created
+      if Rails.env.production?
+        mixpanel.track 'Comment Created', { :distinct_id => current_user.id }
+      end
+      
       if klass == Page
         redirect_to [@commentable, :comments], notice:"Comment created."
       else

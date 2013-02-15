@@ -8,7 +8,7 @@ class UploadsController < ApplicationController
   # GET /uploads
   # GET /uploads.json
   def index
-    @uploads = Upload.all
+    @uploads = Upload.order("created_at desc").all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -63,6 +63,12 @@ class UploadsController < ApplicationController
 
     respond_to do |format|
       if @upload.save
+        
+        # mixpanel track file upload
+        if Rails.env.production?
+          mixpanel.track 'File Uploaded', { :distinct_id => current_user.id }
+        end
+        
         format.html { redirect_to @upload, notice: 'Upload was successfully created.' }
         format.json { render json: @upload, status: :created, location: @upload }
       else
