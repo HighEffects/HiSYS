@@ -12,6 +12,7 @@ class SlidesController < ApplicationController
       mixpanel.track 'Landing Page Loaded', { :distinct_id => current_user.id } if Rails.env.production?
     else
       mixpanel.track 'Landing Page Loaded' if Rails.env.production?
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @slides }
