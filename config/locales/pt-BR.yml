@@ -27,8 +27,19 @@ pt-BR:
     login: "Entrar"
     search: "Busca"
     send: "Enviar"
+    name: "Nome"
+    email: "Email"
+    registered: "Registrado"
+    item: "Item"
+    comment: "Comentário"
+    user: "Usuário"
   support_messages:
     message_sent: "Mensagem enviada com suscesso."
+  admin:
+    user_list:
+      user_list: "Lista de Usuários"
+    comment_list:
+      comment_list: "Lista de Comentários"
 
   activerecord:
     models:

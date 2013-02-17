@@ -1,0 +1,28 @@
+<h1><%= t ".comment_list" %></h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th><%= t "sys.item" %></th>
+    <th><%= t "sys.comment" %></th>
+    <th><%= t "sys.user" %></th>
+	<th><%= t "sys.registered" %></th>
+  </tr>
+
+<% @comments.each do |comment| %>
+  <tr>
+    <td>
+		<% if comment.commentable_type == "Post" %>
+			<%= link_to comment.commentable.title, post_path(comment.commentable) %>
+		<% end %>
+		<% if comment.commentable_type == "Page" %>
+		<%= link_to comment.commentable.name, page_path(comment.commentable) + "/comments"%>
+		<% end %>
+		<% if comment.commentable_type == "Upload" %>
+		<%= link_to comment.commentable.name, upload_path(comment.commentable) %>
+		<% end %>
+	</td>
+    <td><%= comment.content %></td>
+	<td><%= comment.user.first_name %> <%= comment.user.last_name %></td>
+    <td><%= time_ago_in_words(comment.created_at) %> <%= t "sys.ago" %></td>
+<% end %>
+</table>
