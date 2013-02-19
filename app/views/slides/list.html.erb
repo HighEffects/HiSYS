@@ -21,7 +21,13 @@
          
 
 
-<h1>Listing slides <small><%= link_to "slideshow", slides_path, :class => "btn btn-mini" %></small></h1>
+<h1>
+	<%= t ".slide_list" %> 
+	<small>
+		<%= link_to "slideshow", slides_path, :class => "btn btn-mini", :style => "margin-bottom:5px;" %> 
+		<%= link_to "+ slide", slides_path, :class => "btn btn-mini", :style => "margin-bottom:5px;" %>
+	</small>
+</h1>
 
 <table class="table table-bordered">
   <thead>

@@ -35,11 +35,16 @@ pt-BR:
     user: "Usuário"
   support_messages:
     message_sent: "Mensagem enviada com suscesso."
+    list:
+      support_messages_list: "Lista de mensagem recebidas"
   admin:
     user_list:
       user_list: "Lista de Usuários"
     comment_list:
       comment_list: "Lista de Comentários"
+  slides:
+    list:
+      slide_list: "Lista de Slides"
 
   activerecord:
     models:
