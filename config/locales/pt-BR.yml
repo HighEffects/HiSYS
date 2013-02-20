@@ -27,6 +27,8 @@ pt-BR:
     login: "Entrar"
     search: "Busca"
     send: "Enviar"
+    error_404: "A página solicitada não foi encontrada."
+    error_500: "Ocorreu um erro no servidor. Por favor tente de novo."
   support_messages:
     message_sent: "Mensagem enviada com suscesso."
 
