@@ -27,5 +27,21 @@ en:
     login: "Login"
     search: "Search"
     send: "Enviar"
+    name: "Name"
+    email: "Email"
+    registered: "Registered"
+    item: "Item"
+    comment: "Comment"
+    user: "User"
   support_messages:
     message_sent: "Your message has been sent."
+    list:
+      support_messages_list: "Received Messages"
+  admin:
+    user_list:
+      user_list: "User List"
+    comment_list:
+      comment_list: "Comment List"
+  slides:
+    list:
+      slide_list: "Lista de Slides"

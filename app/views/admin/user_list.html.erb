@@ -1,0 +1,16 @@
+<h1><%= t ".user_list" %></h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th><%= t "sys.name" %></th>
+    <th><%= t "sys.email" %></th>
+    <th><%= t "sys.registered" %></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.first_name %> <%= user.last_name %></td>
+    <td><%= user.email %></td>
+    <td><%= time_ago_in_words(user.created_at) %> <%= t "sys.ago" %></td>
+<% end %>
+</table>

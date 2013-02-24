@@ -1,6 +1,11 @@
-<div class="container">
-    <div class="row">
-      <div class="span12">
+
+	  <% if params[:controller] == "slides" %>
+	  <div class="container">
+	      <div class="row"> 
+      	<div class="span12">
+	  <% else %>
+	  	<div class="span12">
+	  <% end %>
 		  <% if notice %>
 			  <div class="alert">
 			    <button type="button" class="close" data-dismiss="alert">×</button>
@@ -16,7 +21,13 @@
          
 
 
-<h1>Listing slides <small><%= link_to "slideshow", slides_path, :class => "btn btn-mini" %></small></h1>
+<h1>
+	<%= t ".slide_list" %> 
+	<small>
+		<%= link_to "slideshow", slides_path, :class => "btn btn-mini", :style => "margin-bottom:5px;" %> 
+		<%= link_to "+ slide", slides_path, :class => "btn btn-mini", :style => "margin-bottom:5px;" %>
+	</small>
+</h1>
 
 <table class="table table-bordered">
   <thead>
@@ -35,7 +46,7 @@
 		<% pos = slide.position - 1 %>
 	    <td style="width: 15%" class="handle"><%= link_to slide.title, slides_path + '#' + pos.to_s %></td>
 	    <td style="width: 35%" class="handle"><%= truncate( slide.content, :length => 140, :omission => '...') %></td>
-	    <td style="width: 12%" class="handle"><%= slide.upload.name %></td>
+	    <td style="width: 12%" class="handle"><%= truncate( slide.upload.name, :length => 20, :omission => '...') %></td>
 	    <td style="width: 13%" class="handle"><%= link_to slide.link_title, slide.link %></td>
 	    <td style="width: 5%" class="handle"><%= slide.layout %></td>
 	    <td style="width: 5%; text-align: center;" class="handle" >
@@ -53,15 +64,17 @@
 
 <% # link_to 'New Slide', new_slide_path, :class => "btn"%>
 
-
-
-      </div>
-          
-    </div><!--/row-->
-
+<% if params[:controller] == "slides" %>
+  </div>
+    
+</div><!--/row-->     
   <footer>
 	<hr>
     <p>
       &copy; High Effects 2012<p></p>
     </p>
   </footer>
+<% else %>
+  </div>
+  
+<% end %>
