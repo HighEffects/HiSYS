@@ -1,1 +1,30 @@
-<%= render 'form' %>
+<li>
+	<%= image_tag('nuvens.jpeg', :style => "left: 0px; margin-top: 40px;") %>
+    			
+	<div class="container" style="background: rgba(255, 255, 255, 0.0); width: 100%; top: 100px; margin:0; margin-left: 20px; padding:0;">
+	  <div class="row">
+	  	<div class="offset10 span4">
+	  		<div>
+	      		<h1 class="" style="font-family: 'AkzidenzGrotesk-ExtraBoldCond'; color: white; font-size: 90px; line-height: 90px; text-align: right; margin-top: -5px">Contato</h1>
+	      		<p class="header-text" style="text-align: right; margin-top: -5px">Mande um email para <a>contato@higheffects.com.br</a><br> ou escreva uma mensagem:</p>
+			    <% if notice %>
+			   	  <div class="alert pull-right">
+			   	    <button type="button" class="close" data-dismiss="alert">×</button>
+			   	    <%= notice %>
+			   	  </div>
+			    <% end %>
+			    <% if alert %>
+			     <div class="alert pull-right">
+			       <button type="button" class="close" data-dismiss="alert">×</button>
+			       <%= alert %>
+			     </div>
+			     <% end %>
+
+
+				 <%= render 'form' %>
+			 </div>
+		</div>
+	  </div>
+	</div>
+</li>
+<li></li>

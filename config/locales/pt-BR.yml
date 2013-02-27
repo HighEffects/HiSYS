@@ -33,6 +33,8 @@ pt-BR:
     item: "Item"
     comment: "Comentário"
     user: "Usuário"
+    error_404: "O item solicitado não foi encontrado."
+    error_500: "Ocorreu um erro no servidor. Por favor tente de novo."
   support_messages:
     message_sent: "Mensagem enviada com suscesso."
     list:

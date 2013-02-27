@@ -48,6 +48,8 @@ Hisys::Application.routes.draw do
  
   root :to => 'slides#index'
   
+  match '*not_found', to: 'errors#error_404'
+  
   
   
   # The priority is based upon order of creation:

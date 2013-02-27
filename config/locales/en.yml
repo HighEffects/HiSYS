@@ -33,6 +33,8 @@ en:
     item: "Item"
     comment: "Comment"
     user: "User"
+    error_404: "The item you were looking for could not be found!"
+    error_500: "There was an internal server error. Please try again."
   support_messages:
     message_sent: "Your message has been sent."
     list:

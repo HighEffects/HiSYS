@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_locale
   
+  
+  rescue_from Exception, with: lambda { |exception| render_error 500, exception }
+  rescue_from ActionController::RoutingError, ActionController::UnknownController, ::AbstractController::ActionNotFound, ActiveRecord::RecordNotFound, with: lambda { |exception| render_error 404, exception }
+  
   def after_sign_in_path_for(resource)
    pages_path
   end
@@ -20,6 +24,13 @@ class ApplicationController < ActionController::Base
   end
 
   private
+  
+  def render_error(status, exception)
+    respond_to do |format|
+      format.html { render template: "errors/error_#{status}", layout: "layout-contact", status: status }
+      format.all { render nothing: true, status: status }
+    end
+  end
 
   def set_locale
     I18n.locale = 'pt-BR'

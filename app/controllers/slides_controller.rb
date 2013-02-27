@@ -8,8 +8,12 @@ class SlidesController < ApplicationController
   # GET /slides.json
   def index
     @slides = Slide.order("position")
-    if user_signed_in?
-      mixpanel.track 'Landing Page Loaded', { :distinct_id => current_user.id } if Rails.env.production?
+    if Rails.env.production?
+      if user_signed_in?
+        mixpanel.track 'Landing Page Loaded', { :distinct_id => current_user.id,  :user => "Registered" } if Rails.env.production?
+      else
+        mixpanel.track 'Landing Page Loaded', { :user => "Unregisterd" } if Rails.env.production?
+      end
     end
     respond_to do |format|
       format.html # index.html.erb
