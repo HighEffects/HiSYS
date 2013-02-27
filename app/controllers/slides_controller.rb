@@ -11,8 +11,6 @@ class SlidesController < ApplicationController
     if Rails.env.production?
       if user_signed_in?
         mixpanel.track 'Landing Page Loaded', { :distinct_id => current_user.id,  :user => "Registered" } if Rails.env.production?
-      else
-        mixpanel.track 'Landing Page Loaded', { :user => "Unregisterd" } if Rails.env.production?
       end
     end
     respond_to do |format|
