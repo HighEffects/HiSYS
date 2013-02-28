@@ -5,22 +5,24 @@
     <th>Title</th>
     <th>Content</th>
 	<th>Author</th>
-	<th>Comments</th>
+	<th><i class="icon-comment"></i></th>
     <% if user_signed_in? %>
-	  <th></th>
-	<% end%>
+	  <th style="width: 90px;"><%= t "sys.actions" %></th>
+	<% end %>
   </tr>
 
 <% @posts.each do |post| %>
   <tr>
     <td><%= link_to post.title, post %></td>
-    <td><%= truncate( post.content, :length => 110, :omission => '...') %></td>
-	<td><%= post.user.email %></td>
+    <td><%= truncate( post.content, :length => 100, :omission => '...') %></td>
+	<td><%= post.user.first_name %> <%= post.user.last_name %></td>
 	<td><%= post.comments.count %></td>
 	<% if user_signed_in? %>
       <td style="text-align: right;">
-	  	<%= link_to 'Edit', edit_post_path(post), :class => "btn btn-mini" %> 
-		<%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
+		<div class="btn-group">
+	  	  <%= link_to 'Edit', edit_post_path(post), :class => "btn btn-mini" %> 
+		  <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
+		</div>
 	  </td>
     </tr>
     <% end %>

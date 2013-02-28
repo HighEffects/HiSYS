@@ -7,7 +7,6 @@ gem 'rails', '3.2.8'
 
 gem 'pg'
 gem 'thin'
-gem 'twitter-bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -17,10 +16,12 @@ group :assets do
   gem 'therubyracer', :platforms => :ruby
   gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-rails'
   gem 'jquery-ui-rails'
+  gem 'twitter-bootstrap-rails'
 end
 
-gem 'jquery-rails'
+
 gem 'devise'
 gem 'simple_form'
 gem 'ancestry'

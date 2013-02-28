@@ -65,5 +65,8 @@ module Hisys
     # Prevent initializing the application before assets are precompiled (required for heroku)
     config.assets.initialize_on_precompile = false
     
+    # config.assets.precompile += %w( *.js *.css )
+    # config.serve_static_assets = true
+    
   end
 end
