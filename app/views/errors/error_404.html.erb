@@ -7,7 +7,9 @@
 				<div class="container" style="background: rgba(255, 255, 255, 0.0); width: 100%; top: 175px; margin:0; margin-left: 20px; padding:0;">
 					<h1 style="font-family: 'AkzidenzGrotesk-ExtraBoldCond'; color: white; font-size: 85px; line-height: 73px; margin-top: 5px; margin-bottom: 10px">ERROR 404</h1>
 					<p class="header-text" style=" margin-top: -5px; background-color: black; width: 380px;"><%= t("sys.error_404")%></p>
-					<p ><% debug(params) %></p>
+					<% if Rails.env.development? %>
+						<p><%=  debug(params) %></p>
+					<% end %>
 				</div>
 			</div>
 		</div>

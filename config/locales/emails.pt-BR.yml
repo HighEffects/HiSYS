@@ -1,0 +1,7 @@
+pt-BR:
+  pass-reset:
+    welcome: "Olá"
+    message: "Foi requisitado um link para mudar a sua senha no sistema da High Effects. Você pode fazer isso seguindo o link abaixo:"
+    link: "Mudar minha senha"
+    disclaimer: "Se você não requisitou isto, ignore esta mensagem."
+    rules: "Sua senha não ira mudar até você acessar o link acima e criar uma nova."
