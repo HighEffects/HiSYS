@@ -61,7 +61,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user
 
     respond_to do |format|
-      if @post.save
+      if @post.update_attributes(params[:post])
         
         # mixpanel track post created
         if Rails.env.production?
