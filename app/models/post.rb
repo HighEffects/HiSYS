@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
 
-  attr_accessible :content, :title, :user, :slug
+  attr_accessible :content, :title, :user, :slug, :cover, :short_text
   belongs_to :user
   has_many :comments, as: :commentable
   
@@ -11,6 +11,8 @@ class Post < ActiveRecord::Base
                    exclusion: {in: %w[signup login]}
   
   before_validation :generate_slug
+  
+  mount_uploader :cover, FileUploader
   
   def to_param
     slug # or "#{id}-#{name}".parameterize

@@ -1,30 +1,34 @@
-<h1>High Effects Blog</h1>
+<h1 style="text-align: center;"><%= image_tag("HighEffects-Blog-Logo.png") %></h1>
+<hr style="margin-top: 15px;">
+<% counter = 0 %>
 
 <% @posts.each do |post| %>
-
+<% if counter == 0 %>
+	<div class="row">
+<% end %>
+<div class="span3">
 <div class="media">
 
   <div class="media-body">
-    <h3 class="media-heading"><%= link_to post.title, post %></h3>
-    
-	
     
     <!-- Nested media object -->
     <div class="media">
-      <p><%= truncate( strip_tags(post.content), :length => 250, :omission => '...') %></p>
-      <p><% if post.tags %> Tags: 
-        <% post.tags.each do |tag| %>
-           <span class="badge"><%= link_to tag.name, {:controller => 'tags', :action => 'show', :id => tag.name }, :style => "color: white;" %></span> 
-        <% end %> |
-      <% end %>
-      <%= t "sys.created" %> <%= time_ago_in_words(post.created_at) %> <%= t "sys.ago" %> |
-      <% if post.comments.count != 0%>
-        <%= t "sys.comments" %>: <%= post.comments.count %> |
-      <% end %>
-  	<%= t "sys.by" %> <%= post.user.first_name %> <%= post.user.last_name if post.user.last_name? %></p>
+	  <a href="<%= post_path(post) %>" class="pull-left">
+	    <%= image_tag post.cover.cover.to_s, :class => "media-object img-polaroid", :style => "margin-bottom: 5px;" %>
+	  </a>
+	  <h3 class="media-heading" style="line-height: 30px;"><%= link_to post.title, post %></h3>
+      <p><%= truncate( strip_tags(post.short_text), :length => 150, :omission => '') %></p>
+
       
 	  
     </div>
   </div>
 </div>
+</div>
+<% counter = counter + 1 %>
+<% if counter == 4 %>
+	</div>
+	<% counter = 0 %>
 <% end %>
+<% end %>
+</div>

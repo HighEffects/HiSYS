@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class FileUploader < CarrierWave::Uploader::Base
+class CoverUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -22,7 +22,7 @@ class FileUploader < CarrierWave::Uploader::Base
   if Rails.env.production?
     storage :fog
   end
-  
+
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -33,18 +33,7 @@ class FileUploader < CarrierWave::Uploader::Base
   def cache_dir
     " ./tmp/uploads/#{mounted_as}/#{model.id}"
   end
-
-  version :thumb do
-    process :resize_to_fill => [200, 150,  gravity = ::Magick::CenterGravity]
-  end
   
-  version :small do
-    process :resize_to_fill => [50, 50,  gravity = ::Magick::CenterGravity]
-  end
-  
-  version :cover do
-    process :resize_to_fill => [300, 300,  gravity = ::Magick::CenterGravity]
-  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
