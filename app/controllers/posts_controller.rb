@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.order("created_at desc").all
     @post = false
     respond_to do |format|
       format.html # index.html.erb

@@ -11,7 +11,7 @@
     
     <!-- Nested media object -->
     <div class="media">
-      <p><%= truncate( post.content, :length => 250, :omission => '...') %></p>
+      <p><%= truncate( strip_tags(post.content), :length => 250, :omission => '...') %></p>
       <p><% if post.tags %> Tags: 
         <% post.tags.each do |tag| %>
            <span class="badge"><%= link_to tag.name, {:controller => 'tags', :action => 'show', :id => tag.name }, :style => "color: white;" %></span> 
