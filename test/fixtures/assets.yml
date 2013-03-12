@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  item_id: 1
+  owner: 1
+  location: 1
+
+two:
+  type: 
+  item_id: 1
+  owner: 1
+  location: 1

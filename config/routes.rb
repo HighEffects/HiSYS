@@ -1,5 +1,7 @@
 Hisys::Application.routes.draw do
 
+  resources :assets
+
   resources :items
 
   get 'admin', to: 'admin#index'
