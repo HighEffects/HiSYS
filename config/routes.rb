@@ -1,5 +1,7 @@
 Hisys::Application.routes.draw do
 
+  resources :locations
+
   resources :assets
 
   get 'items/list', to: 'items#list'

@@ -17,7 +17,7 @@
 	<td><%= link_to asset.item.name, item_path(asset.item)%></td>
     <td><%= asset.item.category %></td> 
     <td><%= asset.user.first_name %> <%= asset.user.last_name %></td>
-    <td><%= asset.location %></td>
+    <td><%= link_to asset.location.name, location_path(asset.location) %></td>
 	<td><%= asset.note %></td>
     <td style="text-align: right;">
 		<div class="btn-group">

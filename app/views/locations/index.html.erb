@@ -1,0 +1,30 @@
+<h1>Listing locations</h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th style="width: 90px;"><%= t "sys.actions" %></th>
+  </tr>
+
+<% @locations.each do |location| %>
+  <tr>
+    <td><%= link_to location.name, location %></td>
+    <td><%= location.address %></td>
+    <td><%= location.latitude %></td>
+    <td><%= location.longitude %></td>
+	<td style="text-align: right;">
+			<div class="btn-group">
+    			<%= link_to 'Edit', edit_location_path(location), :class => "btn btn-mini" %>
+    			<%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-mini btn-danger" %>
+			</div>
+	</td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Location', new_location_path,  :class => "btn"  %>

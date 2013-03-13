@@ -38,6 +38,7 @@ pt-BR:
     items: "Itens"
     assets: "Assets"
     inventory: "Inventorio"
+    locations: "Locações"
   support_messages:
     message_sent: "Mensagem enviada com suscesso."
     list:

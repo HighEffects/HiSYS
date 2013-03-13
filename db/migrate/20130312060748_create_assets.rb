@@ -5,7 +5,7 @@ class CreateAssets < ActiveRecord::Migration
       t.integer :item_id
       t.integer :quantity
       t.integer :user_id
-      t.integer :location
+      t.integer :location_id
       t.string :note
       t.boolean :delivered
       t.string :tracking_code

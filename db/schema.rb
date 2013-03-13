@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130312060748) do
+ActiveRecord::Schema.define(:version => 20130313032942) do
 
   create_table "assets", :force => true do |t|
     t.integer  "item_id"
     t.integer  "quantity"
     t.integer  "user_id"
-    t.integer  "location"
+    t.integer  "location_id"
     t.string   "note"
     t.boolean  "delivered"
     t.string   "tracking_code"
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(:version => 20130312060748) do
     t.integer  "user_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "pages", :force => true do |t|

@@ -38,6 +38,7 @@ en:
     items: "Items"
     assets: "Assets"
     inventory: "Inventory"
+    locations: "Locations"
   support_messages:
     message_sent: "Your message has been sent."
     list:
