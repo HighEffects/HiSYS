@@ -39,6 +39,11 @@ pt-BR:
     assets: "Assets"
     inventory: "Inventorio"
     locations: "Locações"
+    back: "voltar"
+    has: "tem"
+    one: "um"
+    at: "@"
+    note: "nota"
   support_messages:
     message_sent: "Mensagem enviada com suscesso."
     list:

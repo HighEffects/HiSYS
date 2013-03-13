@@ -39,6 +39,11 @@ en:
     assets: "Assets"
     inventory: "Inventory"
     locations: "Locations"
+    back: "back"
+    has: "has"
+    one: "one"
+    at: "at"
+    note: "note"
   support_messages:
     message_sent: "Your message has been sent."
     list:

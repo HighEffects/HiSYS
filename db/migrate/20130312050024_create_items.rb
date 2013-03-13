@@ -9,6 +9,7 @@ class CreateItems < ActiveRecord::Migration
       t.string :category
       t.string :cover
       t.integer :user_id
+      t.string :slug
 
       t.timestamps
     end

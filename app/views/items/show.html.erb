@@ -1,30 +1,65 @@
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @item.name %>
-</p>
-
-<p>
-  <b>Short description:</b>
-  <%= @item.short_description %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @item.description %>
-</p>
-
-<p>
-  <b>Price:</b>
-  <%= @item.price %>
-</p>
-
-<p>
-  <b>Currency:</b>
-  <%= @item.currency %>
-</p>
-
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<div class="row">
+<div class="span3">
+	<%=  image_tag @item.cover.cover.to_s, :class => "img-polaroid" if @item.cover? %>
+</div>
+<div class="span9">
+	<h1>
+		<%= @item.name %>
+		<small>
+			<% if @item.currency == "Real" %>
+				(R$ <%= @item.human_price %>)
+			<% end %>
+			<% if @item.currency == "Dollar" %>
+				(US$ <%= @item.human_price %>)
+			<% end %>
+		</small>
+		<small class="pull-right" style="font-size: 12px"><%= link_to t("sys.back"), items_path %></small>
+	</h1>
+	<%= markdown(@item.description) %>
+	
+	<% if @item.assets.count > 0 %>
+		<% if @item.assets.count > 0 %>
+			<% total = 0 %>
+			<% @item.assets.each do |asset| %>
+				<% total = total.to_i + asset.quantity.to_i  %>
+			<% end %>
+		<% end %>
+	
+	<h3><%= t("sys.assets") %> (<%= total %>)</h3>
+	<ul class="media-list">
+	
+	<% @item.assets.each do |asset| %>
+      <li class="media">
+  	  <span class="pull-left">
+  		  <%= image_tag asset.user.avatar.small.to_s, :class => "media-object img-rounded" if asset.user.avatar?%>
+  	  </span>
+        <div class="media-body">
+        
+          <div class="media">
+			<%= asset.user.first_name %> <%= asset.user.last_name if asset.user.last_name? %>
+			<%= t("sys.has") %>
+			<% if asset.quantity > 1 %>
+				<%= asset.quantity %>x
+			<% else %>
+				 <%= t("sys.one") %>
+			<% end %>
+			<%= link_to @item.name, asset_path(asset) %> 
+  			
+			<%= t("sys.at") %> <%= link_to asset.location.name, location_path(asset.location) %>
+   		    <br>
+			<% if asset.note  %>
+				<%= t("sys.note") %>: 
+  				<%= asset.note  %>
+			<% end %>
+  			<small class=""> - <%= time_ago_in_words(asset.created_at) %> <%= t "sys.ago" %></small>
+			
+          </div></div>
+      </li>
+	  
+	<% end %>
+	</table>
+	
+	<% end %>
+</div>
+</div>
