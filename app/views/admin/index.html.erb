@@ -9,16 +9,22 @@
 			<a href="<%= admin_user_list_path %>"><span class="count"><%= @total_users %></span> Usuários</a>
 		</li>
 		<li>
-			<a href="<%= lab_list_path %>"><span class="count"><%= @total_pages %></span> Páginas</a>
+			<a href="<%= admin_page_list_path %>"><span class="count"><%= @total_pages %></span> Páginas</a>
 		</li>
 		<li>
-			<a href="<%= blog_list_path %>"><span class="count"><%= @total_posts %></span> Posts</a>
+			<a href="<%= admin_post_list_path %>"><span class="count"><%= @total_posts %></span> Posts</a>
 		</li>
 		<li>
-			<a href="<%= files_list_path %>"><span class="count"><%= @total_files %></span> Files</a>
+			<a href="<%= admin_upload_list_path %>"><span class="count"><%= @total_files %></span> Arquivos</a>
+		</li>
+		<li>
+			<a href="<%= admin_items_list_path %>"><span class="count"><%= @total_items %></span> Itens</a>
+		</li>
+		<li>
+			<a href="<%= admin_locations_list_path %>"><span class="count"><%= @total_locations %></span> Locações</a>
 		</li>
 		<li class="last">
-			<a href="<%= admin_comment_list_path %>"><span class="count"><%= @total_comments %></span> Comments</a>
+			<a href="<%= admin_comment_list_path %>"><span class="count"><%= @total_comments %></span> Comentários</a>
 		</li>
 	</ul>
 </div>

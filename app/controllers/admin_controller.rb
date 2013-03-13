@@ -9,6 +9,9 @@ class AdminController < ApplicationController
     @total_pages = Page.count
     @total_posts = Post.count
     @total_files = Upload.count
+    @total_items = Item.count
+    @total_assets = Asset.count
+    @total_locations = Location.count
     @total_comments = Comment.count
     respond_to do |format|
       format.html # index.html.erb
@@ -42,6 +45,14 @@ class AdminController < ApplicationController
     end
   end
   
+  def locations_list
+    @locations = Location.all
+    respond_to do |format|
+      format.html { render :template => "locations/index" }
+      format.json { render json: @assets }
+    end
+  end
+  
   def page_list
     @pages = Page.all
     respond_to do |format|
@@ -62,6 +73,22 @@ class AdminController < ApplicationController
     @uploads = Upload.all
     respond_to do |format|
       format.html { render :template => "uploads/list" }
+      format.json { render json: @uploads }
+    end
+  end
+
+  def items_list
+    @items = Item.all
+    respond_to do |format|
+      format.html { render :template => "items/list" }
+      format.json { render json: @uploads }
+    end
+  end
+  
+  def assets_list
+    @assets = Asset.all
+    respond_to do |format|
+      format.html { render :template => "assets/index" }
       format.json { render json: @uploads }
     end
   end

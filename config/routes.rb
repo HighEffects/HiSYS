@@ -14,9 +14,12 @@ Hisys::Application.routes.draw do
   get 'admin/slides', to: 'admin#slides'
   get 'admin/support_messages', to: 'admin#support_messages'
   get 'admin/user_list', to: 'admin#user_list'
+  get 'admin/locations_list', to: 'admin#locations_list'
   get 'admin/page_list', to: 'admin#page_list'
   get 'admin/post_list', to: 'admin#post_list'
   get 'admin/upload_list', to: 'admin#upload_list'
+  get 'admin/items_list', to: 'admin#items_list'
+  get 'admin/assets_list', to: 'admin#assets_list'
   get 'admin/comment_list', to: 'admin#comment_list'
 
   get 'contato', to: 'support_messages#index'

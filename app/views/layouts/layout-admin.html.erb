@@ -93,6 +93,12 @@
 			  	<li><a href="<%= admin_user_list_path %>"><i class="icon-user" style="color: black"></i> Usuários</a></li>
 			  <% end %>
 			  
+			  <% if params[:action] == "locations_list" %>
+			  	<li class="active"><a href="<%= admin_locations_list_path %>"><i class="icon-map-marker icon-white"></i> Locações</a></li>
+			  <% else %>
+			  	<li><a href="<%= admin_locations_list_path %>"><i class="icon-map-marker" style="color: black"></i> Locações</a></li>
+			  <% end %>
+			  
 			  <li class="nav-header">Conteúdo</li>
 			  
 			  <% if params[:action] == "page_list" %>
@@ -113,6 +119,18 @@
 			  	<li><a href="<%= admin_upload_list_path %>"><i class="icon-picture" style="color: black"></i> Arquivos</a></li>
 			  <% end %>
 			  
+			  <% if params[:action] == "items_list" %>
+			  	<li class="active"><a href="<%= admin_items_list_path %>"><i class="icon-gift icon-white"></i> Itens</a></li>
+			  <% else %>
+			  	<li><a href="<%= admin_items_list_path %>"><i class="icon-gift" style="color: black"></i> Itens</a></li>
+			  <% end %>
+			  
+			  <% if params[:action] == "assets_list" %>
+			  	<li class="active"><a href="<%= admin_assets_list_path %>"><i class="icon-gift icon-white"></i> Assets</a></li>
+			  <% else %>
+			  	<li><a href="<%= admin_assets_list_path %>"><i class="icon-gift" style="color: black"></i> Assets</a></li>
+			  <% end %>
+			  
 			  <% if params[:action] == "comment_list" %>
 			  	<li class="active"><a href="<%= admin_comment_list_path %>"><i class="icon-comment icon-white"></i> Comentários</a></li>
 			  <% else %>
@@ -120,7 +138,7 @@
 			  <% end %>
 			</ul>
 		  </div>
-          <div class="span10">
+          <div class="span10" style="min-height: 400px;">
 			  <% if notice && params[:controller] != "users" %>
 				  <div class="alert">
 				    <button type="button" class="close" data-dismiss="alert">×</button>
