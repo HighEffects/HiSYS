@@ -1,8 +1,10 @@
 class ItemsController < ApplicationController
   
   before_filter :find_item, only: [:show, :edit, :update, :destroy]
-  
-  layout "application"
+  before_filter :check_access, :except => [:show, :index]
+  after_filter :process_tags, only: [:create, :update]
+ 
+  layout "layout-items"
 
   # GET /items
   # GET /items.json
@@ -51,6 +53,7 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
+     @tags = Tag.all
   end
 
   # POST /items
@@ -94,8 +97,30 @@ class ItemsController < ApplicationController
     end
   end
   
+  def process_tags
+    @item.taggings.each do |old_tag|
+      old_tag.destroy
+    end
+    if params[:hiddenTagList]
+      tags = params[:hiddenTagList].split(",")
+      tags.each do |t|
+        tag = Tag.find_by_name(t.downcase)
+        if(tag.class != Tag)
+          tag = Tag.create!(:name => t.downcase)
+        end
+        @item.taggings.create!(:tag_id => tag.id)
+      end
+    end
+  end
+  
   def find_item
     @item = Item.find_by_slug!(params[:id].split("/").last)
+  end
+  
+  def check_access
+    if user_signed_in? == false
+      redirect_to(new_user_session_path, alert: 'You dont have access to that page!')
+    end
   end
   
 end

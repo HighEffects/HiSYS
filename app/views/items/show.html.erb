@@ -2,6 +2,19 @@
 <div class="row">
 <div class="span3">
 	<%=  image_tag @item.cover.cover.to_s, :class => "img-polaroid" if @item.cover? %>
+    <p style="margin-top: 10px;">
+		<%= @item.short_description %><br>
+	</p>
+	<p>
+		<small><%= t "sys.created" %> <%= time_ago_in_words(@item.created_at) %> <%= t "sys.ago" %></small><br>
+	    <% if @item.tags %> 
+			<% @item.tags.each do |tag| %>
+		      <span class="badge"><%= link_to tag.name, {:controller => 'tags', :action => 'show', :id => tag.name }, :style => "color: white;" %></span> 
+		    <% end %>
+	    <% end %>
+	    
+	</p>
+   		    
 </div>
 <div class="span9">
 	<h1>
@@ -18,52 +31,52 @@
 	</h1>
 	<%= markdown(@item.description) %>
 	
-	<% if @item.assets.count > 0 %>
+	<% if user_signed_in? %>
 		<% if @item.assets.count > 0 %>
-			<% total = 0 %>
-			<% @item.assets.each do |asset| %>
-				<% total = total.to_i + asset.quantity.to_i  %>
+			<% if @item.assets.count > 0 %>
+				<% total = 0 %>
+				<% @item.assets.each do |asset| %>
+					<% total = total.to_i + asset.quantity.to_i  %>
+				<% end %>
 			<% end %>
+	
+		<h3><%= t("sys.assets") %> (<%= total %>)</h3>
+		<ul class="media-list">
+	
+		<% @item.assets.each do |asset| %>
+	      <li class="media">
+	  	  <span class="pull-left">
+	  		  <%= image_tag asset.user.avatar.small.to_s, :class => "media-object img-rounded" if asset.user.avatar?%>
+	  	  </span>
+	        <div class="media-body">
+        
+	          <div class="media">
+				<%= asset.user.first_name %> <%= asset.user.last_name if asset.user.last_name? %>
+				<%= t("sys.has") %>
+				<% if asset.quantity > 1 %>
+					<%= asset.quantity %>x
+				<% else %>
+					 <%= t("sys.one") %>
+				<% end %>
+				<%= link_to @item.name, asset_path(asset) %> 
+  			
+				<%= t("sys.at") %> <%= link_to asset.location.name, location_path(asset.location) %>
+	   		    <br>
+				<% if asset.note  %>
+					<%= t("sys.note") %>: 
+	  				<%= asset.note  %>
+				<% end %>
+	  			<small class=""> - <%= time_ago_in_words(asset.created_at) %> <%= t "sys.ago" %></small>
+			
+	          </div></div>
+	      </li>
+	  
 		<% end %>
 	
-	<h3><%= t("sys.assets") %> (<%= total %>)</h3>
-	<ul class="media-list">
-	
-	<% @item.assets.each do |asset| %>
-      <li class="media">
-  	  <span class="pull-left">
-  		  <%= image_tag asset.user.avatar.small.to_s, :class => "media-object img-rounded" if asset.user.avatar?%>
-  	  </span>
-        <div class="media-body">
-        
-          <div class="media">
-			<%= asset.user.first_name %> <%= asset.user.last_name if asset.user.last_name? %>
-			<%= t("sys.has") %>
-			<% if asset.quantity > 1 %>
-				<%= asset.quantity %>x
-			<% else %>
-				 <%= t("sys.one") %>
-			<% end %>
-			<%= link_to @item.name, asset_path(asset) %> 
-  			
-			<%= t("sys.at") %> <%= link_to asset.location.name, location_path(asset.location) %>
-   		    <br>
-			<% if asset.note  %>
-				<%= t("sys.note") %>: 
-  				<%= asset.note  %>
-			<% end %>
-  			<small class=""> - <%= time_ago_in_words(asset.created_at) %> <%= t "sys.ago" %></small>
-			
-          </div></div>
-      </li>
-	  
-	<% end %>
-	</table>
-	
+		<% end %>
 	<% end %>
 	
 	<%= render "comments/comments"%>
 	<%= render "comments/form"%>
-	</div>
 </div>
 </div>

@@ -1,4 +1,7 @@
 class AssetsController < ApplicationController
+  
+  before_filter :check_access
+  
   # GET /assets
   # GET /assets.json
   def index
@@ -80,4 +83,11 @@ class AssetsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def check_access
+    if user_signed_in? == false
+      redirect_to(new_user_session_path, alert: 'You dont have access to that page!')
+    end
+  end
+  
 end

@@ -20,6 +20,9 @@
 		<% if comment.commentable_type == "Upload" %>
 		<%= link_to comment.commentable.name, upload_path(comment.commentable) %>
 		<% end %>
+		<% if comment.commentable_type == "Item" %>
+		<%= link_to comment.commentable.name, item_path(comment.commentable) %>
+		<% end %>
 	</td>
     <td><%= comment.content %></td>
 	<td><%= comment.user.first_name %> <%= comment.user.last_name %></td>

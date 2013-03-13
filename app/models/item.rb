@@ -2,9 +2,10 @@ class Item < ActiveRecord::Base
   attr_accessible :currency, :description, :name, :human_price, :short_description, :category, :cover, :user
   
   has_many :comments, as: :commentable
+  has_many :taggings, :as => :taggable
+  has_many :tags, :through => :taggings
   has_many :assets
   belongs_to :user
-  
   
   validates :slug, uniqueness: true, presence: true,
                      exclusion: {in: %w[signup login]}

@@ -1,8 +1,10 @@
 <h3 style="margin-top: 25px;">
-	Comments (<%= @comments.count %>) 
-	<button type="button" class="btn btn-mini" data-toggle="collapse" data-target="#comment_form">
-		<i class="icon-comment"></i>
-	</button>
+	Comments (<%= @comments.count %>)
+	<% if user_signed_in? %> 
+		<button type="button" class="btn btn-mini" data-toggle="collapse" data-target="#comment_form">
+			<i class="icon-comment"></i>
+		</button>
+	<% end %> 
 </h3>
 <ul class="media-list">
   <%@comments.each do |comment| %>
