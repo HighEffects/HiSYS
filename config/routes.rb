@@ -6,6 +6,9 @@ Hisys::Application.routes.draw do
 
   get 'items/list', to: 'items#list'
   resources :items
+  resources :items, :path => "items" do
+    resources :comments
+  end
 
   get 'admin', to: 'admin#index'
   get 'admin/slides', to: 'admin#slides'

@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.new(params[:comment])
     @comment.user_id = current_user
     if @comment.save
-      klass = [Post, Page, Upload].detect { |c| params["#{c.name.underscore}_id"]}
+      klass = [Post, Page, Upload, Item].detect { |c| params["#{c.name.underscore}_id"]}
       
       # mixpanel track comment created
       if Rails.env.production?
@@ -34,8 +34,8 @@ class CommentsController < ApplicationController
   end
   
   def load_commentable
-      klass = [Post, Page, Upload].detect { |c| params["#{c.name.underscore}_id"]}
-      if klass == Post || klass == Page
+      klass = [Post, Page, Upload, Item].detect { |c| params["#{c.name.underscore}_id"]}
+      if klass == Post || klass == Page || klass == Item
         @commentable = klass.find_by_slug!(params["#{klass.name.underscore}_id"])
       else
         @commentable = klass.find_by_id!(params["#{klass.name.underscore}_id"])
