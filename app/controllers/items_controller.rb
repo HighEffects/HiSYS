@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   
   layout "application"
+
   # GET /items
   # GET /items.json
   def index
@@ -8,6 +9,17 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render json: @items }
+    end
+  end
+  
+  # GET /items
+  # GET /items.json
+  def list
+    @items = Item.all
+
+    respond_to do |format|
+      format.html # list.html.erb
       format.json { render json: @items }
     end
   end

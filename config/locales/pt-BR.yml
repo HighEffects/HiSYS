@@ -35,6 +35,9 @@ pt-BR:
     user: "Usuário"
     error_404: "O item solicitado não foi encontrado."
     error_500: "Ocorreu um erro no servidor. Por favor tente de novo."
+    items: "Itens"
+    assets: "Assets"
+    inventory: "Inventorio"
   support_messages:
     message_sent: "Mensagem enviada com suscesso."
     list:

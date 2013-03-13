@@ -2,28 +2,34 @@
 
 <table class="table table-bordered">
   <tr>
-    <th>Type</th>
     <th>Item</th>
+    <th>Category</th>
     <th>Owner</th>
     <th>Location</th>
-    <th></th>
-    <th></th>
-    <th></th>
+	<th>note</th>
+    <% if user_signed_in? %>
+	  <th style="width: 90px;"><%= t "sys.actions" %></th>
+	<% end %>
   </tr>
 
 <% @assets.each do |asset| %>
   <tr>
-    <td><%= asset.asset_type %></td>
-    <td><%= asset.item_id %></td>
-    <td><%= asset.owner %></td>
+	<td><%= link_to asset.item.name, item_path(asset.item)%></td>
+    <td><%= asset.item.category %></td> 
+    <td><%= asset.user.first_name %> <%= asset.user.last_name %></td>
     <td><%= asset.location %></td>
-    <td><%= link_to 'Show', asset %></td>
-    <td><%= link_to 'Edit', edit_asset_path(asset) %></td>
-    <td><%= link_to 'Destroy', asset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<td><%= asset.note %></td>
+    <td style="text-align: right;">
+		<div class="btn-group">
+    		<%= link_to 'Show', asset, :class => "btn btn-mini" %>
+    		<%= link_to 'Edit', edit_asset_path(asset), :class => "btn btn-mini" %>
+    		<%= link_to 'Destroy', asset, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-mini btn-danger" %>
+		</div>
+	</td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Asset', new_asset_path %>
+<%= link_to 'New Asset', new_asset_path, :class => "btn" %>

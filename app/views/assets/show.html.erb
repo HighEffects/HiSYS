@@ -1,18 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Type:</b>
-  <%= @asset.asset_type %>
-</p>
-
-<p>
   <b>Item:</b>
-  <%= @asset.item_id %>
+  <%= @asset.item.name %>
 </p>
 
 <p>
   <b>Owner:</b>
-  <%= @asset.owner %>
+  <%= @asset.user.first_name %> <%= @asset.user.last_name %>
 </p>
 
 <p>

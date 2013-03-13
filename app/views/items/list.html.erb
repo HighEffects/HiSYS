@@ -1,0 +1,39 @@
+<h1>Listing items</h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Name</th>
+    <th>description</th>
+    <th>Price</th>
+    <% if user_signed_in? %>
+	  <th style="width: 90px;"><%= t "sys.actions" %></th>
+	<% end %>
+  </tr>
+
+<% @items.each do |item| %>
+  <tr>
+    <td><%= link_to item.name, item %></td>
+    <td><%= item.short_description %></td>
+    <td>
+		<% if item.currency == "Real" %>
+			R$ <%= item.human_price %>
+		<% end %>
+		<% if item.currency == "Dollar" %>
+			US$ <%= item.human_price %>
+		<% end %>
+	</td>
+	<% if user_signed_in? %>
+    <td style="text-align: right;">
+		<div class="btn-group">
+	  	  <%= link_to t('sys.edit'), edit_item_path(item), :class => "btn btn-mini" %> 
+	      <%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-mini btn-danger" %>
+	    </div>
+	</td>
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_item_path, :class => "btn" %>

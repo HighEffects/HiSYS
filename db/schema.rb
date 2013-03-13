@@ -14,13 +14,15 @@
 ActiveRecord::Schema.define(:version => 20130312060748) do
 
   create_table "assets", :force => true do |t|
-    t.string   "asset_type"
     t.integer  "item_id"
     t.integer  "quantity"
-    t.integer  "owner"
+    t.integer  "user_id"
     t.integer  "location"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "note"
+    t.boolean  "delivered"
+    t.string   "tracking_code"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -40,6 +42,9 @@ ActiveRecord::Schema.define(:version => 20130312060748) do
     t.text     "description"
     t.integer  "price"
     t.string   "currency"
+    t.string   "category"
+    t.string   "cover"
+    t.integer  "user_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end

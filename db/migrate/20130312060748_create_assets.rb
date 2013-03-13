@@ -1,12 +1,15 @@
 class CreateAssets < ActiveRecord::Migration
   def change
     create_table :assets do |t|
-      t.string :asset_type
+      
       t.integer :item_id
       t.integer :quantity
-      t.integer :owner
+      t.integer :user_id
       t.integer :location
-
+      t.string :note
+      t.boolean :delivered
+      t.string :tracking_code
+      
       t.timestamps
     end
   end

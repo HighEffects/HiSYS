@@ -6,6 +6,9 @@ class CreateItems < ActiveRecord::Migration
       t.text :description
       t.integer :price
       t.string :currency
+      t.string :category
+      t.string :cover
+      t.integer :user_id
 
       t.timestamps
     end
