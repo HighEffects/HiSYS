@@ -27,7 +27,7 @@ class Item < ActiveRecord::Base
   end
   
   def generate_slug
-    self.slug ||= title.parameterize
+    self.slug ||= name.parameterize
   end
   
 end
