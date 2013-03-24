@@ -34,6 +34,7 @@ gem "carrierwave"
 gem 'acts_as_list'
 gem 'i18n'
 gem "fog", "~> 1.3.1"
+gem 'geocoder'
 
 
 

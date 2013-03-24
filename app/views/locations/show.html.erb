@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= image_tag "http://maps.google.com/maps/api/staticmap?size=640x640&sensor=false&zoom=16&markers=#{@location.latitude}%2C#{@location.longitude}"%>
+
 <p>
   <b>Name:</b>
   <%= @location.name %>
