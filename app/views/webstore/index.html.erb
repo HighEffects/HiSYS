@@ -1,0 +1,39 @@
+<h1 style="text-align: center;">Loja</h1>
+<hr style="margin-top: 15px;">
+<% counter = 0 %>
+
+<% @items.each do |item| %>
+<% if counter == 0 %>
+	<div class="row">
+<% end %>
+<div class="span3">
+<div class="media">
+
+  <div class="media-body">
+    
+    <!-- Nested media object -->
+    <div class="media">
+	  <a href="<%= 'loja/' + item.slug %>" class="pull-left">
+	    <%= image_tag item.cover.cover.to_s, :class => "media-object img-polaroid", :style => "margin-bottom: 5px;" %>
+	  </a>
+	  <h3 class="media-heading" style="line-height: 30px;"><%= link_to item.name, 'loja/' + item.slug %></h3>
+      <p><%= truncate( strip_tags(item.short_description), :length => 150, :omission => '') %></p>
+
+	<% if item.currency == "Real" %>
+		R$ <%= item.human_price %>
+	<% end %>
+	<% if item.currency == "Dollar" %>
+		US$ <%= item.human_price %>
+	<% end %>
+	  
+    </div>
+  </div>
+</div>
+</div>
+<% counter = counter + 1 %>
+<% if counter == 4 %>
+	</div>
+	<% counter = 0 %>
+<% end %>
+<% end %>
+</div>

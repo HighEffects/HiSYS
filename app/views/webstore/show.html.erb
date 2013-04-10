@@ -1,0 +1,16 @@
+<h1>
+	<%= @item.name%>
+	<small>
+		<% if @item.currency == "Real" %>
+			(R$ <%= @item.human_price %>)
+		<% end %>
+		<% if @item.currency == "Dollar" %>
+			(US$ <%= @item.human_price %>)
+		<% end %>
+	</small> 
+	<a href="" class="btn btn-small">Comprar</a>
+	<small class="pull-right" style="font-size: 12px"><%= link_to t("sys.back"), loja_path %></small>
+</h1>
+
+
+<%= @item.description%>

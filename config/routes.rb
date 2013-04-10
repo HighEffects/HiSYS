@@ -1,5 +1,10 @@
 Hisys::Application.routes.draw do
 
+  get "loja/", to: "webstore#index"
+  get "store/", to: "webstore#index"
+  get 'loja/*id', to: 'webstore#show'
+  get 'store/*id', to: 'webstore#show'
+
   resources :locations
 
   resources :assets
