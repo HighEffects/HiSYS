@@ -1,9 +1,11 @@
 class ShoppingCartsController < ApplicationController
   # GET /shopping_carts
   # GET /shopping_carts.json
+  
+  before_filter :check_for_cart, only: [:index, :add_to_cart, :create_location]
+  
   def index
-    shopping_cart = ShoppingCart.find_by_user_id(current_user.id)
-    @cart_items = ShoppingCartItem.order("created_at desc").find_all_by_shopping_cart_id(shopping_cart.id)
+    @cart_items = ShoppingCartItem.order("created_at desc").find_all_by_shopping_cart_id(@shopping_cart.id)
     @total = 0
 
     respond_to do |format|
@@ -64,7 +66,7 @@ class ShoppingCartsController < ApplicationController
 
     respond_to do |format|
       if @shopping_cart.update_attributes(params[:shopping_cart])
-        format.html { redirect_to @shopping_cart, notice: 'Shopping cart was successfully updated.' }
+        format.html { redirect_to shopping_carts_url, notice: 'Shopping cart was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -89,11 +91,21 @@ class ShoppingCartsController < ApplicationController
   
   # Cart Controller
   
+  def check_for_cart
+    @shopping_cart = ShoppingCart.find_by_user_id(current_user.id)
+    if @shopping_cart == nil
+      shopping_cart = ShoppingCart.new
+      shopping_cart.status = 'open'
+      shopping_cart.user_id = current_user.id
+      shopping_cart.save
+      @shopping_cart = shopping_cart
+    end
+  end
+  
   def add_to_cart
-    shopping_cart = ShoppingCart.find_by_user_id(current_user.id)
     if ShoppingCartItem.find_by_item_id(params[:item_id]) == nil
       cart_item = ShoppingCartItem.new
-      cart_item.shopping_cart_id = shopping_cart.id
+      cart_item.shopping_cart_id = @shopping_cart.id
       cart_item.item_id = params[:item_id]
       cart_item.quantity = 1
       cart_item.save
@@ -138,6 +150,16 @@ class ShoppingCartsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to shopping_carts_url }
       format.json { head :no_content }
+    end
+  end
+  
+  # -------------------------------------------------
+  
+  def create_location
+    @location = Location.new
+    respond_to do |format|
+      format.html 
+      format.json { render json: @location }
     end
   end
   

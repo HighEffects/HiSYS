@@ -67,15 +67,36 @@
 				<% end %>
 				<%= content_tag(:div, :class => 'span3') do %>
 					<%= content_tag(:h4) do %>
-						<%= content_tag(:span, :class => 'btn-group pull-right') do %>
-							<%= link_to 'Adicionar Endereço', '', :class => 'btn btn-mini' %>
+						<% if @shopping_cart.location %>
+							<%= content_tag(:p) do %>
+								<%= content_tag(:span, :class => 'btn-group pull-right') do %>
+									<%= link_to @shopping_cart.location.address, '', :class => 'btn btn-mini disabled' %>
+									<%= link_to create_location_path, :class => 'btn btn-mini' do %>
+										<i class="icon-pencil"></i>
+									<% end %>
+								<% end %>
+							<% end %>
+						<% else %>
+							<%= content_tag(:span, :class => 'btn-group pull-right') do %>
+								<%= link_to 'Adicionar Endereço', create_location_path, :class => 'btn btn-mini' %>
+							<% end %>
 						<% end %>
-						
 					<% end %>
 				<% end %>
 				<%= content_tag(:div, :class => 'span3') do %>
 					<%= content_tag(:h4, :class => 'pull-right') do %>
-						R$ <%= 0 %>	
+						<% if @shopping_cart.shipping_cost %>
+							<% if @shopping_cart.shipping_currency == "Real" %>
+								R$ <%= @shopping_cart.shipping_cost %>
+								<% @total = @total + @shopping_cart.shipping_cost %>	
+							<% end %>
+							<% if @shopping_cart.shipping_currency == "Dollar" %>
+								US$ <%= @shopping_cart.shipping_cost %>
+								<% @total = @total + (@shopping_cart.shipping_cost * 1.9) %>
+							<% end %>
+						<% else %>
+							R$ 0
+						<% end %>
 					<% end %>
 				<% end %>					
 			<% end %>

@@ -1,6 +1,7 @@
 class Location < ActiveRecord::Base
   attr_accessible :address, :latitude, :longitude, :name
   has_many :assets
+  has_many :shopping_carts
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
   

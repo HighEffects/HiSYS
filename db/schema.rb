@@ -94,8 +94,12 @@ ActiveRecord::Schema.define(:version => 20130412195632) do
   create_table "shopping_carts", :force => true do |t|
     t.integer  "user_id"
     t.string   "status"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "location_id"
+    t.string   "payment_method"
+    t.integer  "shipping_cost"
+    t.string   "shipping_currency"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "slides", :force => true do |t|
