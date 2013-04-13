@@ -7,8 +7,10 @@
 		<% if @item.currency == "Dollar" %>
 			(US$ <%= @item.human_price %>)
 		<% end %>
-	</small> 
-	<a href="" class="btn btn-small">Comprar</a>
+	</small>
+	
+	 
+	<%= link_to 'Comprar', {:controller => 'shopping_carts', :action => 'add_to_cart', :item_id => @item.id}, :class => 'btn btn-small' %>
 	<small class="pull-right" style="font-size: 12px"><%= link_to t("sys.back"), loja_path %></small>
 </h1>
 

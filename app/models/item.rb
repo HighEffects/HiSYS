@@ -5,6 +5,7 @@ class Item < ActiveRecord::Base
   has_many :taggings, :as => :taggable
   has_many :tags, :through => :taggings
   has_many :assets
+  has_many :shopping_cart_items
   belongs_to :user
   
   validates :slug, uniqueness: true, presence: true,

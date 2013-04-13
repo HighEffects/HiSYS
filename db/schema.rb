@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313032942) do
+ActiveRecord::Schema.define(:version => 20130412195632) do
 
   create_table "assets", :force => true do |t|
     t.integer  "item_id"
@@ -82,6 +82,21 @@ ActiveRecord::Schema.define(:version => 20130313032942) do
   end
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "shopping_cart_items", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "shopping_cart_id"
+    t.integer  "quantity"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "shopping_carts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "slides", :force => true do |t|
     t.string   "title"

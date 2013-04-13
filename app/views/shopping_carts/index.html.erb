@@ -1,0 +1,99 @@
+<h1 style="margin-bottom: 30px;">Carrinho de compras</h1>
+
+
+<% @cart_items.each do |cart_item| %>
+
+		<%= content_tag(:div, :class => 'media') do %>
+			<%= content_tag(:a, :href => item_path(cart_item.item), :class => 'pull-left') do %>
+				<%= image_tag cart_item.item.cover.small.to_s, :class => "media-object img-polaroid", :style => "margin-bottom: 5px;" %>
+			<% end %>
+		  	<%= content_tag(:div, :class => 'media-body') do %>
+				<%= content_tag(:div, :class => 'row') do %>
+					<%= content_tag(:div, :class => 'span5') do %>
+						<%= content_tag(:h4, :class => 'media-heading') do cart_item.item.name end %>
+						<%= content_tag(:p) do cart_item.item.short_description end %>
+					<% end %>
+					<%= content_tag(:div, :class => 'span3') do %>
+						<%= content_tag(:h5, :class => 'pull-right') do  %>
+							<%= content_tag(:span, :class => 'btn-group') do %>
+								<%= link_to( 'remove_from_cart/' + cart_item.id.to_s , data: { confirm: t('sys.are_you_sure') }, :class => 'btn btn-mini') do %>
+									<i class="icon-remove"></i>
+								<% end %>
+							<% end %>
+							<%= content_tag(:span, :class => 'btn-group') do %>
+								<%= link_to 'add_quantity_from_cart_item/' + cart_item.id.to_s, :class => 'btn btn-mini' do %>
+									<i class="icon-chevron-up"></i>
+								<% end %>
+								<%= link_to '', :class => 'btn btn-mini disabled' do %>
+									<%= cart_item.quantity %>
+								<% end %>
+								<% if cart_item.quantity > 1%>
+									<%= link_to 'subtract_quantity_from_cart_item/' + cart_item.id.to_s, :class => 'btn btn-mini' do %>
+										<i class="icon-chevron-down"></i>
+									<% end %>
+								<% else %>
+									<%= link_to 'subtract_quantity_from_cart_item/' + cart_item.id.to_s, :class => 'btn btn-mini disabled' do %>
+										<i class="icon-chevron-down"></i>
+									<% end %>
+								<% end %>
+							<% end %>
+						<% end %>
+					<% end %>
+					<%= content_tag(:div, :class => 'span3') do %>
+						<%= content_tag_for(:h5, cart_item.item, :class => 'pull-right') do |item| %>
+							<% if item.currency == "Real" %>
+								R$ <%= item.human_price %>
+								<% @total = @total + (item.human_price * cart_item.quantity) %>
+							<% end %>
+							<% if item.currency == "Dollar" %>
+								US$ <%= item.human_price %>
+								<% @total = @total + ((item.human_price * 1.9)* cart_item.quantity) %>
+							<% end %>
+						<% end %>
+					<% end %>
+				<% end %>
+		  	<% end %>
+		<% end %>
+	<% end %>
+	
+	<%= content_tag(:div, :class => 'media') do %>
+		<%= content_tag(:div, :class => 'pull-left', :style => 'width: 60px;height: 60px;') do end%>
+		<%= content_tag(:div, :class => 'media-body') do %>
+			<%= content_tag(:div, :class => 'row') do %>
+				<%= content_tag(:div, :class => 'span5') do %>
+					<%= content_tag(:h4) do %>
+						Shipping:
+					<% end %>
+				<% end %>
+				<%= content_tag(:div, :class => 'span3') do %>
+					<%= content_tag(:h4) do %>
+						<%= content_tag(:span, :class => 'btn-group pull-right') do %>
+							<%= link_to 'Adicionar Endereço', '', :class => 'btn btn-mini' %>
+						<% end %>
+						
+					<% end %>
+				<% end %>
+				<%= content_tag(:div, :class => 'span3') do %>
+					<%= content_tag(:h4, :class => 'pull-right') do %>
+						R$ <%= 0 %>	
+					<% end %>
+				<% end %>					
+			<% end %>
+		<% end %>
+	<% end %>
+	
+	<%= content_tag(:div, :class => 'media') do %>
+		<%= content_tag(:div, :class => 'pull-left', :style => 'width: 60px;height: 60px;') do end%>
+		<%= content_tag(:h4) do %>
+			Total:
+			<%= content_tag(:span, :class => 'pull-right') do %>
+				R$ <%= @total %>
+				<br>
+				<% if @cart_items.length != 0 %>
+					<%= link_to "Checkout", '', :class => "btn btn-success", :style => 'margin-top: 8px; float:right' %>
+				<% end %>	
+			<% end %>
+		<% end %>
+	<% end %>
+
+

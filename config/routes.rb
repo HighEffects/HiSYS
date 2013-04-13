@@ -1,8 +1,14 @@
 Hisys::Application.routes.draw do
 
-  get "loja/", to: "webstore#index"
-  get "store/", to: "webstore#index"
-  get 'loja/*id', to: 'webstore#show'
+  get "add_to_cart/*id",      to: "shopping_carts#add_to_cart"
+  get "remove_from_cart/*id", to: "shopping_carts#remove_from_cart"
+  get "add_quantity_from_cart_item/*id",      to: "shopping_carts#add_quantity_from_cart_item"
+  get "subtract_quantity_from_cart_item/*id",      to: "shopping_carts#subtract_quantity_from_cart_item"
+  resources :shopping_carts
+  
+  get "loja/",     to: "webstore#index"
+  get "store/",    to: "webstore#index"
+  get 'loja/*id',  to: 'webstore#show'
   get 'store/*id', to: 'webstore#show'
 
   resources :locations
