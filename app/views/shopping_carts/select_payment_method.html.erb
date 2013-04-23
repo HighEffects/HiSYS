@@ -1,0 +1,17 @@
+<h1>Selecione o metodo de pagamento</h1>
+
+<%= simple_form_for(@shopping_cart) do |f| %>
+
+	<label class="radio" for="shopping_cart_payment_method_paypal">
+		<input id="shopping_cart_payment_method_paypal" name="shopping_cart[payment_method]" type="radio" value="deposito">
+		Deposito em conta bancaria
+	</label>
+	<label class="radio" for="shopping_cart_payment_method_paypal">
+		<input id="shopping_cart_payment_method_paypal" name="shopping_cart[payment_method]" type="radio" value="paypal">
+		PayPal
+	</label>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

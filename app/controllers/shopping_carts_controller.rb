@@ -2,7 +2,7 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts
   # GET /shopping_carts.json
   
-  before_filter :check_for_cart, only: [:index, :add_to_cart, :create_location]
+  before_filter :check_for_cart, only: [:index, :add_to_cart, :create_location, :select_payment_method, :checkout, :close_order]
   
   def index
     @cart_items = ShoppingCartItem.order("created_at desc").find_all_by_shopping_cart_id(@shopping_cart.id)
@@ -92,7 +92,7 @@ class ShoppingCartsController < ApplicationController
   # Cart Controller
   
   def check_for_cart
-    @shopping_cart = ShoppingCart.find_by_user_id(current_user.id)
+    @shopping_cart = ShoppingCart.where(:status == "open").find_by_user_id(current_user.id)
     if @shopping_cart == nil
       shopping_cart = ShoppingCart.new
       shopping_cart.status = 'open'
@@ -155,11 +155,48 @@ class ShoppingCartsController < ApplicationController
   
   # -------------------------------------------------
   
+  # Checkout
+  
+  def checkout
+    # Check if Shipping Address is set
+    respond_to do |format|
+      if @shopping_cart.location == nil
+        format.html { redirect_to action: 'create_location'}      
+        format.json { head :no_content }    
+      end 
+      if @shopping_cart.payment_method != nil
+        format.html 
+        format.json { head :no_content }
+      else
+        format.html { redirect_to action: 'select_payment_method'}      
+        format.json { head :no_content }    
+      end
+    end
+  end
+  
+  def close_order
+    @shopping_cart.status = 'shipping'
+    @shopping_cart.save
+    respond_to do |format|
+      format.html 
+      format.json { render json: @location }
+    end
+  end
+  
+  # -------------------------------------------------
+  
   def create_location
     @location = Location.new
     respond_to do |format|
       format.html 
       format.json { render json: @location }
+    end
+  end
+  
+  def select_payment_method
+    respond_to do |format|
+      format.html 
+      format.json { head :no_content }
     end
   end
   

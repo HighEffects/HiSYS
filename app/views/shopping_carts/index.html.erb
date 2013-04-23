@@ -105,16 +105,39 @@
 	
 	<%= content_tag(:div, :class => 'media') do %>
 		<%= content_tag(:div, :class => 'pull-left', :style => 'width: 60px;height: 60px;') do end%>
-		<%= content_tag(:h4) do %>
-			Total:
-			<%= content_tag(:span, :class => 'pull-right') do %>
-				R$ <%= @total %>
-				<br>
-				<% if @cart_items.length != 0 %>
-					<%= link_to "Checkout", '', :class => "btn btn-success", :style => 'margin-top: 8px; float:right' %>
-				<% end %>	
+			<%= content_tag(:div, :class => 'media-body') do %>
+				<%= content_tag(:div, :class => 'row') do %>
+					<%= content_tag(:div, :class => 'span5') do %>
+						<%= content_tag(:h4) do %>
+							Total:
+						<% end %>
+					<% end %>
+					<%= content_tag(:div, :class => 'span3') do %>
+						<%= content_tag(:h4) do %>
+							<%= content_tag(:span, :class => 'btn-group pull-right') do %>
+								<% if (@shopping_cart.payment_method == 'deposito') then method = 'Deposito em conta bancaria' end%>
+								<% if (@shopping_cart.payment_method == 'paypal') then method = 'PayPal' end%>
+								<%= link_to method, '', :class => 'btn btn-mini disabled' %>
+								<%= link_to select_payment_method_path, :class => 'btn btn-mini' do %>
+									<i class="icon-pencil"></i>
+								<% end %>
+							<% end %>
+						<% end %>
+						
+					<% end %>
+					<%= content_tag(:div, :class => 'span3') do %>
+						<%= content_tag(:span, :class => 'pull-right') do %>
+							<%= content_tag(:h4) do %>
+								R$ <%= @total %>
+								<br>
+								<% if @cart_items.length != 0 %>
+									<%= link_to "Checkout", checkout_path, :class => "btn btn-success", :style => 'margin-top: 8px; float:right' %>
+								<% end %>	
+							<% end %>
+						<% end %>
+					<% end %>
+				<% end %>
 			<% end %>
-		<% end %>
-	<% end %>
+<% end %>
 
 
