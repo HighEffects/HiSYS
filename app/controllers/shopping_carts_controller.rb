@@ -3,11 +3,9 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts.json
   
   before_filter :check_for_cart, only: [:index, :add_to_cart, :create_location, :select_payment_method, :checkout, :close_order]
+  before_filter :cart_total, only: [:index]
   
   def index
-    @cart_items = ShoppingCartItem.order("created_at desc").find_all_by_shopping_cart_id(@shopping_cart.id)
-    @total = 0
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @shopping_carts }
@@ -46,6 +44,8 @@ class ShoppingCartsController < ApplicationController
   def create
     @shopping_cart = ShoppingCart.new(params[:shopping_cart])
     @shopping_cart.status = 'open'
+    @shopping_cart.shipping_cost = 0
+    @shopping_cart.shipping_currency = 'Real'
     @shopping_cart.user_id = current_user.id
 
     respond_to do |format|
@@ -92,18 +92,46 @@ class ShoppingCartsController < ApplicationController
   # Cart Controller
   
   def check_for_cart
-    @shopping_cart = ShoppingCart.where(:status == "open").find_by_user_id(current_user.id)
+    @shopping_cart = ShoppingCart.where(:status => "open").find_by_user_id(current_user.id)
     if @shopping_cart == nil
       shopping_cart = ShoppingCart.new
       shopping_cart.status = 'open'
+      shopping_cart.shipping_cost = 0
+      shopping_cart.shipping_currency = 'Real'
       shopping_cart.user_id = current_user.id
       shopping_cart.save
       @shopping_cart = shopping_cart
     end
   end
   
+  def cart_total
+    @total = 0
+    @total_items = 0
+    @cart_items = ShoppingCartItem.order("created_at desc").find_all_by_shopping_cart_id(@shopping_cart.id)
+    @cart_items.each do |cart_item|
+      if cart_item.item.currency == "Real"
+        @total = @total + (cart_item.item.human_price * cart_item.quantity)
+      end
+      if cart_item.item.currency == "Dollar"
+        @total = @total + ((cart_item.item.human_price * 1.9)* cart_item.quantity)
+      end
+      @total_items = @total_items + cart_item.quantity
+    end
+    if @shopping_cart.location != nil
+      @shopping_cart.shipping_cost = (15 * @total_items)
+      @shopping_cart.shipping_currency = "Real"
+      @shopping_cart.save
+    end
+    if @shopping_cart.shipping_currency == "Real"
+      @total = @total + @shopping_cart.shipping_cost
+    end
+    if @shopping_cart.shipping_currency == "Dollar"
+      @total = @total + (@shopping_cart.shipping_cost * 1.9)
+    end
+  end
+  
   def add_to_cart
-    if ShoppingCartItem.find_by_item_id(params[:item_id]) == nil
+    if ShoppingCartItem.where(:shopping_cart_id => @shopping_cart.id).find_by_item_id(params[:item_id]) == nil
       cart_item = ShoppingCartItem.new
       cart_item.shopping_cart_id = @shopping_cart.id
       cart_item.item_id = params[:item_id]
@@ -183,8 +211,6 @@ class ShoppingCartsController < ApplicationController
     end
   end
   
-  # -------------------------------------------------
-  
   def create_location
     @location = Location.new
     respond_to do |format|
@@ -194,6 +220,18 @@ class ShoppingCartsController < ApplicationController
   end
   
   def select_payment_method
+    respond_to do |format|
+      format.html 
+      format.json { head :no_content }
+    end
+  end
+  
+  # -------------------------------------------------
+  
+  # Historico de compras
+  
+  def order_history
+    @shopping_carts = ShoppingCart.order("created_at desc").find_all_by_user_id(current_user.id)
     respond_to do |format|
       format.html 
       format.json { head :no_content }

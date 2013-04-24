@@ -8,6 +8,7 @@ Hisys::Application.routes.draw do
   get "select_payment_method", to: 'shopping_carts#select_payment_method'
   get "checkout", to: 'shopping_carts#checkout'
   get "close_order", to: 'shopping_carts#close_order'
+  get "historico_de_compras", to: 'shopping_carts#order_history'
   resources :shopping_carts, :path => 'cart'
   
   get "loja/",     to: "webstore#index"

@@ -1,0 +1,87 @@
+<h1>Historico de compras</h1>
+<hr>
+
+<% @shopping_carts.each do |cart| %>
+	<% if cart.status != 'open' %>
+			
+		<%= content_tag(:div, :class => 'row') do %>
+		
+			<%= content_tag(:div, :class => 'span7') do %>
+				<%= content_tag(:h4) do %>
+					<a href="#" class="accordion-toggle" data-toggle="collapse" data-target="#cart_<%= cart.id %>"><%= ' Compra #' + cart.id.to_s %></a>
+				<% end %>
+			<% end %>
+			
+			<%= content_tag(:div, :class => 'span3') do %>
+				<%= content_tag(:div, :class => 'pull-right') do %>
+					<%= content_tag(:span, :class => 'small') do %>
+						<%= time_ago_in_words(cart.created_at) %>
+					<% end %>
+				<% end %>
+			<% end %>
+			
+			<%= content_tag(:div, :class => 'span2') do %>
+				<%= content_tag(:div, :class => 'pull-right') do %>
+					<% if cart.status == 'shipping'%>
+						<%= content_tag(:span, :class => 'label label-warning') do %>
+							<%=  'Enviando' %>
+						<% end %>
+					<% end %>
+					<% if cart.status == 'closed'%>
+						<%= content_tag(:span, :class => 'label label-success') do %>
+							<%=  'Fechado' %>
+						<% end %>
+					<% end %>
+					<% if cart.status == 'canceled'%>
+						<%= content_tag(:span, :class => 'label label-important') do %>
+							<%=  'Cancelada' %>
+						<% end %>
+					<% end %>
+				<% end %>
+			<% end %>
+			
+		<% end %>
+		
+		<%= content_tag(:div, :class => 'collapse', :id => 'cart_' + cart.id.to_s) do %>
+		
+			<% cart.shopping_cart_items.each do |cart_item| %>
+			
+			
+			<%= content_tag(:div, :class => 'media') do %>
+				<%= content_tag(:a, :href => item_path(cart_item.item), :class => 'pull-left') do %>
+					<%= image_tag cart_item.item.cover.small.to_s, :class => "media-object img-polaroid", :style => "margin-bottom: 5px;" %>
+				<% end %>
+			  	<%= content_tag(:div, :class => 'media-body') do %>
+					<%= content_tag(:div, :class => 'row') do %>
+					
+						<%= content_tag(:div, :class => 'span6') do %>
+							<%= content_tag(:strong, :class => 'media-heading') do cart_item.item.name end %>
+							<%= content_tag(:p) do cart_item.item.short_description end %>
+						<% end %>
+						
+						<%= content_tag(:div, :class => 'span3') do %>
+							<%= content_tag(:h5, :class => 'pull-right') do 'x' + cart_item.quantity.to_s end %>
+						<% end %>
+						
+						<%= content_tag(:div, :class => 'span2') do %>
+							<%= content_tag_for(:h5, cart_item.item, :class => 'pull-right') do |item| %>
+								<% if item.currency == "Real" %>
+									R$ <%= item.human_price %>
+								<% end %>
+								<% if item.currency == "Dollar" %>
+									US$ <%= item.human_price %>
+								<% end %>
+							<% end %>
+						<% end %>
+						
+					<% end %>
+				<% end %>
+			<% end %>
+			
+			
+			<% end %>
+		
+		<% end %>
+			
+	<% end %>
+<% end %>	

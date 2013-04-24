@@ -16,4 +16,5 @@ class User < ActiveRecord::Base
   has_many :uploads
   has_many :items
   has_many :assets
+  has_many :shopping_carts
 end

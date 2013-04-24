@@ -7,6 +7,7 @@ class ShoppingCart < ActiveRecord::Base
   
   attr_writer :shipping_address
   
+  
   before_save :create_location
   
   def create_location 
@@ -14,12 +15,8 @@ class ShoppingCart < ActiveRecord::Base
       self.location.name = shipping_address
       self.location.address = shipping_address
       self.location.save
-      self.shipping_cost = 15
-      self.shipping_currency = "Real"
     else
-      self.location = Location.create!(name: shipping_address, address: shipping_address) if shipping_address.present?
-      self.shipping_cost = 15
-      self.shipping_currency = "Real"
+      self.location = Location.create(name: @shipping_address, address: @shipping_address) if @shipping_address.present?
     end
   end
   
