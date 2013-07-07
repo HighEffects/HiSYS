@@ -1,0 +1,39 @@
+<h1>Alerta - Compra #<%= @shopping_cart.id %></h1>
+
+<p>Uma nova compra foi efetuada na loja da High Effects.</P>
+
+<h4>Cliente </h4>
+	
+	<ul style="list-style: none;"><li>
+		<%= @shopping_cart.user.first_name%> <%= @shopping_cart.user.last_name%> (<%= @shopping_cart.user.email%>)
+	</li></ul>
+
+<h4>Lista de compras</h4>
+<ul>
+<% @shopping_cart.shopping_cart_items.each do |cart_item| %>
+
+	<li>
+		<%= cart_item.quantity %>x <%= cart_item.item.name %> 
+
+		<% if cart_item.item.currency == "Real" %>
+			(R$ <%= cart_item.item.human_price %>)
+		<% end %>
+		<% if cart_item.item.currency == "Dollar" %>
+			(US$ <%= cart_item.item.human_price %>)
+		<% end %>
+	</li>
+
+<% end %>
+</ul>
+
+<h4>Endereço de envio</h4> 
+	<ul style="list-style: none;"><li><%= @shopping_cart.location.address %></li></ul>
+
+<h4>Total: 
+	<% if @shopping_cart.final_price_currency == "Real" %>
+		R$ <%= @shopping_cart.final_price %>
+	<% end %>
+	<% if @shopping_cart.final_price_currency == "Dollar" %>
+		US$ <%= @shopping_cart.final_price %>
+	<% end %>
+</h4>

@@ -1,5 +1,5 @@
 class ShoppingCart < ActiveRecord::Base
-  attr_accessible :status, :user_id, :location_attributes, :shipping_address, :payment_method
+  attr_accessible :status, :user_id, :location_attributes, :shipping_address, :payment_method, :final_price, :final_price_currency, :checkout_date, :shipping_date, :arrival_date, :note
   
   belongs_to :user
   has_many :shopping_cart_items

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412195632) do
+ActiveRecord::Schema.define(:version => 20130424025149) do
 
   create_table "assets", :force => true do |t|
     t.integer  "item_id"
@@ -98,8 +98,14 @@ ActiveRecord::Schema.define(:version => 20130412195632) do
     t.string   "payment_method"
     t.integer  "shipping_cost"
     t.string   "shipping_currency"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "final_price"
+    t.string   "final_price_currency"
+    t.date     "checkout_date"
+    t.date     "shipping_date"
+    t.date     "arrival_date"
+    t.string   "note"
   end
 
   create_table "slides", :force => true do |t|

@@ -1,0 +1,33 @@
+<h1>Compra #<%= @shopping_cart.id %> - Loja High Effects</h1>
+
+<p>Sua compra foi efetuada com sucesso. Em breve estaremos enviando seus itens pelo correio. Obrigado por comprar produtos da High Effects.</P>
+
+<h4>Lista de compras</h4>
+<ul>
+<% @shopping_cart.shopping_cart_items.each do |cart_item| %>
+
+	<li>
+		<%= cart_item.quantity %>x <%= cart_item.item.name %> 
+
+		<% if cart_item.item.currency == "Real" %>
+			(R$ <%= cart_item.item.human_price %>)
+		<% end %>
+		<% if cart_item.item.currency == "Dollar" %>
+			(US$ <%= cart_item.item.human_price %>)
+		<% end %>
+	</li>
+
+<% end %>
+</ul>
+
+<h4>Endereço de envio</h4> 
+	<ul style="list-style: none;"><li><%= @shopping_cart.location.address %></li></ul>
+
+<h4>Total: 
+	<% if @shopping_cart.final_price_currency == "Real" %>
+		R$ <%= @shopping_cart.final_price %>
+	<% end %>
+	<% if @shopping_cart.final_price_currency == "Dollar" %>
+		US$ <%= @shopping_cart.final_price %>
+	<% end %>
+</h4>

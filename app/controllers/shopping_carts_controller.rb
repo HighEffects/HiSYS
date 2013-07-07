@@ -3,7 +3,7 @@ class ShoppingCartsController < ApplicationController
   # GET /shopping_carts.json
   
   before_filter :check_for_cart, only: [:index, :add_to_cart, :create_location, :select_payment_method, :checkout, :close_order]
-  before_filter :cart_total, only: [:index]
+  before_filter :cart_total, only: [:index, :checkout, :close_order]
   
   def index
     respond_to do |format|
@@ -193,6 +193,9 @@ class ShoppingCartsController < ApplicationController
         format.json { head :no_content }    
       end 
       if @shopping_cart.payment_method != nil
+        @shopping_cart.final_price = @total
+        @shopping_cart.final_price_currency = 'Real'
+        @shopping_cart.save
         format.html 
         format.json { head :no_content }
       else
@@ -205,6 +208,11 @@ class ShoppingCartsController < ApplicationController
   def close_order
     @shopping_cart.status = 'shipping'
     @shopping_cart.save
+    # Send email receipt to user
+    UserMailer.store_checkout(@shopping_cart).deliver
+    # Alert admins of purchase
+    @admins = User.find_all_by_admin('true')
+    UserMailer.store_checkout_alert(@shopping_cart, @admins).deliver
     respond_to do |format|
       format.html 
       format.json { render json: @location }

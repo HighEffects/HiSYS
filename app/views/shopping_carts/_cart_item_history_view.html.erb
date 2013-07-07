@@ -1,0 +1,96 @@
+<% cart.shopping_cart_items.each do |cart_item| %>
+	<%= content_tag(:div, :class => 'media') do %>
+		<%= content_tag(:a, :href => item_path(cart_item.item), :class => 'pull-left') do %>
+			<%= image_tag cart_item.item.cover.small.to_s, :class => "media-object img-polaroid", :style => "margin-bottom: 5px;" %>
+		<% end %>
+	  	<%= content_tag(:div, :class => 'media-body') do %>
+			<%= content_tag(:div, :class => 'row') do %>
+	
+				<%= content_tag(:div, :class => 'span6') do %>
+					<%= content_tag(:strong, :class => 'media-heading') do cart_item.item.name end %>
+					<%= content_tag(:p) do cart_item.item.short_description end %>
+				<% end %>
+		
+				<%= content_tag(:div, :class => 'span3') do %>
+					<%= content_tag(:h5, :class => 'pull-right') do 'x' + cart_item.quantity.to_s end %>
+				<% end %>
+		
+				<%= content_tag(:div, :class => 'span2') do %>
+					<%= content_tag_for(:h5, cart_item.item, :class => 'pull-right') do |item| %>
+						<% if item.currency == "Real" %>
+							R$ <%= item.human_price %>
+						<% end %>
+						<% if item.currency == "Dollar" %>
+							US$ <%= item.human_price %>
+						<% end %>
+					<% end %>
+				<% end %>
+		
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+<%= content_tag(:div, :class => 'media') do %>
+	<%= content_tag(:div, :class => 'pull-left', :style => 'width: 60px;height: 20px;') do end%>
+				  	<%= content_tag(:div, :class => 'media-body') do %>
+		<%= content_tag(:div, :class => 'row') do %>
+
+			<%= content_tag(:div, :class => 'span5') do %>
+				<%= content_tag(:h5, :class => 'media-heading') do 'Envio' end %>
+			<% end %>
+	
+			<%= content_tag(:div, :class => 'span4') do %>
+				<%= content_tag(:div, :class => 'pull-right') do %>
+					<% if cart.location != nil %>
+						<%= cart.location.address %>
+					<% end %>
+				<% end %>
+			<% end %>
+	
+			<%= content_tag(:div, :class => 'span2') do %>
+				<%= content_tag(:h5, :class => 'pull-right media-heading') do %>
+					<% if cart.shipping_currency == "Real" %>
+						R$ <%= cart.shipping_cost %>
+					<% end %>
+					<% if cart.shipping_currency == "Dollar" %>
+						US$ <%= cart.shipping_cost %>
+					<% end %>
+				<% end %>
+			<% end %>
+
+		<% end %>
+	<% end %>
+<% end %>
+
+		
+<%= content_tag(:div, :class => 'media') do %>
+	<%= content_tag(:div, :class => 'pull-left', :style => 'width: 60px;height: 20px;') do end%>
+				  	<%= content_tag(:div, :class => 'media-body') do %>
+		<%= content_tag(:div, :class => 'row') do %>
+
+			<%= content_tag(:div, :class => 'span5') do %>
+				<%= content_tag(:h5, :class => 'media-heading') do 'Total' end %>
+			<% end %>
+	
+			<%= content_tag(:div, :class => 'span4') do %>
+				<%= content_tag(:div, :class => 'pull-right') do %>
+					<% if (cart.payment_method == 'deposito') then method = 'Pagamento via deposito em conta bancaria' end %>
+					<% if (cart.payment_method == 'paypal') then method = 'Pagamento via PayPal' end %>
+					<% method %>
+				<% end %>
+			<% end %>
+
+			<%= content_tag(:div, :class => 'span2') do %>
+				<%= content_tag(:h5, :class => 'pull-right media-heading') do %>
+					<% if cart.final_price_currency == "Real" %>
+						R$ <%= cart.final_price %>
+					<% end %>
+					<% if cart.final_price_currency == "Dollar" %>
+						US$ <%= cart.final_price %>
+					<% end %>
+				<% end %>
+			<% end %>
+
+		<% end %>
+	<% end %>
+<% end %>			

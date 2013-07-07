@@ -1,2 +1,10 @@
+<div class=>
 <h1>Confirmar Compra</h1>
-<%= link_to 'Confirmar', close_order_path, :class => 'btn btn-large btn-success'%>
+<p>Confira os item do seu carrinho, o endereço de envio e a forma de pagamento. Depois finalize sua compra.</p>
+<hr>
+<%= render 'shopping_carts/cart_item_history_view', cart: @shopping_cart  %>
+<br>
+
+<%= link_to 'Confirmar', close_order_path, :class => 'btn btn-large btn-success pull-right'%> 
+<%= link_to 'Cancelar', shopping_carts_path, :class => 'btn btn-link pull-right', :style => 'margin-right: 20px; margin-top: 7px;' %>
+</div>
