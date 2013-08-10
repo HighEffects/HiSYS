@@ -16,3 +16,31 @@
 /tmp
 /doc/scaffolding.md
 /doc/clipboard.md
+
+# Ignore all .DS_Store
+.DS_Store
+app/.DS_Store
+app/assets/.DS_Store
+app/assets/fonts/.DS_Store
+app/assets/images/.DS_Store
+app/assets/javascripts/.DS_Store
+app/assets/stylesheets/.DS_Store
+app/controllers/.DS_Store
+app/helpers/.DS_Store
+app/models/.DS_Store
+app/uploaders/.DS_Store
+app/views/.DS_Store
+app/views/devise/registrations/.DS_Store
+app/views/devise/sessions/.DS_Store
+app/views/layouts/.DS_Store
+app/views/pages/.DS_Store
+config/.DS_Store
+config/environments/.DS_Store
+db/.DS_Store
+db/migrate/.DS_Store
+public/ ./
+public/.DS_Store
+public/javascripts/.DS_Store
+public/testing/.DS_Store
+vendor/.DS_Store
+vendor/assets/.DS_Store
