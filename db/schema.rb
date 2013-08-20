@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308034141) do
+ActiveRecord::Schema.define(:version => 20130820020051) do
+
+  create_table "assets", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "quantity"
+    t.integer  "user_id"
+    t.integer  "location_id"
+    t.string   "note"
+    t.boolean  "delivered"
+    t.string   "tracking_code"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -23,6 +35,29 @@ ActiveRecord::Schema.define(:version => 20130308034141) do
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
+
+  create_table "items", :force => true do |t|
+    t.string   "name"
+    t.string   "short_description"
+    t.text     "description"
+    t.integer  "price"
+    t.string   "currency"
+    t.string   "category"
+    t.string   "cover"
+    t.integer  "user_id"
+    t.string   "slug"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "locations", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "pages", :force => true do |t|
     t.string   "name"
@@ -50,13 +85,40 @@ ActiveRecord::Schema.define(:version => 20130308034141) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
+    t.string   "slug"
+    t.string   "short_description"
     t.text     "description"
     t.string   "visibility"
     t.string   "status"
-    t.date     "starting_date"
-    t.date     "ending_date"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.integer  "cover"
+    t.integer  "user_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "shopping_cart_items", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "shopping_cart_id"
+    t.integer  "quantity"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "shopping_carts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "status"
+    t.integer  "location_id"
+    t.string   "payment_method"
+    t.integer  "shipping_cost"
+    t.string   "shipping_currency"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.integer  "final_price"
+    t.string   "final_price_currency"
+    t.date     "checkout_date"
+    t.date     "shipping_date"
+    t.date     "arrival_date"
+    t.string   "note"
   end
 
   create_table "slides", :force => true do |t|

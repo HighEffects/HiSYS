@@ -1,0 +1,17 @@
+<%= simple_form_for(@project) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :slug %>
+    <%= f.input :short_description %>
+    <%= f.input :description %>
+    <%= f.input :visibility, collection: ['public', 'private', 'secret'], :input_html => {:class => "span2"}  %>
+    <%= f.input :status, collection: ['open', 'completed', 'paused', 'droped'], :input_html => {:class => "span2"} %>
+    <%= f.input :cover %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

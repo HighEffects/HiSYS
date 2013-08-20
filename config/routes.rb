@@ -1,5 +1,7 @@
 Hisys::Application.routes.draw do
 
+  resources :projects
+
   get 'admin', to: 'admin#index'
   get 'admin/slides', to: 'admin#slides'
   get 'admin/support_messages', to: 'admin#support_messages'
