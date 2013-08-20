@@ -1,6 +1,9 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
+  
+  layout "layout-projects"
+  
   def index
     @projects = Project.all
 

@@ -7,7 +7,7 @@ class CreateProjects < ActiveRecord::Migration
       t.text :description
       t.string :visibility
       t.string :status
-      t.integer :cover
+      t.string :cover
       t.integer :user_id
 
       t.timestamps
