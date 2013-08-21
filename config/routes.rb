@@ -1,5 +1,7 @@
 Hisys::Application.routes.draw do
 
+  resources :task_lists
+
   resources :projects
 
   get 'admin', to: 'admin#index'
