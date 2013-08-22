@@ -25,7 +25,7 @@ class TaskListsController < ApplicationController
   # GET /task_lists/new.json
   def new
     @task_list = TaskList.new
-    @task_list.project_id = Project.find_by_id(params[:project])
+    @task_list.project_id = Project.find_by_id(params[:project]).id
     @task_list.user_id = current_user.id
     @task_list.save
     respond_to do |format|

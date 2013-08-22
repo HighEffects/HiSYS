@@ -1,79 +1,70 @@
-<p id="notice"><%= notice %></p>
+<div class="row-fluid">
+	<div class="span9">
+		<h1><%= @project.name %></h1>
+	</div>
+	<div class="span3 pull-right">
+		<h1 id="function_btns" class="pull-right">
+			<a id="archive_btn" class="btn btn-mini btn-danger">Deletar</a>
+			<a id="archive_btn" class="btn btn-mini ">Arquivar</a>
+			<a id="finish_btn" class="btn btn-mini  btn-success ">Concluir</a>
+		</h1>
+	</div>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @project.name %>
-</p>
-
-<p>
-  <b>Slug:</b>
-  <%= @project.slug %>
-</p>
-
-<p>
-  <b>Short description:</b>
-  <%= @project.short_description %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @project.description %>
-</p>
-
-<p>
-  <b>Visibility:</b>
-  <%= @project.visibility %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @project.status %>
-</p>
-
-<p>
-  <b>Cover:</b>
-  <%= image_tag @project.cover.thumb.to_s %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @project.user_id %>
-</p>
-
-<% if @project.task_lists.count > 0 %>
-	<table class="table table-bordered">
-	  <tr>
-	    <th>Nome</th>
-	    <th>Projeto</th>
-	    <th>Criador</th>
-	    <th>Descrição</th>
-	    <% if user_signed_in? %>
-		  <th style="width: 90px;"><%= t "sys.actions" %></th>
-		<% end %>
-	  </tr>
-	<% @project.task_lists.each do |task_list| %>
-	  <tr>
-	    <td><%= task_list.name %></td>
-	    <td><%= task_list.project.name %></td>
-	    <td><%= task_list.user.first_name %> <%= task_list.user.first_name %></td>
-	    <td><%= task_list.description %></td>
-		<% if user_signed_in? %>
-	      <td style="text-align: right;">
-			<div class="btn-group">
-		  	  <%= link_to 'Edit', edit_task_list_path(task_list), :class => "btn btn-mini" %> 
-			  <%= link_to 'Delete', task_list, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
-			</div>
-		  </td>
-	    </tr>
-	    <% end %>
-	  </tr>
-	<% end %>
-	</table>
-<% end %>
-<br />
+<hr style="margin-top: 0px;">
 
 
-<%= link_to 'New Task list', new_task_list_path(:project => @project.id), :class => "btn" %>
+<div class="row-fluid">
+    <div class="span3 ">
+		<p><%= image_tag @project.cover.to_s %></p>
+    	<p>
+			<%= t "sys.created" %> <%= time_ago_in_words(@project.created_at)%> <%= t "sys.ago" %> 
+			por <%= @project.user.first_name %> <%= @project.user.last_name %>
+		</p>
+    	<p>
+			<b>Descrição:</b><br>
+			<%= @project.short_description %>
+		</p>
+    	<p>
+			<b>Equipe:</b><br>
+			<% @project.project_members.each do |member| %>
+				<%= member.user.first_name %> <%= member.user.last_name %>  
+			<% end %>
+		</p>
+		<p><b>Visibilidade:</b><br><%= @project.visibility %></p>
+		<p><b>Status:</b><br><%= @project.status %></p>
+		
+		<div class="clearfix"></div>
+		<p style="margin-top: 10px;">
+			<b>Projeto:</b><br>
+			<% task_list_count = 0 %>
+			<% @project.task_lists.each do |list| %>
+				<% task_list_count = task_list_count + 1 %>  
+			<% end %>
+			<%= task_list_count %> listas de tarefas.
+			
+		</p>
+	</div>
+	<div class="span9">
+		<div style="margin-bottom: 40px; margin-top: -10px;">
+
+			<h4 style="margin-bottom: 20px">Listas de tarefas <%= link_to 'Nova Lista', new_task_list_path(:project => @project.id), :class => "btn btn-mini" %></h4>
+			<% @project.task_lists.each do |task_list| %>
+				<div style="margin-bottom: 30px">
+					<h5>
+						<%= task_list.name %>
+					  	<%= content_tag_for(:a , task_list, method: :delete, data: { confirm: 'Are you sure?' }) do %>
+					  		<i class="icon-remove" style="font-size: 10px; color:black; cursor: pointer;"></i>
+					  	<% end %>
+					</h5>
+					<form style="margin-left: 5px;">
+						
+					</form>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
 
 <hr>
 
