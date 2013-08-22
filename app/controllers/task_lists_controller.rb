@@ -25,10 +25,11 @@ class TaskListsController < ApplicationController
   # GET /task_lists/new.json
   def new
     @task_list = TaskList.new
-    @task_list.project = Project.find_by_id(params[:project])
-    @project = @task_list.project.id
+    @task_list.project_id = Project.find_by_id(params[:project])
+    @task_list.user_id = current_user.id
+    @task_list.save
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render action: "edit" }
       format.json { render json: @task_list }
     end
   end
@@ -42,7 +43,6 @@ class TaskListsController < ApplicationController
   # POST /task_lists.json
   def create
     @task_list = TaskList.new(params[:task_list])
-    @task_list.project = Project.find_by_id(params[:project])
     respond_to do |format|
       if @task_list.save
         format.html { redirect_to @task_list, notice: 'Task list was successfully created.' }
@@ -58,7 +58,6 @@ class TaskListsController < ApplicationController
   # PUT /task_lists/1.json
   def update
     @task_list = TaskList.find(params[:id])
-
     respond_to do |format|
       if @task_list.update_attributes(params[:task_list])
         format.html { redirect_to @task_list, notice: 'Task list was successfully updated.' }

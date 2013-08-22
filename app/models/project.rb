@@ -7,6 +7,9 @@ class Project < ActiveRecord::Base
   belongs_to :user
   
   has_many :project_members
+  
   has_many :task_lists
+  
+ 
   
 end
