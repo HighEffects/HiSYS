@@ -70,35 +70,27 @@
         </div>
       </div>
     </div>
-
-    <div class="container">
-        <div class="row">
+	<% if params[:action] != "index" %>
+    <div class="container-fluid">
+        <div class="row-fluid">
           <div class="span12">
-			  <% if notice %>
-				  <div class="alert">
-				    <button type="button" class="close" data-dismiss="alert">×</button>
-				    <strong>Notice! </strong><%= notice %>
-				  </div>
-			 <% end %>
-			 <% if alert %>
-			  <div class="alert">
-			    <button type="button" class="close" data-dismiss="alert">×</button>
-			    <strong>Alert! </strong><%= alert %>
-			  </div>
-			  <% end %>
+			  <%= render 'layouts/error_messages' %>
              <%= yield %>
           </div>
-          
         </div><!--/row-->
-
-      <footer>
-		<hr>
-	    <p>
-          &copy; High Effects <%= Time.now.strftime("%Y") %>
-	    </p>
-      </footer>
-
+      	<%= render 'layouts/footer_basic' %>
     </div> <!-- /container -->
+	<% else %>
+	    <div class="container">
+	        <div class="row">
+	          <div class="span12">
+				  <%= render 'layouts/error_messages' %>
+	             <%= yield %>
+	          </div>
+	        </div><!--/row-->
+	      	<%= render 'layouts/footer_basic' %>
+	    </div> <!-- /container -->
+	<% end %>
 
     <!-- Javascripts
     ================================================== -->

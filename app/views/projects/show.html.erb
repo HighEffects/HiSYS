@@ -40,6 +40,39 @@
   <%= @project.user_id %>
 </p>
 
+<% if @project.task_lists.count > 0 %>
+	<table class="table table-bordered">
+	  <tr>
+	    <th>Nome</th>
+	    <th>Projeto</th>
+	    <th>Criador</th>
+	    <th>Descrição</th>
+	    <% if user_signed_in? %>
+		  <th style="width: 90px;"><%= t "sys.actions" %></th>
+		<% end %>
+	  </tr>
+	<% @project.task_lists.each do |task_list| %>
+	  <tr>
+	    <td><%= task_list.name %></td>
+	    <td><%= task_list.project.name %></td>
+	    <td><%= task_list.user.first_name %> <%= task_list.user.first_name %></td>
+	    <td><%= task_list.description %></td>
+		<% if user_signed_in? %>
+	      <td style="text-align: right;">
+			<div class="btn-group">
+		  	  <%= link_to 'Edit', edit_task_list_path(task_list), :class => "btn btn-mini" %> 
+			  <%= link_to 'Delete', task_list, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
+			</div>
+		  </td>
+	    </tr>
+	    <% end %>
+	  </tr>
+	<% end %>
+	</table>
+<% end %>
+<br />
+
+
 <%= link_to 'New Task list', new_task_list_path(:project => @project.id), :class => "btn" %>
 
 <hr>
