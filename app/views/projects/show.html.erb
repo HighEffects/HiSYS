@@ -53,13 +53,21 @@
 				<div style="margin-bottom: 30px">
 					<h5>
 						<%= task_list.name %>
-					  	<%= content_tag_for(:a , task_list, method: :delete, data: { confirm: 'Are you sure?' }) do %>
-					  		<i class="icon-remove" style="font-size: 10px; color:black; cursor: pointer;"></i>
-					  	<% end %>
+					  	<%= link_to 'x' , task_list, method: :delete, data: { confirm: 'Are you sure?' }, :style => "font-size: 10px;" %> 
+						<%= link_to '+', new_task_path(:task_list => task_list.id), :style => "font-size: 10px;" %>
+					  	
 					</h5>
 					<form style="margin-left: 5px;">
-						
+						<% task_list.tasks.each do |task| %>
+							<%= tag_for(:label, :class => "checkbox") do %>
+								<input type="checkbox" <% if task.completed == true %>
+								 CHECKED
+								 <% end %>
+								> <%= task.name %>
+							<% end %>
+						<% end %>
 					</form>
+					
 				</div>
 			<% end %>
 		</div>
