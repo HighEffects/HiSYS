@@ -74,11 +74,23 @@ class TaskListsController < ApplicationController
   def destroy
     @task_list = TaskList.find(params[:id])
     @project = @task_list.project
-    @task_list.destroy
-
     respond_to do |format|
-      format.html { redirect_to @project }
-      format.json { head :no_content }
+      if @project.project_members.find_by_user_id(current_user.id) != nil
+        if @project.project_members.find_by_user_id(current_user.id).role == "owner"        
+          @task_list.tasks.each do |task|
+            task.destroy
+          end
+          @task_list.destroy
+          format.html { redirect_to @project, notice: 'Task list deleted.'  }
+          format.json { render json: @project }
+        else
+          format.html { redirect_to @project, alert: 'You dont have permission to delete the selected Task List.'  }
+          format.json { head :no_content }
+        end
+      else
+        format.html { redirect_to @project, alert: 'You dont have permission to delete the selected Task List.'  }
+        format.json { head :no_content }
+      end
     end
   end
 end

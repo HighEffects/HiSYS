@@ -16,7 +16,9 @@
 
 <div class="row-fluid">
     <div class="span3 ">
-		<p><%= image_tag @project.cover.to_s %></p>
+		<% if @project.cover.to_s != "" %>
+			<p><%= image_tag @project.cover.to_s %></p>
+		<% end %>
     	<p>
 			<%= t "sys.created" %> <%= time_ago_in_words(@project.created_at)%> <%= t "sys.ago" %> 
 			por <%= @project.user.first_name %> <%= @project.user.last_name %>
@@ -47,7 +49,7 @@
 	</div>
 	<div class="span9">
 		<div style="margin-bottom: 40px; margin-top: -10px;">
-
+			<%= render 'layouts/error_messages' %>
 			<h4 style="margin-bottom: 20px">Listas de tarefas <%= link_to 'Nova Lista', new_task_list_path(:project => @project.id), :class => "btn btn-mini" %></h4>
 			<% @project.task_lists.each do |task_list| %>
 				<div style="margin-bottom: 30px">
@@ -59,11 +61,15 @@
 					</h5>
 					<form style="margin-left: 5px;">
 						<% task_list.tasks.each do |task| %>
-							<%= tag_for(:label, :class => "checkbox") do %>
-								<input type="checkbox" <% if task.completed == true %>
-								 CHECKED
-								 <% end %>
-								> <%= task.name %>
+							<% if task.completed == true %>
+								<%= content_tag(:label, :class => "checkbox", :style => "text-decoration: line-through;") do %>
+									<input type="checkbox" CHECKED > <%= link_to task.name, task, :class => "task_link" %>
+								<% end %>
+							<% else %>
+								<%= content_tag(:label, :class => "checkbox") do %>
+									<input type="checkbox" > <%= link_to task.name, task, :class => "task_link" %> 
+									<%= link_to 'x', task, method: :delete, data: { confirm: 'Are you sure?' }, :style => "font-size: 10px;"%>
+								<% end %>
 							<% end %>
 						<% end %>
 					</form>

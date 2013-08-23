@@ -74,7 +74,9 @@
     <div class="container-fluid">
         <div class="row-fluid">
           <div class="span12">
-			  <%= render 'layouts/error_messages' %>
+			 <% if params[:action] != "show" %>
+			 	<%= render 'layouts/error_messages' %>
+			 <% end %>
              <%= yield %>
           </div>
         </div><!--/row-->
@@ -84,7 +86,9 @@
 	    <div class="container">
 	        <div class="row">
 	          <div class="span12">
-				  <%= render 'layouts/error_messages' %>
+				 <% if params[:action] != "show" %>
+				 	<%= render 'layouts/error_messages' %>
+				 <% end %>
 	             <%= yield %>
 	          </div>
 	        </div><!--/row-->

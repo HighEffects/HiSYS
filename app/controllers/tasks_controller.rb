@@ -59,10 +59,10 @@ class TasksController < ApplicationController
   # PUT /tasks/1.json
   def update
     @task = Task.find(params[:id])
-
+    @project = @task.task_list.project
     respond_to do |format|
       if @task.update_attributes(params[:task])
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to @project, notice: 'Task was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -75,11 +75,22 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     @task = Task.find(params[:id])
-    @task.destroy
-
+    @project = @task.task_list.project
+    if @project.project_members.find_by_user_id(current_user.id) != nil
+      @user_role = @project.project_members.find_by_user_id(current_user.id).role
+    else
+      @user_role = "none"
+    end
     respond_to do |format|
-      format.html { redirect_to tasks_url }
-      format.json { head :no_content }
+      if @user_role == "owner" || @user_role == "admin" || @user_role == "user"
+        @task.destroy
+        format.html { redirect_to @project, notice: 'Task was deleted.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @project, alert: 'You dont have enougth permissions to delete this task.' }
+        format.json { head :no_content }
+      end
     end
   end
+  
 end

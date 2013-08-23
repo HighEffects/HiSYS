@@ -90,16 +90,23 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.json
   def destroy
     @project = Project.find(params[:id])
+    if @project.project_members.find_by_user_id(current_user.id) != nil
+      @user_role = @project.project_members.find_by_user_id(current_user.id).role
+    else
+      @user_role = "none"
+    end
     respond_to do |format|
-      if @project.project_members.find_by_user_id(current_user.id) != nil
-        if @project.project_members.find_by_user_id(current_user.id).role == "owner"
-          @project.destroy
-          format.html { redirect_to projects_url }
-          format.json { head :no_content }
-        else
-          format.html { redirect_to projects_url, alert: 'You dont have permission to delete the selected project.'  }
-          format.json { head :no_content, status: :unprocessable_entity }
+      if @user_role == "owner" || @user_role == "admin"
+        # Delete all task_lists and tasks
+        @project.task_lists.each do |task_list|
+          task_list.tasks.each do |task|
+            task.destroy
+          end
+          task_list.destroy
         end
+        @project.destroy
+        format.html { redirect_to projects_url }
+        format.json { head :no_content }
       else
         format.html { redirect_to projects_url, alert: 'You dont have permission to delete the selected project.'  }
         format.json { head :no_content, status: :unprocessable_entity }
