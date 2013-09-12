@@ -34,6 +34,9 @@ class CoverUploader < CarrierWave::Uploader::Base
     " ./tmp/uploads/#{mounted_as}/#{model.id}"
   end
   
+  version :cover do
+    process :resize_to_fill => [300, 300,  gravity = ::Magick::CenterGravity]
+  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url

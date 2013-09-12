@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
   
   before_validation :generate_slug
   
-  mount_uploader :cover, FileUploader
+  mount_uploader :cover, CoverUploader
   
   def to_param
     slug # or "#{id}-#{name}".parameterize
