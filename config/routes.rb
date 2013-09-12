@@ -5,6 +5,8 @@ Hisys::Application.routes.draw do
   resources :task_lists
 
   resources :projects
+  get 'projects/*id/edit_members', to: 'projects#edit_members'
+  get 'projects/*id/add_member', to: 'projects#add_member'
 
   get 'admin', to: 'admin#index'
   get 'admin/slides', to: 'admin#slides'

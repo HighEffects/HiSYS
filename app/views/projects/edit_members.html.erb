@@ -30,8 +30,8 @@
     	<p>
 			<b>Equipe:</b><br>
 			<% @project.project_members.each do |member| %>
-				<%= member.user.first_name %> <%= member.user.last_name %>   
-			<% end %> <%= link_to '+', {:controller => "projects", :action => "edit_members"}, :style => "font-size: 10px;" %> 
+				<%= member.user.first_name %> <%= member.user.last_name %>  
+			<% end %>
 		</p>
 		<p><b>Visibilidade:</b><br><%= @project.visibility %></p>
 		<p><b>Status:</b><br><%= @project.status %></p>
@@ -50,32 +50,41 @@
 	<div class="span9">
 		<div style="margin-bottom: 40px; margin-top: -10px;">
 			<%= render 'layouts/error_messages' %>
-			<h4 style="margin-bottom: 20px">Listas de tarefas <%= link_to 'Nova Lista', new_task_list_path(:project => @project.id), :class => "btn btn-mini" %></h4>
-			<% @project.task_lists.each do |task_list| %>
-				<div style="margin-bottom: 30px">
-					<h5>
-						<%= task_list.name %>
-					  	<%= link_to 'x' , task_list, method: :delete, data: { confirm: 'Are you sure?' }, :style => "font-size: 10px;" %> 
-						<%= link_to '+', new_task_path(:task_list => task_list.id), :style => "font-size: 10px;" %>
-					  	
-					</h5>
-					<form style="margin-left: 5px;">
-						<% task_list.tasks.each do |task| %>
-							<% if task.completed == true %>
-								<%= content_tag(:label, :class => "checkbox", :style => "text-decoration: line-through;") do %>
-									<input type="checkbox" CHECKED > <%= link_to task.name, task, :class => "task_link" %>
-								<% end %>
-							<% else %>
-								<%= content_tag(:label, :class => "checkbox") do %>
-									<input type="checkbox" > <%= link_to task.name, task, :class => "task_link" %> 
-									<%= link_to 'x', task, method: :delete, data: { confirm: 'Are you sure?' }, :style => "font-size: 10px;"%>
-								<% end %>
-							<% end %>
-						<% end %>
-					</form>
-					
+			<h4 style="margin-bottom: 20px">
+				Membros do projeto
+				<button type="button" class="btn btn-mini" data-toggle="collapse" data-target="#add_members">
+				  Adicionar membro
+				</button>
+			</h4>
+			<ul class="thumbnails">
+				<% @project.project_members.each do |member| %>
+					<li class="span3">
+						<div class="thumbnail">
+							<div class="media">
+								<a class="pull-left" href="#">
+									<%= image_tag member.user.avatar.small.to_s, :class => " img-rounded" if member.user.avatar?%>
+				  			  	</a>
+				  			  	<div class="media-body">
+				  			    	<h5 class="media-heading"><%= member.user.first_name %> <%= member.user.last_name %></h5>
+									<p><%= member.role %></p>
+							    </div>
+							</div>
+							
+						</div>
+					</li>
+				<% end %>
+			</ul>
+			
+ 
+			<div id="add_members" class="collapse">
+				<h4 style="margin-bottom: 20px; margin-top: 30px">Selecionar membro</h4>
+				<% @users.each do |user| %>
+				<div style="width: 100px; text-align: center; float: left;">
+					<%= image_tag user.avatar.small.to_s, :class => "media-object img-rounded", :style => "margin-left: auto; margin-right: auto" if user.avatar? %>
+					<%= link_to user.first_name , {:controller => "/projects", :action => "add_member", :user => user.id }%>
 				</div>
-			<% end %>
+				<% end %>
+			</div>
 		</div>
 	</div>
 </div>

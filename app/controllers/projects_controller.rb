@@ -114,4 +114,25 @@ class ProjectsController < ApplicationController
     end
   end
   
+  def edit_members
+    @project = Project.find(params[:id])
+    @users = User.all
+  end
+  
+  def add_member
+    @project = Project.find(params[:id])
+    @user = User.find_by_id(params[:user])
+    respond_to do |format|
+      if @project.project_members.find_by_user_id(@user.id) != nil
+        format.html { redirect_to @project, alert: 'This user is already in the project'  }
+      else
+        @member = ProjectMember.new
+        @member.project_id = @project.id
+        @member.user_id = @user.id
+        @member.save    
+        format.html { redirect_to :controller => "projects", :action => "edit_members", :id => @project.id  }
+      end
+    end
+  end
+  
 end
