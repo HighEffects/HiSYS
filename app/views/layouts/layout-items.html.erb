@@ -51,7 +51,16 @@
           <div class="row-fluid nav-collapse">
             <%= render 'layouts/nav_links' %>
 			<ul class="nav pull-right">
-					
+				
+				<% if user_signed_in? %>
+				  <% if @item != nil && @item.new_record? != true %>
+				    <li><a href="<%=  %>"><i class="icon-remove"></i></a></li>
+					<li><a id="edit-item-page" href="<%=item_path(@item) + '/edit' %>"><i class="icon-pencil"></i></a></li>
+				  <% end %>
+				  <li><a id="create_item" href="<%= new_item_path %>"><i class="icon-plus"></i></a></li>
+				  <li class="divider-vertical"></li>
+				  <% end%>
+				
 			    <%= render 'layouts/search' %>
 				
 				<li class="divider-vertical"></li>
