@@ -11,6 +11,14 @@ class PostsController < ApplicationController
   def index
     @posts = Post.order("created_at desc").all
     @post = false
+    # Mix Panel Page Tracking
+    if Rails.env.production?
+      if user_signed_in?
+        mixpanel.track 'Page Loaded', { :page_title => "Blog", :distinct_id => current_user.id,  :user => "Registered" }
+      else
+        mixpanel.track 'Page Loaded', { :page_title => "Blog", :user => "Unregistered" }
+      end
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @posts }
@@ -32,6 +40,14 @@ class PostsController < ApplicationController
     @commentable = @post
     @comments = @commentable.comments
     @comment = Comment.new
+    # Mix Panel Page Tracking
+    if Rails.env.production?
+      if user_signed_in?
+        mixpanel.track 'Page Loaded', { :page_title => @post.title, :distinct_id => current_user.id,  :user => "Registered" }
+      else
+        mixpanel.track 'Page Loaded', { :page_title => @post.title, :user => "Unregistered" }
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }

@@ -33,7 +33,9 @@ class SupportMessagesController < ApplicationController
     # Mix Panel Page Tracking
     if Rails.env.production?
       if user_signed_in?
-        mixpanel.track 'Page Loaded', { :page_title => "Contato", :distinct_id => current_user.id } if Rails.env.production?
+        mixpanel.track 'Page Loaded', { :page_title => "Contato", :distinct_id => current_user.id,  :user => "Registered" }
+      else
+        mixpanel.track 'Page Loaded', { :page_title => "Contato", :user => "Unregistered" }
       end
     end
     respond_to do |format|
