@@ -11,6 +11,12 @@ class PagesController < ApplicationController
   def index
     @page = Page.find_by_slug!('home')
     @comments = false
+    # MixPanel Page Tracking
+    if Rails.env.production?
+      if user_signed_in?
+        mixpanel.track 'Page Loaded', { :page_title => "Lab", :distinct_id => current_user.id } if Rails.env.production?
+      end
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @page }
@@ -32,6 +38,12 @@ class PagesController < ApplicationController
   # GET /pages/1
   # GET /pages/1.json
   def show
+    # MixPanel Page Tracking
+    if Rails.env.production?
+      if user_signed_in?
+        mixpanel.track 'Page Loaded', { :page_title => @page.title, :distinct_id => current_user.id } if Rails.env.production?
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @page }

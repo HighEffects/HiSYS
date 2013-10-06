@@ -10,7 +10,7 @@ class SlidesController < ApplicationController
     @slides = Slide.order("position")
     if Rails.env.production?
       if user_signed_in?
-        mixpanel.track 'Landing Page Loaded', { :distinct_id => current_user.id,  :user => "Registered" } if Rails.env.production?
+        mixpanel.track 'Landing Page Loaded', { :page_title => "Slideshow", :distinct_id => current_user.id } if Rails.env.production?
       end
     end
     respond_to do |format|

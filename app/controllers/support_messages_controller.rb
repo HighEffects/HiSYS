@@ -30,7 +30,12 @@ class SupportMessagesController < ApplicationController
   # GET /support_messages/new.json
   def index
     @support_message = SupportMessage.new
-
+    # Mix Panel Page Tracking
+    if Rails.env.production?
+      if user_signed_in?
+        mixpanel.track 'Page Loaded', { :page_title => "Contato", :distinct_id => current_user.id } if Rails.env.production?
+      end
+    end
     respond_to do |format|
       format.html { render :layout => "layout-contact" }# new.html.erb
       format.json { render json: @support_message }
@@ -49,7 +54,9 @@ class SupportMessagesController < ApplicationController
       if @support_message.save
         # Create mixpanel user and track signup event
         if Rails.env.production?
-          mixpanel.track 'Support Message', { :distinct_id => current_user.id }
+          if user_signed_in?
+            mixpanel.track 'Support Message', { :distinct_id => current_user.id } if Rails.env.production?
+          end
         end
         #Send Welcome email to user
         UserMailer.support_message(@support_message).deliver
