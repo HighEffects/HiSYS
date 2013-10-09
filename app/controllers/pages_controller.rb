@@ -11,6 +11,7 @@ class PagesController < ApplicationController
   def index
     @page = Page.find_by_slug!('home')
     @comments = false
+    @members = CompanyMember.all
     # MixPanel Page Tracking
     if Rails.env.production?
       if user_signed_in?
