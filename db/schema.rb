@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308034141) do
+ActiveRecord::Schema.define(:version => 20131009012750) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(:version => 20130308034141) do
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
+
+  create_table "company_members", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "position"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "company_members", ["user_id"], :name => "index_company_members_on_user_id"
 
   create_table "pages", :force => true do |t|
     t.string   "name"
@@ -47,17 +56,6 @@ ActiveRecord::Schema.define(:version => 20130308034141) do
   end
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
-
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "visibility"
-    t.string   "status"
-    t.date     "starting_date"
-    t.date     "ending_date"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
 
   create_table "slides", :force => true do |t|
     t.string   "title"
