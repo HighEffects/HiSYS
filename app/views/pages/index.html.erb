@@ -5,25 +5,23 @@
 	<% counter = counter + 1 %>
 <% end%>
 
-<script src="jquery.nested.js"></script>
-<script src="makeboxes.js"></script>
+
 
 <hr>
-<div style="text-align: center; margin-right: 50px">
+<div style="text-align: center;">
 <h3>Equipe</h3>
 <p style="margin-top: -15px;">Membros do HE Lab</p>
 </div>
 
-<div style="margin-left: auto; margin-right: auto; width: <%= counter * 280 + 50 %>px;">
-	<div style="margin-left: 50px">
+<div id="container" style="margin-left: auto; margin-right: auto; width: <%= counter * 204 %>px;">
 		<% @members.each do |member| %>
 
-			<div style="width: 180px; margin-right: 100px; float: left">
-			   <%= image_tag member.user.avatar.to_s, :style => "width: 180px; height:180px; border-radius: 500px;" if member.user.avatar? %>
+			<div style="width: 200px; float: left" class="box size45">
+			   <%= image_tag member.user.avatar.to_s, :style => "width: 180px; height:180px; border-radius: 1000px; margin-right: 20px; margin-left: 10px" if member.user.avatar? %>
 			   <h4 style="text-align: center;"><%= member.user.first_name %> <%= member.user.last_name %></h4>
 			   <p style="text-align: center; margin-top: -10px;"><%= member.position %></p>
 		    </div>
 
 		<% end %>
-	</div>
 </div>
+

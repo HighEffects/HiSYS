@@ -119,6 +119,9 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
 	<%= javascript_include_tag "bootstrap-tagmanager.js" %>
+	<%= javascript_include_tag "jquery.nested.js" %>
+	<%= javascript_include_tag "makeboxes.js" %>
+
 	
     <script>
     	$(document).ready(function() {
@@ -143,7 +146,7 @@
 				<% end %>
     		 	]
     		 } )
-
+	 		jQuery("#container").nested({});
     	});
     </script>
 	
