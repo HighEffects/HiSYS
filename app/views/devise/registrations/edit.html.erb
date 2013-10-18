@@ -2,22 +2,28 @@
 
 
 	<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => "form-horizontal", :multipart => true }) do |f| %>
-  <legend>Edit <%= resource_name.to_s.humanize %></legend>
-  <%= f.error_notification %>
+  
+  
 
   <div class="form-inputs">
+	  <legend>Informações de Usuario</legend>
+	  <%= f.error_notification %>
 	<%= f.input :first_name, :required => true, :autofocus => true %>
 	<%= f.input :last_name %>
     <%= f.input :email, :required => true %>
 	
+	<legend>Links</legend>
 	<%= f.input :website %>
 	<%= f.input :facebook %>
 	<%= f.input :github %>
 	<%= f.input :linkedin %>
 	
-    <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
+	<legend>Mudar senha</legend>
+    <%= f.input :password, :autocomplete => "off", :hint => "", :required => false %>
     <%= f.input :password_confirmation, :required => false %>
-    <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
+    <%= f.input :current_password, :hint => "", :required => true %>
+	
+	<hr>
 	
   <div class="fileupload fileupload-new" data-provides="fileupload">
     <div style="margin-bottom: 7px">
