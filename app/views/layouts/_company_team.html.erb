@@ -5,16 +5,23 @@
             <div class="ch-info">
                 <p>
 					<a class="no-underline" href="mailto:<%= member.user.email %>" style="color: white;"><i class="icon-envelope icon-white"></i></a>
+					<% if member.user.website %>
+						<a class="no-underline" href="<%= member.user.website %>" style="color: white;"><i class="icon-link"></i></a>
+					<% end %>
+					<% if member.user.facebook %>
+						<a class="no-underline" href="<%= member.user.facebook %>" style="color: white;"><i class="icon-facebook-sign"></i></a>
+					<% end %>
+					<% if member.user.github %>
+						<a class="no-underline" href="<%= member.user.github %>" style="color: white;"><i class="icon-github"></i></a>
+					<% end %>
+					<% if member.user.linkedin %>
+						<a class="no-underline" href="<%= member.user.linkedin %>" style="color: white;"><i class="icon-linkedin-sign"></i></a>
+					<% end %>
 					<!--
-					<a class="no-underline" href="#" style="color: white;"><i class="icon-link"></i></a>
-					<br> 
-					<a class="no-underline" href="#" style="color: white;"><i class="icon-facebook-sign"></i></a>
-					<a class="no-underline" href="#" style="color: white;"><i class="icon-linkedin-sign"></i></a>
 					<a class="no-underline" href="#" style="color: white;"><i class="icon-youtube-sign"></i></a>
 					<br>
 					<a class="no-underline" href="#" style="color: white; margin-left: -8px;"><i class="icon-skype"></i></a>
 					<a class="no-underline" href="#" style="color: white;"><i class="icon-twitter-sign"></i></a>
-					<a class="no-underline" href="#" style="color: white;"><i class="icon-github"></i></a>
 					-->
 				</p>
             </div>

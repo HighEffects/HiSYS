@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131009012750) do
+ActiveRecord::Schema.define(:version => 20131018065735) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -57,6 +57,31 @@ ActiveRecord::Schema.define(:version => 20131009012750) do
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
+  create_table "project_members", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "role"
+    t.string   "access"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "project_members", ["project_id"], :name => "index_project_members_on_project_id"
+  add_index "project_members", ["user_id"], :name => "index_project_members_on_user_id"
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.string   "short_description"
+    t.text     "description"
+    t.string   "visibility"
+    t.string   "status"
+    t.string   "cover"
+    t.integer  "user_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "slides", :force => true do |t|
     t.string   "title"
     t.text     "content"
@@ -96,6 +121,30 @@ ActiveRecord::Schema.define(:version => 20131009012750) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "task_lists", :force => true do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "task_lists", ["project_id"], :name => "index_task_lists_on_project_id"
+  add_index "task_lists", ["user_id"], :name => "index_task_lists_on_user_id"
+
+  create_table "tasks", :force => true do |t|
+    t.string   "name"
+    t.boolean  "completed"
+    t.integer  "user_id"
+    t.integer  "task_list_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "tasks", ["task_list_id"], :name => "index_tasks_on_task_list_id"
+  add_index "tasks", ["user_id"], :name => "index_tasks_on_user_id"
+
   create_table "uploads", :force => true do |t|
     t.string   "name"
     t.string   "file_type"
@@ -127,6 +176,10 @@ ActiveRecord::Schema.define(:version => 20131009012750) do
     t.boolean  "admin"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "website"
+    t.string   "facebook"
+    t.string   "github"
+    t.string   "linkedin"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
