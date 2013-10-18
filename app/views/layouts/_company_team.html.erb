@@ -1,23 +1,26 @@
-<% counter = 0 %>
-<% @members.each do |count| %>
-	<% counter = counter + 1 %>
-<% end%>
-
-
-
-<div style="text-align: center;">
-<h3>Equipe</h3>
-<p style="margin-top: -15px;">Membros do HE Lab</p>
-</div>
-
-<div id="container" style="margin-left: auto; margin-right: auto; width: <%= counter * 204 %>px;">
-		<% @members.each do |member| %>
-
-			<div style="width: 200px; float: left" class="box size45">
-			   <%= image_tag member.user.avatar.to_s, :style => "width: 180px; height:180px; border-radius: 1000px; margin-right: 20px; margin-left: 10px" if member.user.avatar? %>
-			   <h4 style="text-align: center;"><%= member.user.first_name %> <%= member.user.last_name %></h4>
-			   <p style="text-align: center; margin-top: -10px;"><%= member.position %></p>
-		    </div>
-
-		<% end %>
-</div>
+<ul class="ch-grid">
+	<% @members.each do |member| %>
+    <li>
+        <div class="ch-item ch-img center-container" style="background-image: url( <%= member.user.avatar.to_s if member.user.avatar? %>);">
+            <div class="ch-info">
+                <p>
+					<a class="no-underline" href="mailto:<%= member.user.email %>" style="color: white;"><i class="icon-envelope icon-white"></i></a>
+					<!--
+					<a class="no-underline" href="#" style="color: white;"><i class="icon-link"></i></a>
+					<br> 
+					<a class="no-underline" href="#" style="color: white;"><i class="icon-facebook-sign"></i></a>
+					<a class="no-underline" href="#" style="color: white;"><i class="icon-linkedin-sign"></i></a>
+					<a class="no-underline" href="#" style="color: white;"><i class="icon-youtube-sign"></i></a>
+					<br>
+					<a class="no-underline" href="#" style="color: white; margin-left: -8px;"><i class="icon-skype"></i></a>
+					<a class="no-underline" href="#" style="color: white;"><i class="icon-twitter-sign"></i></a>
+					<a class="no-underline" href="#" style="color: white;"><i class="icon-github"></i></a>
+					-->
+				</p>
+            </div>
+        </div>
+	   <h4 style="text-align: center;"><%= member.user.first_name %> <%= member.user.last_name %></h4>
+	   <p style="text-align: center; margin-top: -10px;"><%= member.position %></p>
+    </li>
+	<% end %>
+</ul>
