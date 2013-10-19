@@ -8,23 +8,31 @@
 	      		<h1 class="" style="font-family: 'AkzidenzGrotesk-ExtraBoldCond'; color: white; font-size: 90px; line-height: 90px; text-align: right; margin-top: -5px">Contato</h1>
 	      		<p class="header-text" style="text-align: right; margin-top: -5px">Mande um email para <a>contato@higheffects.com.br</a><br> ou escreva uma mensagem:</p>
 			    <% if notice %>
-			   	  <div class="alert pull-right">
+			   	  <div class="alert alert-success pull-right">
 			   	    <button type="button" class="close" data-dismiss="alert">×</button>
 			   	    <%= notice %>
 			   	  </div>
 			    <% end %>
 			    <% if alert %>
-			     <div class="alert pull-right">
+			     <div class="alert alert-error pull-right">
 			       <button type="button" class="close" data-dismiss="alert">×</button>
 			       <%= alert %>
 			     </div>
 			     <% end %>
+				 
 
 
 				 <%= render 'form' %>
+				 
+				 <div style="text-align: right; margin-top: 300px;">
+					<a class="big_social_icon" href="https://www.facebook.com/HighEffects"><i class="icon-facebook-sign"></i></a>
+				 	<a class="big_social_icon" href="http://www.youtube.com/HighEffectsBR"><i class="icon-youtube-sign"></i></a>
+					<a class="big_social_icon" href="https://github.com/HighEffects"><i class="icon-github"></i></a>
+				</div>
 			 </div>
 		</div>
 	  </div>
 	</div>
 </li>
 <li></li>
+

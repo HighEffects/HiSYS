@@ -91,3 +91,18 @@
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
 }
+
+.big_social_icon {
+	color: white;
+	font-size: 60px;
+	text-decoration: none;
+	margin: 18px;
+}
+
+.big_social_icon:hover {
+	color: white;
+	opacity: 0.6;
+	transform: scale(1);
+	transition: all 0.4s ease-in-out;
+	text-decoration: none;
+}

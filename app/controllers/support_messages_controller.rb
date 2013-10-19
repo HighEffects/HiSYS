@@ -65,7 +65,7 @@ class SupportMessagesController < ApplicationController
         format.html { redirect_to({action: "index"}, {notice: t("support_messages.message_sent") }) }
         format.json { render json: @support_message, status: :created, location: @support_message }
       else
-        format.html { render action: "index" }
+        format.html { redirect_to({action: "index"}, {alert: 'Por favor preencha todos os campos.' } ) }
         format.json { render json: @support_message.errors, status: :unprocessable_entity }
       end
     end
