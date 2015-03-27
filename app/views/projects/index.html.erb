@@ -1,0 +1,35 @@
+<h1>Projetos</h1>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Titulo</th>
+    <th>Descrição</th>
+	<th>Visibilidade</th>
+	<th>Status</th>
+	<th>Criado por</th>
+    <% if user_signed_in? %>
+	  <th style="width: 90px;"><%= t "sys.actions" %></th>
+	<% end %>
+  </tr>
+
+<% @projects.each do |project| %>
+  <tr>
+    <td><%= link_to project.name, project  %></td>
+    <td><%= truncate( project.short_description, :length => 100, :omission => '...') %></td>
+    <td><%= project.visibility %></td>
+    <td><%= project.status %></td>
+	<td><%= project.user.first_name %> <%= project.user.last_name %></td>
+	<% if user_signed_in? %>
+      <td style="text-align: right;">
+		<div class="btn-group">
+	  	  <%= link_to 'Edit', edit_project_path(project), :class => "btn btn-mini" %> 
+		  <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger btn-mini" %>
+		</div>
+	  </td>
+    </tr>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'New Project', new_project_path, :class => "btn" %>

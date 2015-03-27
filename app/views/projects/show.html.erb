@@ -1,0 +1,86 @@
+<div class="row-fluid">
+	<div class="span9">
+		<h1><%= @project.name %></h1>
+	</div>
+	<div class="span3 pull-right">
+		<h1 id="function_btns" class="pull-right">
+			<a id="archive_btn" class="btn btn-mini btn-danger">Deletar</a>
+			<a id="archive_btn" class="btn btn-mini ">Arquivar</a>
+			<a id="finish_btn" class="btn btn-mini  btn-success ">Concluir</a>
+		</h1>
+	</div>
+</div>
+
+<hr style="margin-top: 0px;">
+
+
+<div class="row-fluid">
+    <div class="span3 ">
+		<% if @project.cover.to_s != "" %>
+			<p><%= image_tag @project.cover.to_s %></p>
+		<% end %>
+    	<p>
+			<%= t "sys.created" %> <%= time_ago_in_words(@project.created_at)%> <%= t "sys.ago" %> 
+			por <%= @project.user.first_name %> <%= @project.user.last_name %>
+		</p>
+    	<p>
+			<b>Descrição:</b><br>
+			<%= @project.short_description %>
+		</p>
+    	<p>
+			<b>Equipe:</b><br>
+			<% @project.project_members.each do |member| %>
+				<%= member.user.first_name %> <%= member.user.last_name %>   
+			<% end %> <%= link_to '+', {:controller => "projects", :action => "edit_members"}, :style => "font-size: 10px;" %> 
+		</p>
+		<p><b>Visibilidade:</b><br><%= @project.visibility %></p>
+		<p><b>Status:</b><br><%= @project.status %></p>
+		
+		<div class="clearfix"></div>
+		<p style="margin-top: 10px;">
+			<b>Projeto:</b><br>
+			<% task_list_count = 0 %>
+			<% @project.task_lists.each do |list| %>
+				<% task_list_count = task_list_count + 1 %>  
+			<% end %>
+			<%= task_list_count %> listas de tarefas.
+			
+		</p>
+	</div>
+	<div class="span9">
+		<div style="margin-bottom: 40px; margin-top: -10px;">
+			<%= render 'layouts/error_messages' %>
+			<h4 style="margin-bottom: 20px">Listas de tarefas <%= link_to 'Nova Lista', new_task_list_path(:project => @project.id), :class => "btn btn-mini" %></h4>
+			<% @project.task_lists.each do |task_list| %>
+				<div style="margin-bottom: 30px">
+					<h5>
+						<%= task_list.name %>
+					  	<%= link_to 'x' , task_list, method: :delete, data: { confirm: 'Are you sure?' }, :style => "font-size: 10px;" %> 
+						<%= link_to '+', new_task_path(:task_list => task_list.id), :style => "font-size: 10px;" %>
+					  	
+					</h5>
+					<form style="margin-left: 5px;">
+						<% task_list.tasks.each do |task| %>
+							<% if task.completed == true %>
+								<%= content_tag(:label, :class => "checkbox", :style => "text-decoration: line-through;") do %>
+									<input type="checkbox" CHECKED > <%= link_to task.name, task, :class => "task_link" %>
+								<% end %>
+							<% else %>
+								<%= content_tag(:label, :class => "checkbox") do %>
+									<input type="checkbox" > <%= link_to task.name, task, :class => "task_link" %> 
+									<%= link_to 'x', task, method: :delete, data: { confirm: 'Are you sure?' }, :style => "font-size: 10px;"%>
+								<% end %>
+							<% end %>
+						<% end %>
+					</form>
+					
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+
+<hr>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

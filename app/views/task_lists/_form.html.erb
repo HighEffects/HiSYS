@@ -1,0 +1,16 @@
+<%= simple_form_for(@task_list, :html => {:class => 'form-inline well'}) do |f| %>
+  <%= f.error_notification %>
+  
+  <h3>New task list for project <%= @task_list.project.name %></h3>
+	  
+  <div class="form-inputs">
+    
+    <%= f.input :name %>	
+    <%= f.input :description %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

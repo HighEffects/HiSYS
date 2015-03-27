@@ -1,0 +1,95 @@
+<div class="row-fluid">
+	<div class="span9">
+		<h1><%= @project.name %></h1>
+	</div>
+	<div class="span3 pull-right">
+		<h1 id="function_btns" class="pull-right">
+			<a id="archive_btn" class="btn btn-mini btn-danger">Deletar</a>
+			<a id="archive_btn" class="btn btn-mini ">Arquivar</a>
+			<a id="finish_btn" class="btn btn-mini  btn-success ">Concluir</a>
+		</h1>
+	</div>
+</div>
+
+<hr style="margin-top: 0px;">
+
+
+<div class="row-fluid">
+    <div class="span3 ">
+		<% if @project.cover.to_s != "" %>
+			<p><%= image_tag @project.cover.to_s %></p>
+		<% end %>
+    	<p>
+			<%= t "sys.created" %> <%= time_ago_in_words(@project.created_at)%> <%= t "sys.ago" %> 
+			por <%= @project.user.first_name %> <%= @project.user.last_name %>
+		</p>
+    	<p>
+			<b>Descrição:</b><br>
+			<%= @project.short_description %>
+		</p>
+    	<p>
+			<b>Equipe:</b><br>
+			<% @project.project_members.each do |member| %>
+				<%= member.user.first_name %> <%= member.user.last_name %>  
+			<% end %>
+		</p>
+		<p><b>Visibilidade:</b><br><%= @project.visibility %></p>
+		<p><b>Status:</b><br><%= @project.status %></p>
+		
+		<div class="clearfix"></div>
+		<p style="margin-top: 10px;">
+			<b>Projeto:</b><br>
+			<% task_list_count = 0 %>
+			<% @project.task_lists.each do |list| %>
+				<% task_list_count = task_list_count + 1 %>  
+			<% end %>
+			<%= task_list_count %> listas de tarefas.
+			
+		</p>
+	</div>
+	<div class="span9">
+		<div style="margin-bottom: 40px; margin-top: -10px;">
+			<%= render 'layouts/error_messages' %>
+			<h4 style="margin-bottom: 20px">
+				Membros do projeto
+				<button type="button" class="btn btn-mini" data-toggle="collapse" data-target="#add_members">
+				  Adicionar membro
+				</button>
+			</h4>
+			<ul class="thumbnails">
+				<% @project.project_members.each do |member| %>
+					<li class="span3">
+						<div class="thumbnail">
+							<div class="media">
+								<a class="pull-left" href="#">
+									<%= image_tag member.user.avatar.small.to_s, :class => " img-rounded" if member.user.avatar?%>
+				  			  	</a>
+				  			  	<div class="media-body">
+				  			    	<h5 class="media-heading"><%= member.user.first_name %> <%= member.user.last_name %></h5>
+									<p><%= member.role %></p>
+							    </div>
+							</div>
+							
+						</div>
+					</li>
+				<% end %>
+			</ul>
+			
+ 
+			<div id="add_members" class="collapse">
+				<h4 style="margin-bottom: 20px; margin-top: 30px">Selecionar membro</h4>
+				<% @users.each do |user| %>
+				<div style="width: 100px; text-align: center; float: left;">
+					<%= image_tag user.avatar.small.to_s, :class => "media-object img-rounded", :style => "margin-left: auto; margin-right: auto" if user.avatar? %>
+					<%= link_to user.first_name , {:controller => "/projects", :action => "add_member", :user => user.id }%>
+				</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<hr>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
